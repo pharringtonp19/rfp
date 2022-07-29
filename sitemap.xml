@@ -6,27 +6,37 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/data/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/Generalizing%20Across%20Clusters/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/losses/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/examples/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/networks/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/Implementation/data/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/train/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/Implementation/losses/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/utils/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/Implementation/networks/</loc>
+         <lastmod>2022-07-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pharringtonp19.github.io/rfp/Implementation/train/</loc>
+         <lastmod>2022-07-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pharringtonp19.github.io/rfp/Implementation/utils/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>

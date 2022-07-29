@@ -12,14 +12,14 @@
         <meta name="author" content="Patrick Power">
       
       
-        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/utils/">
+        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Generalizing%20Across%20Clusters/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Utils - Regularizing the Forward Pass</title>
+        <title>Generalizing Across Clusters - Regularizing the Forward Pass</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rfp.utils" class="md-skip">
+        <a href="#tldr" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Utils
+              Generalizing Across Clusters
             
           </span>
         </div>
@@ -155,67 +155,7 @@
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Home
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../networks/" class="md-nav__link">
-        Neural Network Models
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../train/" class="md-nav__link">
-        Training
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../losses/" class="md-nav__link">
-        Losses
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../data/" class="md-nav__link">
-        Toy Data Sets
+        Philosphy
       </a>
     </li>
   
@@ -237,12 +177,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Utils
+          Generalizing Across Clusters
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Utils
+        Generalizing Across Clusters
       </a>
       
         
@@ -259,22 +199,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rfp.utils" class="md-nav__link">
-    rfp.utils
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.utils.batch_sample" class="md-nav__link">
-    batch_sample()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.utils.init_keys" class="md-nav__link">
-    init_keys()
+  <a href="#tldr" class="md-nav__link">
+    TLDR
   </a>
   
 </li>
@@ -283,6 +209,110 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Implementation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/networks/" class="md-nav__link">
+        Neural Network Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/train/" class="md-nav__link">
+        Training
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/losses/" class="md-nav__link">
+        Losses
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/data/" class="md-nav__link">
+        Toy Data Sets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/utils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -312,22 +342,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rfp.utils" class="md-nav__link">
-    rfp.utils
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.utils.batch_sample" class="md-nav__link">
-    batch_sample()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.utils.init_keys" class="md-nav__link">
-    init_keys()
+  <a href="#tldr" class="md-nav__link">
+    TLDR
   </a>
   
 </li>
@@ -346,89 +362,10 @@
                 
 
 
-  <h1>Utils</h1>
+  <h1>Generalizing Across Clusters</h1>
 
-<div class="doc doc-object doc-module">
-
-
-<a id="rfp.utils"></a>
-  <div class="doc doc-contents first">
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="rfp.utils.batch_sample" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">batch_sample</span><span class="p">(</span><span class="n">sample_fn</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Samples Batch of Data</p>
-
-      <details class="quote">
-        <summary>Source code in <code>rfp/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">batch_sample</span><span class="p">(</span><span class="n">sample_fn</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Samples Batch of Data&quot;&quot;&quot;</span>
-    <span class="n">D</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">sample_fn</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-
-<h2 id="rfp.utils.init_keys" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">init_keys</span><span class="p">(</span><span class="n">key_num</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Data and Params Keys</p>
-
-      <details class="quote">
-        <summary>Source code in <code>rfp/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">init_keys</span><span class="p">(</span><span class="n">key_num</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Data and Params Keys&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">key_num</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
-      </details>
-  </div>
-
-</div>
-
-
-
-  </div>
-
-  </div>
-
-</div>
+<h3 id="tldr"><strong>TLDR</strong></h3>
+<p>Rarely is there a pre-established estimator that addresses most of the issues competing for "first-order" importance in observational studies. Because of this, it can be helpful to have econometric methods that are <strong>well-targeted</strong> (i.e. address a specific issue) and <strong>composable</strong> (i.e. the components fit together) so that researchers can adjust their models to their specific context. With this aim in mind, we illustrate that a  regularized version of <a href="https://arxiv.org/abs/1703.03400">MAML</a> offers a conceptually simply, model-agnostic way to adjust one's estimator for the presence of clustered data. Conceptually, the approach can be understood as a gradient correction that favors early stopping at the cluster level.</p>
 
               
             </article>
@@ -444,7 +381,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../data/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Toy Data Sets" rel="prev">
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Philosphy" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -453,11 +390,26 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Toy Data Sets
+              Philosphy
             </div>
           </div>
         </a>
       
+      
+        
+        <a href="../Implementation/networks/" class="md-footer__link md-footer__link--next" aria-label="Next: Neural Network Models" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Neural Network Models
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   
