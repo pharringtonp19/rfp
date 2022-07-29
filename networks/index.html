@@ -240,6 +240,66 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../train/" class="md-nav__link">
+        Training
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../losses/" class="md-nav__link">
+        Losses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        Toy Data Sets
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -385,7 +445,7 @@
 <span class="normal">39</span>
 <span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="n">features</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="n">activation</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">softplus</span>
+    <span class="n">activation</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">relu</span>
 
     <span class="nd">@nn</span><span class="o">.</span><span class="n">compact</span>
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -518,6 +578,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="../train/" class="md-footer__link md-footer__link--next" aria-label="Next: Training" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Training
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   

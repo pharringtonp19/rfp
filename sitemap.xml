@@ -6,12 +6,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/explanations/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/data/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/how-to-guides/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/losses/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -21,7 +21,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/tutorials/</loc>
+         <loc>https://pharringtonp19.github.io/rfp/train/</loc>
+         <lastmod>2022-07-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pharringtonp19.github.io/rfp/utils/</loc>
          <lastmod>2022-07-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
