@@ -1,5 +1,8 @@
 """
-This is Yuri (from the Pinkpanther!) is the trainer who trains
+In my scripts, I label an instance of the trainer
+class as "Yuri" in a reference to the great film 
+The Pink Panther. If you recall from the movie,
+Yuri is the tainer who trains! 
 """
 
 import jax
@@ -7,7 +10,9 @@ import optax
 
 class trainer:
 
-    def __init__(self, loss_fn, opt, epochs):
+
+    def __init__(self, loss_fn: callable, opt, epochs: int):
+        """Training """
         self.loss_fn = loss_fn
         self.opt = opt 
         self.epochs = epochs 

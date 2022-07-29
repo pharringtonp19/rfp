@@ -6,7 +6,7 @@ class sqr_error:
     def __init__(self, mlp):
         self.mlp = mlp 
     
-    def eval(self, params, data):
+    def apply(self, params, data):
         """compute loss"""
         inputs, targets = data
         prediction = self.mlp.fwd_pass(params, inputs)

@@ -7,4 +7,4 @@ def batch_sample(sample_fn, key, n, d):
 
 def init_keys(key_num):
     """Data and Params Keys"""
-    return jax.random.split(jax.random.PRNGKey(key_num))
+    return jax.random.split(jax.random.PRNGKey(key_num), 3)

@@ -5,15 +5,22 @@ site_author: Patrick Power
 
 
 nav:
-  - index.md
-  - Neural Network Models: networks.md
-  - Training: train.md
-  - Losses: losses.md
-  - Toy Data Sets: data.md
-  - Utils: utils.md
+  - Philosphy: index.md
+  - Generalizing Across Clusters: "Generalizing Across Clusters.md"
+  - Implementation: 
+    - Neural Network Models: Implementation/networks.md
+    - Training: Implementation/train.md
+    - Losses: Implementation/losses.md
+    - Toy Data Sets: Implementation/data.md
+    - Utils: Implementation/utils.md
 
 theme:
   name: "material"
 
 plugins:
   - mkdocstrings
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
