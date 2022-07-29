@@ -1,0 +1,15 @@
+site_name: Regularizing the Forward Pass  
+site_url: https://pharringtonp19.github.io/rfp/
+site_description: pure functions <=> pure simplicity
+site_author: Patrick Power
+
+
+nav:
+  - index.md
+  - Neural Network Models: networks.md
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings
