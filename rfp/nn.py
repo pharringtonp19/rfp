@@ -7,8 +7,8 @@ Examples:
     >>> from typing import Sequence
     >>> from flax.core import unfreeze
 
-    >>> mlp = MLP([32, 1], activation=nn.relu)
-    >>> n, d = 100, 10 # (observations, features) 
+    >>> n, d = 100, 10 # (observations, features)
+    >>> mlp = MLP([32, 1], activation=nn.relu) 
     >>> xs = jax.random.normal(jax.random.PRNGKey(0), (n, d))
     >>> params = mlp.init_fn(jax.random.PRNGKey(1), d)
     >>> yhat = mlp.fwd_pass(params, xs)
