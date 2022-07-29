@@ -7,7 +7,8 @@ site_author: Patrick Power
 nav:
   - Philosphy: index.md
   - Generalizing Across Clusters: "Generalizing Across Clusters.md"
-  - Implementation: 
+  - Deep Controls: "deep_controls.md"
+  - Implementation (JAX): 
     - Neural Network Models: Implementation/networks.md
     - Training: Implementation/train.md
     - Losses: Implementation/losses.md
@@ -21,6 +22,8 @@ plugins:
   - mkdocstrings
 
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
+    - attr_list
+    - md_in_html
+    - pymdownx.superfences
+    - admonition
+    - pymdownx.details
