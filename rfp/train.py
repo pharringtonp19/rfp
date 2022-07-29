@@ -1,33 +1,28 @@
+"""
+This is Yuri (from the Pinkpanther!) is the trainer who trains
+"""
+
 import jax
 import optax
 
+class trainer:
 
-def init_update_fn(loss_fn, opt, data):
-    @jax.jit
-    def update_fn(carry):
-        params, opt_state = carry
-        loss, grads = jax.value_and_grad(loss_fn)(params, data)
-        updates, opt_state = opt.update(grads, opt_state, params)
-        params = optax.apply_updates(params, updates)
-        return (params, opt_state), loss
+    def __init__(self, loss_fn, opt, epochs):
+        self.loss_fn = loss_fn
+        self.opt = opt 
+        self.epochs = epochs 
 
-    return update_fn
-
-
-def init_train_fn(loss_fn, opt, epochs, data):
-    @jax.jit
-    def train_fn(params):
+    def train(self, params, data):
+        """Params and Data"""
         def update_fn(carry, t):
             params, opt_state = carry
-            loss, grads = jax.value_and_grad(loss_fn)(params, data)
-            updates, opt_state = opt.update(grads, opt_state, params)
+            loss, grads = jax.value_and_grad(self.loss_fn)(params, data)
+            updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
             return (params, opt_state), loss
 
         (opt_params, _), losses = jax.lax.scan(
-            update_fn, (params, opt.init(params)), xs=None, length=epochs
+            update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
         return opt_params, losses
-
-    return train_fn
 

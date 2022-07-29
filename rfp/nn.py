@@ -21,7 +21,7 @@ from flax.core import unfreeze
 
 class MLP(nn.Module):
     features: Sequence[int]
-    activation: callable = nn.softplus
+    activation: callable = nn.relu
 
     @nn.compact
     def __call__(self, x: jnp.ndarray):
