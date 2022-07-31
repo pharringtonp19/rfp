@@ -10,7 +10,7 @@ nav:
   - Deep Controls: "deep_controls.md"
   - Implementation (JAX): 
     - Neural Network Models: Implementation/networks.md
-    - Training: Implementation/train.md
+    - Training: "Implementation/train.md"
     - Losses: Implementation/losses.md
     - Toy Data Sets: Implementation/data.md
     - Utils: Implementation/utils.md

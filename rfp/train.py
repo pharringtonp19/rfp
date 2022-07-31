@@ -13,7 +13,7 @@ from dataclasses import dataclass
 @dataclass 
 class trainer:
     loss_fn: callable 
-    opt: # What should this be?
+    opt 
     epochs: int 
 
     def train(self, params, data):
