@@ -5,18 +5,22 @@ The Pink Panther. If you recall from the movie,
 Yuri is the tainer who trains! 
 """
 
-from tkinter import E
 import jax
+from numpy import float32
 import optax
+import chex
 from dataclasses import dataclass 
+from rfp.base import Params, Data
+from typing import Tuple 
 
-@dataclass 
+
+@dataclass(frozen=True, slots=True)
 class trainer:
     loss_fn: callable 
-    opt 
+    opt: optax.GradientTransformation
     epochs: int 
 
-    def train(self, params, data):
+    def train(self, params: Params, data: Data) -> Tuple(Params, [float32]):
         """Params and Data"""
         def update_fn(carry, t):
             params, opt_state = carry

@@ -9,6 +9,7 @@ nav:
   - Generalizing Across Clusters: "Generalizing Across Clusters.md"
   - Deep Controls: "deep_controls.md"
   - Implementation (JAX): 
+    - Types: Implementation/base.md
     - Neural Network Models: Implementation/networks.md
     - Training: "Implementation/train.md"
     - Losses: Implementation/losses.md
