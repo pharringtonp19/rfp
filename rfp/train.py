@@ -5,17 +5,16 @@ The Pink Panther. If you recall from the movie,
 Yuri is the tainer who trains! 
 """
 
+from tkinter import E
 import jax
 import optax
+from dataclasses import dataclass 
 
+@dataclass 
 class trainer:
-
-
-    def __init__(self, loss_fn: callable, opt, epochs: int):
-        """Training """
-        self.loss_fn = loss_fn
-        self.opt = opt 
-        self.epochs = epochs 
+    loss_fn: callable 
+    opt: # What should this be?
+    epochs: int 
 
     def train(self, params, data):
         """Params and Data"""
