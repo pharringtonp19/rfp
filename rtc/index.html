@@ -12,14 +12,14 @@
         <meta name="author" content="Patrick Power">
       
       
-        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/examples/">
+        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/rtc/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Examples - Regularizing the Forward Pass</title>
+        <title>Research Question - Regularizing the Forward Pass</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-partially-linear-model" class="md-skip">
+        <a href="#overview" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Examples
+              Research Question
             
           </span>
         </div>
@@ -197,11 +197,89 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../rtc/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Research Question
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Research Question
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-literature" class="md-nav__link">
+    Related Literature
+  </a>
+  
+    <nav class="md-nav" aria-label="Related Literature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectations" class="md-nav__link">
+    Expectations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differentiating-outcomes" class="md-nav__link">
+    Differentiating Outcomes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terms" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -349,9 +427,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-partially-linear-model" class="md-nav__link">
-    The Partially Linear Model
+  <a href="#overview" class="md-nav__link">
+    Overview
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    Questions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-literature" class="md-nav__link">
+    Related Literature
+  </a>
+  
+    <nav class="md-nav" aria-label="Related Literature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectations" class="md-nav__link">
+    Expectations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differentiating-outcomes" class="md-nav__link">
+    Differentiating Outcomes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terms" class="md-nav__link">
+    Terms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -369,9 +488,61 @@
                 
 
 
-  <h1>Examples</h1>
+  <h1>Research Question</h1>
 
-<h3 id="the-partially-linear-model">The Partially Linear Model</h3>
+<h3 id="overview"><strong>Overview</strong></h3>
+<div class="admonition note">
+<p>"By increasing landlords' costs of doing business, legal services attorneys may enrich their clients at the expense of all other similarly situated poor tenants." -- <a href="https://openyls.law.yale.edu/bitstream/handle/20.500.13051/16794/15_13YaleL_PolyRev385_1995_.pdf?sequence=2&amp;isAllowed=y">reference</a>
+    - Relevant Papers: <a href="https://www.jstor.org/stable/795576">1</a>, <a href="https://www.jstor.org/stable/20455760">2</a></p>
+</div>
+<p>Any effect that we observe with be a function of "aggregate" variables </p>
+<pre class="mermaid"><code>flowchart LR
+    A(Preferences/Income) --&gt;  C(Demand);
+    C --&gt; E(Market Equilibrium);
+    D(Supply) --&gt; E
+    M(Expectations) --&gt;C;
+    M --&gt; D;
+    Z(Taxes/Subsidies) --&gt; C;
+    Z --&gt; D;
+    A --&gt; D;
+    E --&gt; Q(Quantity);
+    E --&gt; R(Prices);</code></pre>
+<h3 id="questions">Questions</h3>
+<ul>
+<li>According to his research, legal
+services attorneys tended not to represent tenants in evictions brought by large,
+corporate landlords; instead, they primarily defended tenants in evictions
+brought by private individual landlords, including a substantial percentage of
+"mom and pop" landlords who lived in the same buildings as their tenants. </li>
+<li>However, as will be seen below, very few
+tenants represented by legal services attorneys file answers; more often, their
+cases are settled, dismissed, or withdrawn during the pretrial phases of
+litigation. Accordingly, in cases involving legal services attorneys, the housing
+court files contain little information on tenant defenses.</li>
+</ul>
+<h3 id="related-literature"><strong>Related Literature</strong></h3>
+<ul>
+<li>Previous studies have compared evictions involving tenants represented by legal services attorneys and evictions involving unrepresented tenants --<a href="https://openyls.law.yale.edu/bitstream/handle/20.500.13051/16794/15_13YaleL_PolyRev385_1995_.pdf?sequence=2&amp;isAllowed=y">reference</a></li>
+<li>took thirty percent longer to reach final disposition than cases in which tenants represented themselves and
+contested their evictions.</li>
+</ul>
+<h5 id="expectations">Expectations</h5>
+<ul>
+<li>read <a href="https://www.jstor.org/stable/1228343">1</a>, <a href="https://ir.lawnet.fordham.edu/ulj/vol18/iss3/2/#:~:text=To%20create%20an%20EFZ%2C%20local,gentrification%2C%20and%20ultimately%20block%20displacement.">2</a></li>
+</ul>
+<div class="arithmatex">\[\theta_) = f()\]</div>
+<h4 id="differentiating-outcomes">Differentiating Outcomes</h4>
+<ul>
+<li>landlords withdrew their
+actions</li>
+<li>terms of settlement agreements</li>
+</ul>
+<h4 id="terms">Terms</h4>
+<ul>
+<li>capitalization rate </li>
+<li>negative leverage</li>
+<li>judgment of possession</li>
+</ul>
 
               
             </article>
@@ -382,6 +553,42 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../deep_controls/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deep Controls" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Deep Controls
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../Implementation/base/" class="md-footer__link md-footer__link--next" aria-label="Next: Types" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Types
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

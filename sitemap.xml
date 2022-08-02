@@ -2,52 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://pharringtonp19.github.io/rfp/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Generalizing%20Across%20Clusters/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/deep_controls/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/examples/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pharringtonp19.github.io/rfp/rtc/</loc>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/base/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/data/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/losses/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/networks/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/train/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/Implementation/utils/</loc>
-         <lastmod>2022-07-31</lastmod>
+         <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
