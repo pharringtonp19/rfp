@@ -411,7 +411,7 @@
 <h3 id="tldr">TLDR</h3>
 <p>We don't assume cross-sectional selection on observables:</p>
 <div class="arithmatex">\[ Y_i(d, 1) \perp D_i | X_i  \quad \forall d \]</div>
-<p>We assume de-panelled selection on observables:</p>
+<p>We assume de-panelled selection<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> on observables:</p>
 <div class="arithmatex">\[Y_i(d,1) - Y_i(0, 0) \perp D_i \big | X_i \quad \forall d \]</div>
 <p>This assumption provides justification for interpreting <span class="arithmatex">\(\beta_1\)</span> as the causal effect:</p>
 <div class="arithmatex">\[\begin{align*} Y_{1,i} - Y_{0,i} &amp;= \beta_0 + \beta_1 D_i +  \varepsilon _i  \\  
@@ -419,6 +419,15 @@ Y_{1,i}  &amp;= \beta_0 + \beta_1 D_i + Y_{0,i} +  \varepsilon _i \end{align*} \
 <p>In practice, we don't usually condition on <span class="arithmatex">\(X_i\)</span> (which means there's no reason to correct for <span class="arithmatex">\(\mathbb{P}(D|X)\)</span>, and this is very attractive because we know that the partially linear model fails to correct for this! --&gt; See <a href="../examples/">Double Machine Learning Example</a>)
 and we allow </p>
 <div class="arithmatex">\[Y_{0, i} \approx f(X_i, D_i) \]</div>
+<p>But in some sense, this kinda feels like cheating because it suggests that de-panelled selection on observables is easier to work with than cross-sectional selection on observables. </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Repeated cross-section&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
               
             </article>
