@@ -6,7 +6,7 @@ site_author: Patrick Power
 
 nav:
   - Philosphy: index.md
-  - Generalizing Across Clusters: "Generalizing Across Clusters.md"
+  - Generalizing Across Clusters: "generalizing_across_clusters.md"
   - Deep Controls: "deep_controls.md"
   - Research Question: "rtc.md"
   - Implementation (JAX): 
