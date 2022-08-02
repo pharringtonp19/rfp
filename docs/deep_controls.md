@@ -4,7 +4,7 @@ We don't assume cross-sectional selection on observables:
 
 $$ Y_i(d, 1) \perp D_i | X_i  \quad \forall d $$
 
-We assume de-panelled selection on observables:
+We assume de-panelled selection[^1] on observables:
 
 $$Y_i(d,1) - Y_i(0, 0) \perp D_i \big | X_i \quad \forall d $$
 
@@ -17,3 +17,7 @@ In practice, we don't usually condition on $X_i$ (which means there's no reason 
 and we allow 
 
 $$Y_{0, i} \approx f(X_i, D_i) $$
+
+But in some sense, this kinda feels like cheating because it suggests that de-panelled selection on observables is easier to work with than cross-sectional selection on observables. 
+
+[^1]: Repeated cross-section
