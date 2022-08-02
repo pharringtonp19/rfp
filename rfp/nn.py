@@ -31,7 +31,7 @@ class MLP(nn.Module):
         x = nn.Dense(self.features[-1])(x)
         return x
     
-    def fwd_pass(self, params: Params, x: Array) -> Array :
+    def fwd_pass(self, params: Params, x: Array) -> Array:
         """The Forward Pass"""
         return self.apply({"params": params}, x)
     

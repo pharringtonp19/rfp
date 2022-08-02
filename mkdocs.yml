@@ -8,6 +8,7 @@ nav:
   - Philosphy: index.md
   - Generalizing Across Clusters: "Generalizing Across Clusters.md"
   - Deep Controls: "deep_controls.md"
+  - Research Question: "rtc.md"
   - Implementation (JAX): 
     - Types: Implementation/base.md
     - Neural Network Models: Implementation/networks.md
@@ -25,6 +26,18 @@ plugins:
 markdown_extensions:
     - attr_list
     - md_in_html
-    - pymdownx.superfences
+    - pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format
     - admonition
     - pymdownx.details
+    - pymdownx.arithmatex:  # Render LaTeX via MathJax
+        generic: true
+
+extra_javascript: 
+    # The below three make MathJax work, see https://squidfunk.github.io/mkdocs-material/reference/mathjax/
+    - _static/mathjax.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
