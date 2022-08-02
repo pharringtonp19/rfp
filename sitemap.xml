@@ -6,17 +6,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pharringtonp19.github.io/rfp/Generalizing%20Across%20Clusters/</loc>
-         <lastmod>2022-08-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://pharringtonp19.github.io/rfp/deep_controls/</loc>
          <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://pharringtonp19.github.io/rfp/examples/</loc>
+         <lastmod>2022-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pharringtonp19.github.io/rfp/generalizing_across_clusters/</loc>
          <lastmod>2022-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>

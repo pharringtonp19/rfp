@@ -169,7 +169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Generalizing%20Across%20Clusters/" class="md-nav__link">
+      <a href="../generalizing_across_clusters/" class="md-nav__link">
         Generalizing Across Clusters
       </a>
     </li>
@@ -409,7 +409,16 @@
   <h1>Deep Controls</h1>
 
 <h3 id="tldr">TLDR</h3>
-<p>something insightful here!</p>
+<p>We don't assume cross-sectional selection on observables:</p>
+<div class="arithmatex">\[ Y_i(d, 1) \perp D_i | X_i  \quad \forall d \]</div>
+<p>We assume de-panelled selection on observables:</p>
+<div class="arithmatex">\[Y_i(d,1) - Y_i(0, 0) \perp D_i \big | X_i \quad \forall d \]</div>
+<p>This assumption provides justification for interpreting <span class="arithmatex">\(\beta_1\)</span> as the causal effect:</p>
+<div class="arithmatex">\[\begin{align*} Y_{1,i} - Y_{0,i} &amp;= \beta_0 + \beta_1 D_i +  \varepsilon _i  \\  
+Y_{1,i}  &amp;= \beta_0 + \beta_1 D_i + Y_{0,i} +  \varepsilon _i \end{align*} \]</div>
+<p>In practice, we don't usually condition on <span class="arithmatex">\(X_i\)</span> (which means there's no reason to correct for <span class="arithmatex">\(\mathbb{P}(D|X)\)</span>, and this is very attractive because we know that the partially linear model fails to correct for this! --&gt; See <a href="../examples/">Double Machine Learning Example</a>)
+and we allow </p>
+<div class="arithmatex">\[Y_{0, i} \approx f(X_i, D_i) \]</div>
 
               
             </article>
@@ -425,7 +434,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../Generalizing%20Across%20Clusters/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Generalizing Across Clusters" rel="prev">
+        <a href="../generalizing_across_clusters/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Generalizing Across Clusters" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
