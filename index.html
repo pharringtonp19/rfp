@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#perspective" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -96,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Philosphy
+              Flavor of Causal Inference
             
           </span>
         </div>
@@ -156,9 +161,65 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Flavor of Causal Inference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
-        Philosphy
+        Flavor of Causal Inference
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perspective" class="md-nav__link">
+    Perspective
+  </a>
+  
+    <nav class="md-nav" aria-label="Perspective">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maybe" class="md-nav__link">
+    Maybe?!
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identification" class="md-nav__link">
+    Identification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    Principles
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -171,10 +232,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Generalizing Across Clusters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Generalizing Across Clusters" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Generalizing Across Clusters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="generalizing_across_clusters/" class="md-nav__link">
-        Generalizing Across Clusters
+      <a href="generalizing_across_clusters/overview/" class="md-nav__link">
+        Overview
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generalizing_across_clusters/the_problem/" class="md-nav__link">
+        The Problem
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -345,6 +453,48 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perspective" class="md-nav__link">
+    Perspective
+  </a>
+  
+    <nav class="md-nav" aria-label="Perspective">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maybe" class="md-nav__link">
+    Maybe?!
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identification" class="md-nav__link">
+    Identification
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principles" class="md-nav__link">
+    Principles
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -357,17 +507,29 @@
                 
 
 
-  <h1>Philosphy</h1>
+  <h1>Flavor of Causal Inference</h1>
 
-<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe". </p>
-<details class="cite">
-<summary>From Reading the Bitter Lesson</summary>
+<h3 id="perspective"><strong>Perspective</strong></h3>
+<h4 id="maybe"><strong>Maybe?!</strong></h4>
+<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. </p>
+<p>The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality.</p>
+<p>Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe". </p>
+<h4 id="identification"><strong>Identification</strong></h4>
+<p>In observational studies, you are amost never identified underreasonable assumptions. 
+<pre class="mermaid"><code>stateDiagram-v2
+    state Justification {
+    Identification --&gt; Sample 
+    Sample --&gt; Estimator
+    }</code></pre></p>
+<h3 id="principles"><strong>Principles</strong></h3>
+<div class="admonition cite">
+<p class="admonition-title">The Bitter Lesson</p>
 <p>The lasting impression from Rich Sutton's <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a> is that one should step in the direction of greater compute. That is, one should work on methods that scale with greater computation.</p>
-</details>
-<details class="cite">
-<summary>From Reading Category Theory for Programmers</summary>
+</div>
+<div class="admonition cite">
+<p class="admonition-title">Category Theory for Programmers</p>
 <p>Ideas should be explained at the level of detail so as to enable composition</p>
-</details>
+</div>
 
               
             </article>
@@ -384,13 +546,13 @@
       
       
         
-        <a href="generalizing_across_clusters/" class="md-footer__link md-footer__link--next" aria-label="Next: Generalizing Across Clusters" rel="next">
+        <a href="generalizing_across_clusters/overview/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Generalizing Across Clusters
+              Overview
             </div>
           </div>
           <div class="md-footer__button md-icon">

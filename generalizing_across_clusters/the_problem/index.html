@@ -12,21 +12,21 @@
         <meta name="author" content="Patrick Power">
       
       
-        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/generalizing_across_clusters/">
+        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/generalizing_across_clusters/the_problem/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Generalizing Across Clusters - Regularizing the Forward Pass</title>
+        <title>The Problem - Regularizing the Forward Pass</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -42,9 +42,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tldr" class="md-skip">
+        <a href="#context" class="md-skip">
           Skip to content
         </a>
       
@@ -82,7 +82,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Regularizing the Forward Pass" class="md-header__button md-logo" aria-label="Regularizing the Forward Pass" data-md-component="logo">
+    <a href="../.." title="Regularizing the Forward Pass" class="md-header__button md-logo" aria-label="Regularizing the Forward Pass" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Generalizing Across Clusters
+              The Problem
             
           </span>
         </div>
@@ -135,7 +135,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Regularizing the Forward Pass" class="md-nav__button md-logo" aria-label="Regularizing the Forward Pass" data-md-component="logo">
+    <a href="../.." title="Regularizing the Forward Pass" class="md-nav__button md-logo" aria-label="Regularizing the Forward Pass" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -154,8 +154,8 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
-        Philosphy
+      <a href="../.." class="md-nav__link">
+        Flavor of Causal Inference
       </a>
     </li>
   
@@ -170,6 +170,48 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Generalizing Across Clusters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Generalizing Across Clusters" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Generalizing Across Clusters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -177,12 +219,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Generalizing Across Clusters
+          The Problem
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Generalizing Across Clusters
+        The Problem
       </a>
       
         
@@ -199,15 +241,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tldr" class="md-nav__link">
-    TLDR
+  <a href="#context" class="md-nav__link">
+    Context
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
+  <a href="#challenge-the-tragic-triad4" class="md-nav__link">
+    Challenge (The Tragic Triad)4
   </a>
   
 </li>
@@ -216,6 +258,13 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -228,7 +277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_controls/" class="md-nav__link">
+      <a href="../../deep_controls/" class="md-nav__link">
         Deep Controls
       </a>
     </li>
@@ -243,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rtc/" class="md-nav__link">
+      <a href="../../rtc/" class="md-nav__link">
         Research Question
       </a>
     </li>
@@ -284,7 +333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/base/" class="md-nav__link">
+      <a href="../../Implementation/base/" class="md-nav__link">
         Types
       </a>
     </li>
@@ -298,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/networks/" class="md-nav__link">
+      <a href="../../Implementation/networks/" class="md-nav__link">
         Neural Network Models
       </a>
     </li>
@@ -312,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/train/" class="md-nav__link">
+      <a href="../../Implementation/train/" class="md-nav__link">
         Training
       </a>
     </li>
@@ -326,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/losses/" class="md-nav__link">
+      <a href="../../Implementation/losses/" class="md-nav__link">
         Losses
       </a>
     </li>
@@ -340,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/data/" class="md-nav__link">
+      <a href="../../Implementation/data/" class="md-nav__link">
         Toy Data Sets
       </a>
     </li>
@@ -354,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Implementation/utils/" class="md-nav__link">
+      <a href="../../Implementation/utils/" class="md-nav__link">
         Utils
       </a>
     </li>
@@ -393,15 +442,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tldr" class="md-nav__link">
-    TLDR
+  <a href="#context" class="md-nav__link">
+    Context
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
+  <a href="#challenge-the-tragic-triad4" class="md-nav__link">
+    Challenge (The Tragic Triad)4
   </a>
   
 </li>
@@ -420,16 +469,41 @@
                 
 
 
-  <h1>Generalizing Across Clusters</h1>
+  <h1>The Problem</h1>
 
-<h3 id="tldr"><strong>TLDR</strong></h3>
-<details class="info">
-<summary>Abstract</summary>
-<p>Rarely is there a pre-established estimator that addresses most of the issues competing for "first-order" importance in observational studies. Because of this, it can be helpful to have econometric methods that are <strong>well-targeted</strong> (i.e. address a specific issue) and <strong>composable</strong> (i.e. the components fit together) so that researchers can adjust their models to their specific context. With this aim in mind, we illustrate that a  regularized version of <a href="https://arxiv.org/abs/1703.03400">MAML</a> offers a conceptually simply, model-agnostic way to adjust one's estimator for the presence of clustered data. Conceptually, the approach can be understood as a gradient correction that favors early stopping at the cluster level.</p>
-</details>
-<h2 id="overview"><strong>Overview</strong></h2>
-<p>There is often a difference between the econometrics taught in graduate school courses and the econometrics emphasized in applied seminars. This difference is sometimes mistakenly attributed to a gap in mathematical backgrounds. The better explanation, though, is that the difference exist because in seminars, the data is messy: clusters of individuals receive the same treatment; people drop out of the sample; outcomes get censored; selection into treatment is unknown. \par </p>
-<p>With multiple issues jockeying for <code>first-order</code> consideration, it's rare that a pre-existing estimator addresses most of the issues competing for "first-order" importance. Because of this, it can be helpful to have econometric methods that are \textbf{well-targeted} (i.e. address a specific issue) and \textbf{composable} (i.e. the components fit together) so as to allow researchers to adjust their models for their specific context. With this aim in mind, we illustrate that a  regularized version of <a href="https://arxiv.org/abs/1703.03400">MAML</a> offers a conceptually simply, model-agnostic way to adjust one's estimator for the presence of clustered data. Conceptually, the approach can be understood as a gradient correction that favors early stopping at the cluster level.</p>
+<h2 id="context"><strong>Context</strong></h2>
+<p>To keep things simple, we describe our approach in the specific context of cluster-level randomized control trials where we're interested in estimating treatment heterogeneity.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> With a binary treatment variable such a problem can be formulated as below: </p>
+<div class="arithmatex">\[\underset{f \in \sigma(x)}{\text{inf}} \ E\big[(Y - f)^2\big]\]</div>
+<p>Such experiments are common in development, education, and health settings because they are:</p>
+<ul>
+<li>Generally easier to implement</li>
+<li>Better adhere to the potential outcome framework<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>  </li>
+<li>Perhaps most importantly, allow us to understand the the effects of scaling the treatment.<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>
+</ul>
+<h2 id="challenge-the-tragic-triad4"><strong>Challenge (The Tragic Triad)<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></strong></h2>
+<p>Under the potential outcome framework, clustered level treatment assignment can be roughly thought of as forming the treatment and controls groups via random clustered sampling. From an estimation standpoint, this poses a few challenges because in each treatment group:</p>
+<ul>
+<li>We observe only a subset of the clusters</li>
+<li>The distribution of covariates can differ across clusters</li>
+<li>The distribution of outcomes conditional on covariates may differ across clusters</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Cluster-level randomized control trials are randomized control trials where treatment varies at a level above the unit of interest.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Reduce the chance of spillover effects between treated and non-treated individuals&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Many large scale studies such as HIE prefer to include many control variables in their regression specification: size of family, age categories, education level, income, self-reported health status, and use of medical care in the year prior to the start of the experiment, kind of insurance (if any) the person had prior to the experiment, whether family members grew up in a city, suburb, or town, and spending on medical care and dental care prior to the experiment&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>The expression "tragic triad" is taken from <a href="https://arxiv.org/pdf/2001.06782.pdf">Gradient Surgery for Multi-Task Learning</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 
               
             </article>
@@ -445,7 +519,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Philosphy" rel="prev">
+        <a href="../overview/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -454,14 +528,14 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Philosphy
+              Overview
             </div>
           </div>
         </a>
       
       
         
-        <a href="../deep_controls/" class="md-footer__link md-footer__link--next" aria-label="Next: Deep Controls" rel="next">
+        <a href="../../deep_controls/" class="md-footer__link md-footer__link--next" aria-label="Next: Deep Controls" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -497,12 +571,12 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
-        <script src="../_static/mathjax.js"></script>
+        <script src="../../_static/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
