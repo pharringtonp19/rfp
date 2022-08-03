@@ -409,6 +409,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE" class="md-nav__link">
+    neuralODE
+  </a>
+  
+    <nav class="md-nav" aria-label="neuralODE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.aug_vector_field" class="md-nav__link">
+    aug_vector_field()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.solve_ivp" class="md-nav__link">
+    solve_ivp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.vector_field" class="md-nav__link">
+    vector_field()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -455,6 +496,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE" class="md-nav__link">
+    neuralODE
+  </a>
+  
+    <nav class="md-nav" aria-label="neuralODE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.aug_vector_field" class="md-nav__link">
+    aug_vector_field()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.solve_ivp" class="md-nav__link">
+    solve_ivp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfp.featuremap.neuralODE.vector_field" class="md-nav__link">
+    vector_field()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -487,6 +569,283 @@
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="rfp.featuremap.neuralODE" class="doc doc-heading">
+        <code>neuralODE</code>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Neural ODE</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>rfp/featuremap.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span> 
+<span class="k">class</span> <span class="nc">neuralODE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Neural ODE&quot;&quot;&quot;</span>
+    <span class="n">mlp</span><span class="p">:</span> <span class="n">MLP</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">([</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">solver</span><span class="p">:</span> <span class="n">ODE_Solver</span> <span class="o">=</span> <span class="n">Heun</span><span class="p">()</span>
+    <span class="n">t1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">def</span> <span class="nf">vector_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;mlp parameterized vector field&quot;&quot;&quot;</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="o">.</span><span class="n">fwd_pass</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">aug_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Augmented mlp parameterized vector field&quot;&quot;&quot;</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">state</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector_field</span><span class="p">)(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="k">def</span> <span class="nf">solve_ivp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;fwd pass of ode&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">diffeqsolve</span><span class="p">(</span>
+            <span class="n">ODETerm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aug_vector_field</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span>
+            <span class="n">t0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">t1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t1</span><span class="p">,</span>
+            <span class="n">y0</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+            <span class="n">dt0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">adjoint</span><span class="o">=</span><span class="n">BacksolveAdjoint</span><span class="p">(),</span>
+            <span class="n">stepsize_controller</span><span class="o">=</span><span class="n">PIDController</span><span class="p">(</span><span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span>
+            <span class="n">args</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">ys</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Kleisi</span><span class="p">[</span><span class="n">Array</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Batched FWD Pass&quot;&quot;&quot;</span>
+        <span class="n">sols</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">))(</span>
+            <span class="n">params</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="n">phiX</span> <span class="o">=</span> <span class="n">sols</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">regs</span> <span class="o">=</span> <span class="n">sols</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">phiX</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rfp.featuremap.neuralODE.__call__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Batched FWD Pass</p>
+
+      <details class="quote">
+        <summary>Source code in <code>rfp/featuremap.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Kleisi</span><span class="p">[</span><span class="n">Array</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Batched FWD Pass&quot;&quot;&quot;</span>
+    <span class="n">sols</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">))(</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))))</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="n">phiX</span> <span class="o">=</span> <span class="n">sols</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">regs</span> <span class="o">=</span> <span class="n">sols</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">phiX</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rfp.featuremap.neuralODE.aug_vector_field" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">aug_vector_field</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Augmented mlp parameterized vector field</p>
+
+      <details class="quote">
+        <summary>Source code in <code>rfp/featuremap.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">aug_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Augmented mlp parameterized vector field&quot;&quot;&quot;</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">state</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_field</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector_field</span><span class="p">)(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">c</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rfp.featuremap.neuralODE.solve_ivp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">solve_ivp</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>fwd pass of ode</p>
+
+      <details class="quote">
+        <summary>Source code in <code>rfp/featuremap.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">solve_ivp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;fwd pass of ode&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">diffeqsolve</span><span class="p">(</span>
+        <span class="n">ODETerm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aug_vector_field</span><span class="p">),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">,</span>
+        <span class="n">t0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">t1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">t1</span><span class="p">,</span>
+        <span class="n">y0</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+        <span class="n">dt0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">adjoint</span><span class="o">=</span><span class="n">BacksolveAdjoint</span><span class="p">(),</span>
+        <span class="n">stepsize_controller</span><span class="o">=</span><span class="n">PIDController</span><span class="p">(</span><span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">ys</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rfp.featuremap.neuralODE.vector_field" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">vector_field</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>mlp parameterized vector field</p>
+
+      <details class="quote">
+        <summary>Source code in <code>rfp/featuremap.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vector_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;mlp parameterized vector field&quot;&quot;&quot;</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="o">.</span><span class="n">fwd_pass</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
