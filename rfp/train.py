@@ -11,7 +11,6 @@ import optax
 import chex
 from dataclasses import dataclass 
 from rfp.base import Params, Data
-from typing import Tuple 
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,7 +19,7 @@ class trainer:
     opt: optax.GradientTransformation
     epochs: int 
 
-    def train(self, params: Params, data: Data) -> Tuple(Params, [float32]):
+    def train(self, params: Params, data: Data) -> tuple[Params, [float32]]:
         """Params and Data"""
         def update_fn(carry, t):
             params, opt_state = carry

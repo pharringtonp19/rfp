@@ -12,15 +12,15 @@ import matplotlib.pyplot as plt
 from functools import partial 
 import numpy as np 
 
-file_link = os.getcwd() + "/fig/"
+file_link = os.getcwd() + "/docs/fig/"
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
-flags.DEFINE_integer("n", 100, "number of observations")
+flags.DEFINE_integer("n", 200, "number of observations")
 flags.DEFINE_integer("features", 2, "number of features")
 flags.DEFINE_float("lr", 0.01, "learning rate")
 flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("simulate", False, "simulate")
-flags.DEFINE_integer("simulations", 5, "simulations")
+flags.DEFINE_integer("simulations", 3000, "simulations")
 
 FLAGS = flags.FLAGS
 
@@ -32,8 +32,8 @@ def main(argv):
 
     @partial(jax.jit, static_argnums=(1))
     def simulate(init_key, plots: bool = False):
+        
         # Data
-
         train_key, test_key, params_key = jax.random.split(init_key, 3)
         D, X, Y = batch_sample(partial(sample1, outcome), train_key, FLAGS.n, FLAGS.features)
         
@@ -67,11 +67,11 @@ def main(argv):
         std = jnp.std(coeffs)
         array_plot = np.array((coeffs - target_coef)/ std)
         fig = plt.figure(dpi=300, tight_layout=True)
-        plt.hist(array_plot, edgecolor='black', density=True, bins=20)
+        plt.hist(array_plot, edgecolor='black', density=True, bins=40)
         plt.title('Density', loc='left', size=14)
         plt.xlabel(r'$(\hat{\theta} - \theta_0)/\sigma(\hat{\theta})$')
-        filename = file_link + "dml.pdf"
-        fig.savefig(filename, format="pdf")
+        filename = file_link + "dml.png"
+        fig.savefig(filename, format="png")
         plt.show()
     
     else:
@@ -85,6 +85,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-
-
     app.run(main)

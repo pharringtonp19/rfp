@@ -1,8 +1,12 @@
 import chex 
-from typing import Tuple 
+from typing import TypeAlias, TypeVar
+import diffrax
 
-Array = chex.Array # Is this correct?
-OptState = chex.ArrayTree   
-Params = chex.ArrayTree 
-Data = Tuple[Array, Array] | Tuple[Array, Array, Array]
-Key  = chex.PRNGKey
+Array: TypeAlias = chex.Array # Is this correct?
+OptState: TypeAlias = chex.ArrayTree   
+Params: TypeAlias = chex.ArrayTree 
+Data: TypeAlias = tuple[Array, Array] | tuple[Array, Array, Array]
+Key: TypeAlias  = chex.PRNGKey
+ODE_Solver: TypeAlias = diffrax.solver.base._MetaAbstractSolver
+T = TypeVar("T")
+Kleisi: TypeAlias = tuple[T, jnp.float32]

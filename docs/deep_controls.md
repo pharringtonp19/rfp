@@ -1,3 +1,8 @@
+!!! tldr "Overview"
+
+    The previous section highlighted how bi-level gradient descent is a potentially an attactive approach when estimating nonparametrics estimands with clustered data. It may not be immediatley clear, though, why this "gradient based" partialled out approach is also well suited when were intersted in estimating a parametric estimand. 
+
+
 
 ??? tip "Abstract Algebra"
 
@@ -21,6 +26,12 @@ This assumption provides justification for interpreting $\beta_1$ as the causal 
 $$\begin{align*} Y_{1,i} - Y_{0,i} &= \beta_0 + \beta_1 D_i +  \varepsilon _i  \\  
 Y_{1,i}  &= \beta_0 + \beta_1 D_i + Y_{0,i} +  \varepsilon _i \end{align*} $$
 
+??? Warning inline end "Double Machine Learning Example"
+
+    <figure markdown>
+    ![Image title](./../fig/dml.png){ width="500" }
+    <figcaption>Normalized Sampling Distribution</figcaption>
+    </figure>
 In practice, we don't usually condition on $X_i$ (which means there's no reason to correct for $\mathbb{P}(D|X)$, and this is very attractive because we know that the partially linear model fails to correct for this! --> See [Double Machine Learning Example](./examples.md))
 and we allow 
 

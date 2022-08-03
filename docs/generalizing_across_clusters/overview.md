@@ -4,3 +4,7 @@ There is often a difference between the econometrics taught in graduate school c
 
 With multiple issues jockeying for ``first-order`` consideration, it's rare that a pre-existing estimator addresses all of them. Because of this, it can be helpful to have econometric methods that are **well-targeted** (i.e. address a specific issue) and **composable** (i.e. the components fit together) so as to allow researchers to adjust their models for their specific context. With this aim in mind, we illustrate that a  regularized version of [MAML](https://arxiv.org/abs/1703.03400) offers a conceptually simply, model-agnostic way to adjust one's estimator for the presence of clustered data. Conceptually, the approach can be understood as a gradient correction that favors early stopping at the cluster level.
 
+!!! Note It's actually that Simple!
+    
+    The idea is very simple. It just changes one term in the loss and everything else is the same as prior work. -- [ref](https://perceiving-systems.blog/en/news/novelty-in-science)
+
