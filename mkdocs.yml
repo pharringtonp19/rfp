@@ -5,8 +5,10 @@ site_author: Patrick Power
 
 
 nav:
-  - Philosphy: index.md
-  - Generalizing Across Clusters: "generalizing_across_clusters.md"
+  - Flavor of Causal Inference: index.md
+  - Generalizing Across Clusters: 
+    - Overview: "generalizing_across_clusters/overview.md"
+    - The Problem: "generalizing_across_clusters/the_problem.md"
   - Deep Controls: "deep_controls.md"
   - Research Question: "rtc.md"
   - Implementation (JAX): 

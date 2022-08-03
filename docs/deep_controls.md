@@ -1,4 +1,12 @@
-### TLDR
+
+??? tip "Abstract Algebra"
+
+    What structure on $\mathbb{R}^n$ should we preserve? 
+
+    $$\begin{align*} g : {\text{bijections}} \to \mathbb{R^n} \to \mathbb{R^n} \end{align*}  \equiv \text{Sym}(\mathbb{R}^n)$$
+
+
+
 
 We don't assume cross-sectional selection on observables:
 
