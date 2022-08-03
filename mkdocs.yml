@@ -18,7 +18,7 @@ nav:
     - Losses: Implementation/losses.md
     - Toy Data Sets: Implementation/data.md
     - Utils: Implementation/utils.md
-    - Feature Map: 'Implementation/feature_map.md'
+    - Feature Map: 'Implementation/featuremap.md'
 
 theme:
   name: "material"
