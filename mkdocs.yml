@@ -21,7 +21,14 @@ nav:
     - Feature Map: 'Implementation/featuremap.md'
 
 theme:
-  name: "material"
+  name: material
+  palette:
+    scheme: default
+    primary: blue
+  icon:
+    admonition:
+      code: fontawesome/solid/code
+      note: octicons/tag-16
 
 plugins:
   - mkdocstrings
