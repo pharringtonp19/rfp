@@ -458,6 +458,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Implementation/gan/" class="md-nav__link">
+        GAN
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -539,6 +553,30 @@
   <h1>Flavor of Causal Inference</h1>
 
 <h3 id="perspective"><strong>Perspective</strong></h3>
+<p>From when I read Card and Kreuger 1994 in my second year of grad school, I've been interested in the relationship between "clusters" and selection on observables. The latter assumes a local level of variation, while the former prohibits it. </p>
+<p>At a high level, you can think of assuming selection on observables and then cluster-level assignment as transforming the probability measure of interest as follows </p>
+<div class="arithmatex">\[\mathbb{P} \mapsto G(\mathbb{P}) \mapsto H \circ G (\mathbb{P}) \]</div>
+<p>Where we're interested in recovering <span class="arithmatex">\(\theta(\mathbb{P})\)</span> from <span class="arithmatex">\(H \circ G (\mathbb{P})\)</span></p>
+<ul>
+<li>Randomized Treatment</li>
+<li>Panel </li>
+<li>Clusters</li>
+<li>Controls</li>
+<li>Policy </li>
+<li>Propensity Score</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A(Randomized) --&gt;|over|C;
+    A(Randomized) --&gt;|within|F;
+    A(Randomized);
+    B(Propesnity Score) --&gt; |within|C;
+    B(Propesnity Score) --&gt; |within|F;
+    C(Clusters);
+    D(Pannel) --&gt; A;
+    F(Controls);
+    F --&gt; G(High);
+    F --&gt; Z(Low);
+</code></pre>
 <h4 id="maybe"><strong>Maybe?!</strong></h4>
 <p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. </p>
 <p>The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality.</p>

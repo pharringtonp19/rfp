@@ -12,14 +12,14 @@
         <meta name="author" content="Patrick Power">
       
       
-        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Implementation/data/">
+        <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Implementation/gan/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Toy Data Sets - Regularizing the Forward Pass</title>
+        <title>GAN - Regularizing the Forward Pass</title>
       
     
     
@@ -82,11 +82,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#rfp.data" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -116,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Toy Data Sets
+              GAN
             
           </span>
         </div>
@@ -358,48 +353,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Toy Data Sets
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
         Toy Data Sets
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.data" class="md-nav__link">
-    rfp.data
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -437,11 +395,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../gan/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         GAN
       </a>
+      
     </li>
   
 
@@ -471,21 +437,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rfp.data" class="md-nav__link">
-    rfp.data
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -498,33 +449,13 @@
                 
 
 
-  <h1>Toy Data Sets</h1>
+  <h1>GAN</h1>
 
-<div class="doc doc-object doc-module">
-
-
-<a id="rfp.data"></a>
-  <div class="doc doc-contents first">
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-  </div>
-
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>"Output samples representative of the underlying factors of variation" -- <a href="https://www.youtube.com/watch?v=1CT-kxjYbFU&amp;t=3300s">ref</a></p>
 </div>
+<div class="arithmatex">\[\underset{\theta}{\text{argmin}} \ \mathcal{L}(\theta) := f_{\theta}(z) \quad z \sim \mathcal{N}(0,I) \]</div>
 
               
             </article>
@@ -540,7 +471,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../losses/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Losses" rel="prev">
+        <a href="../featuremap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Feature Map" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -549,26 +480,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Losses
+              Feature Map
             </div>
           </div>
         </a>
       
-      
-        
-        <a href="../utils/" class="md-footer__link md-footer__link--next" aria-label="Next: Utils" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Utils
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
       
     </nav>
   
