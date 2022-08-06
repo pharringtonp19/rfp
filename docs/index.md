@@ -1,5 +1,36 @@
 ### **Perspective**
 
+From when I read Card and Kreuger 1994 in my second year of grad school, I've been interested in the relationship between "clusters" and selection on observables. The latter assumes a local level of variation, while the former prohibits it. 
+
+At a high level, you can think of assuming selection on observables and then cluster-level assignment as transforming the probability measure of interest as follows 
+
+$$\mathbb{P} \mapsto G(\mathbb{P}) \mapsto H \circ G (\mathbb{P}) $$
+
+Where we're interested in recovering $\theta(\mathbb{P})$ from $H \circ G (\mathbb{P})$
+
+
+- Randomized Treatment
+- Panel 
+- Clusters
+- Controls
+- Policy 
+- Propensity Score
+
+``` mermaid
+flowchart LR
+    A(Randomized) -->|over|C;
+    A(Randomized) -->|within|F;
+    A(Randomized);
+    B(Propesnity Score) --> |within|C;
+    B(Propesnity Score) --> |within|F;
+    C(Clusters);
+    D(Pannel) --> A;
+    F(Controls);
+    F --> G(High);
+    F --> Z(Low);
+
+```
+
 #### **Maybe?!**
 Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. 
 

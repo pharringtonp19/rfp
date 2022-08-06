@@ -1,6 +1,7 @@
 import chex 
 from typing import TypeAlias, TypeVar
 import diffrax
+import jax.numpy as jnp 
 
 Array: TypeAlias = chex.Array # Is this correct?
 OptState: TypeAlias = chex.ArrayTree   

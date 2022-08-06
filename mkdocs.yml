@@ -19,6 +19,7 @@ nav:
     - Toy Data Sets: Implementation/data.md
     - Utils: Implementation/utils.md
     - Feature Map: 'Implementation/featuremap.md'
+    - GAN: 'Implementation/gan.md'
 
 theme:
   name: material

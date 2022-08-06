@@ -11,8 +11,9 @@ import optax
 import matplotlib.pyplot as plt
 from functools import partial 
 import numpy as np 
+from typing import Any, Type
 
-file_link = os.getcwd() + "/docs/fig/"
+file_link: str = os.getcwd() + "/docs/fig/"
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
 flags.DEFINE_integer("n", 200, "number of observations")
@@ -22,12 +23,12 @@ flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("simulate", False, "simulate")
 flags.DEFINE_integer("simulations", 3000, "simulations")
 
-FLAGS = flags.FLAGS
+FLAGS: Any = flags.FLAGS
 
-def outcome(d):
+def outcome(d) -> Any:
     return jnp.log(d**2 + 1.0 + jnp.sin(d * 1.5)) + 1.5
 
-def main(argv):
+def main(argv) -> None:
     del argv
 
     @partial(jax.jit, static_argnums=(1))
