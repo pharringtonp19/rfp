@@ -1,3 +1,18 @@
+[tool.poetry]
+name = "rfp"
+version = "0.1.0"
+description = "\"Regularizing the Forward Pass\""
+authors = ["Patrick Power <pharringtonp19@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "3.10"
+diffrax = "^0.2.1"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^5.0.4"
+black = "^22.6.0"
+
 [build-system]
-requires = ["setuptools>=42.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
