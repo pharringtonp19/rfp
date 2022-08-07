@@ -20,6 +20,8 @@ nav:
     - Utils: Implementation/utils.md
     - Feature Map: 'Implementation/featuremap.md'
     - GAN: 'Implementation/gan.md'
+    - Attention: 'Implementation/attention.md'
+    - Gaussian Processes: 'Implementation/gp.md'
 
 theme:
   name: material

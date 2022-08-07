@@ -1,8 +1,12 @@
 ### **Perspective**
 
+??? note "Concepts"
+    
+    - Attention v.s. Sampling 
+
 From when I read Card and Kreuger 1994 in my second year of grad school, I've been interested in the relationship between "clusters" and selection on observables. The latter assumes a local level of variation, while the former prohibits it. 
 
-At a high level, you can think of assuming selection on observables and then cluster-level assignment as transforming the probability measure of interest as follows 
+At a high level, you can think of assuming selection on observables and then cluster-level assignment as transforming the probability measure of interest as follows.  
 
 $$\mathbb{P} \mapsto G(\mathbb{P}) \mapsto H \circ G (\mathbb{P}) $$
 
