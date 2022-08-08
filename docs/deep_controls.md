@@ -2,10 +2,12 @@
 
     The previous section highlighted how bi-level gradient descent is a potentially an attactive approach when estimating nonparametrics estimands with clustered data. It may not be immediatley clear, though, why this "gradient based" partialled out approach is also well suited when were intersted in estimating a parametric estimand. 
 
+We incorporate the regularizing strategy proposed in [Learning Differential Equations that are Easy to Solve
+](https://arxiv.org/abs/2007.04504)  
 <figure markdown>
-![Image title](./../fig/reg_ode_0.0.png){ width="500" }
-![Image title](./../fig/reg_ode_1.0.png){ width="500" }
-<figcaption>Normalized Sampling Distribution</figcaption>
+![Image title](./../fig/reg_ode_0.0.png){ width="700" }
+![Image title](./../fig/reg_ode_10.0.png){ width="700" }
+<figcaption>Visual Effect of Regularizing</figcaption>
 </figure>  
 
 ??? tip "Abstract Algebra"

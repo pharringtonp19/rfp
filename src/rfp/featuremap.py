@@ -1,3 +1,4 @@
+from typing import Any
 import chex
 import jax
 import jax.numpy as jnp
@@ -13,7 +14,8 @@ class neuralODE:
     mlp: MLP  
     solver: ODE_Solver  
     t1: float  
-    saveat = SaveAt(t1=True)
+    saveat: Any = SaveAt(t1=True)
+    adjoint: Any = BacksolveAdjoint()
 
     def vector_field(self, t: float, y: Array, args: Params) -> Array:
         """mlp parameterized vector field"""
@@ -37,17 +39,17 @@ class neuralODE:
             t1=self.t1,
             y0=input,
             dt0=None,
-            adjoint=BacksolveAdjoint(),
+            adjoint=self.adjoint,
             stepsize_controller=PIDController(rtol=1e-3, atol=1e-3),
             saveat=self.saveat,
             args=params,
-        ).ys
+        )
 
     def __call__(self, params: Params, X: Array) -> Kleisi[Array]:
         """Batched FWD Pass"""
         sols = jax.vmap(self.solve_ivp, in_axes=(None, 0))(
             params, jnp.hstack((X, jnp.zeros((X.shape[0], 1))))
-        ).squeeze()
+        ).ys.squeeze()
         phiX = sols[:, :-1]
         regs = sols[:, -1]
         return phiX, jnp.mean(regs)

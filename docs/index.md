@@ -1,5 +1,7 @@
 ### **Perspective**
 
+- the "Which" and "How" of Causal Inference
+
 ??? note "Concepts"
     
     - Attention v.s. Sampling 

@@ -25,7 +25,7 @@ class feature_map_loss:
         target, x = data
         prediction, penalty = self.feature_map(params, x)
         prediction_loss = jnp.mean((target-prediction)**2)
-        return prediction_loss+ self.reg_value*penalty, (prediction_loss, penalty)
+        return prediction_loss + self.reg_value*penalty, (prediction_loss, penalty)
 
         
 
