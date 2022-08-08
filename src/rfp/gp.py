@@ -1,44 +1,19 @@
-from webbrowser import BackgroundBrowser
-
-
-class BankAccount: 
-
-    def __init__(self, account_name: str, initial_balance: int = 0) -> None: 
-        self.account_name = account_name 
-        self.balance = initial_balance 
-
-    def deposit(self, amount: int) -> None:
-        self.balance += amount 
+class Point: 
+    def __init__(self, x: float, y: float):
+        self._x = x 
+        self._y = y 
     
-    def withdraw(self, amount: int) -> None: 
-        self.balance -= amount 
+    @property 
+    def x(self):
+        return self._x 
     
-    def overdrawn(self) -> bool:
-        return self.balance < 0
+    @property 
+    def y(self):
+        return self._y 
 
-def transfer(src: BankAccount, dst: BankAccount, amount: int) -> None:
-    src.withdraw(amount)
-    src.deposit(amount)
-
-account_1 = BankAccount('Alice', 400)
-account_2 = BankAccount('Bob', 200)
-transfer(account_1, account_2, 50)
-
-class AuditedBankAccount(BankAccount):
-    def __init__(self, account_name: str, initial_balance: int = 0) -> None: 
-        super().__init__(account_name, initial_balance)
-        self.audit_log: list[str] = [] 
-    
-    def deposit(self, amount: int) -> None: 
-        self.audit_log.append(f"Deposited {amount}")
-        self.balance += amount 
-    
-    def withdraw(self, amount: int) -> None:
-        self.audit_log.append(f"Withdrew {amount}")
-        self.balance -= amount 
-
-audited = AuditedBankAccount('Charlie', 300)
-transfer(account_1, audited, 100)
+point = Point(12, 5)
+print(point.x)
+print(point.y)
 
 
 

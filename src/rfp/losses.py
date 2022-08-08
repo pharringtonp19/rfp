@@ -14,6 +14,21 @@ class sqr_error:
         prediction = self.mlp.fwd_pass(params, inputs)
         return jnp.mean((prediction-targets)**2)
 
+@dataclass 
+class feature_map_loss: 
+    """Computes the Feature Map Loss"""
+    feature_map: callable
+    reg_value: float = 0.0 
+    aux_status: bool = True 
+
+    def __call__(self, params, data):
+        target, x = data
+        prediction, penalty = self.feature_map(params, x)
+        prediction_loss = jnp.mean((target-prediction)**2)
+        return prediction_loss+ self.reg_value*penalty, (prediction_loss, penalty)
+
+        
+
 @dataclass
 class supervised_loss:
     linear_layer: callable 

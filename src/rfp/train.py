@@ -19,17 +19,17 @@ class trainer:
     opt: optax.GradientTransformation
     epochs: int 
 
-    def train(self, params: Params, data: Data) -> tuple[Params, [float32]]:
+    def train(self, params: Params, data: Data):
         """Params and Data"""
         def update_fn(carry, t):
             params, opt_state = carry
-            loss, grads = jax.value_and_grad(self.loss_fn)(params, data)
+            loss_values, grads = jax.value_and_grad(self.loss_fn, has_aux=self.loss_fn.aux_status)(params, data)
             updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
-            return (params, opt_state), loss
+            return (params, opt_state), loss_values
 
-        (opt_params, _), losses = jax.lax.scan(
+        (opt_params, _), loss_values_history = jax.lax.scan(
             update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
-        return opt_params, losses
+        return opt_params, loss_values_history
 

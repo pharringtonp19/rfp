@@ -10,6 +10,8 @@ python = "3.10"
 diffrax = "^0.2.1"
 beartype = "^0.10.4"
 mypy = "^0.971"
+chex = "^0.1.4"
+flax = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^5.0.4"

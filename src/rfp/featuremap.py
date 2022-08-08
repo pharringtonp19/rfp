@@ -1,7 +1,7 @@
 import chex
 import jax
 import jax.numpy as jnp
-from diffrax import BacksolveAdjoint, diffeqsolve, ODETerm, PIDController, Heun
+from diffrax import BacksolveAdjoint, diffeqsolve, ODETerm, PIDController, Heun, SaveAt# type: ignore
 from flax.core import unfreeze
 from dataclasses import dataclass 
 from rfp.base import ODE_Solver, Params, Array, Kleisi
@@ -10,16 +10,17 @@ from rfp.nn import MLP # Is this necessary?
 @dataclass 
 class neuralODE:
     """Neural ODE"""
-    mlp: MLP = MLP([32, 1])
-    solver: ODE_Solver = Heun()
-    t1: float = 1.0
+    mlp: MLP  
+    solver: ODE_Solver  
+    t1: float  
+    saveat = SaveAt(t1=True)
 
-    def vector_field(self, t, y, args):
+    def vector_field(self, t: float, y: Array, args: Params) -> Array:
         """mlp parameterized vector field"""
         state = jnp.hstack([y, jnp.array(t)])
         return self.mlp.fwd_pass(args, state)
 
-    def aug_vector_field(self, t, state, args):
+    def aug_vector_field(self, t: float, state: Array, args: Params) -> Array:
         """ Augmented mlp parameterized vector field"""
         y, _ = state[:-1], state[-1]
         a = self.vector_field(t, y, args)
@@ -27,7 +28,7 @@ class neuralODE:
         c = jnp.concatenate((a, b))
         return c
 
-    def solve_ivp(self, params, input):
+    def solve_ivp(self, params: Params, input: Array) -> Array:
         """fwd pass of ode"""
         return diffeqsolve(
             ODETerm(self.aug_vector_field),
@@ -38,6 +39,7 @@ class neuralODE:
             dt0=None,
             adjoint=BacksolveAdjoint(),
             stepsize_controller=PIDController(rtol=1e-3, atol=1e-3),
+            saveat=self.saveat,
             args=params,
         ).ys
 
@@ -52,9 +54,15 @@ class neuralODE:
 
 if __name__ == '__main__':
     from rfp.nn import MLP 
+    import matplotlib.pyplot as plt # type: ignore
     mlp = MLP([32, 1])
     params = mlp.init_fn(jax.random.PRNGKey(0), 2)
     x = jnp.linspace(-3,3,10).reshape(-1,1)
-    feature_map = neuralODE()
+    feature_map = neuralODE(mlp, Heun(), 1.0)
     yhat, regs = feature_map(params, x)
-    print(type(yhat), yhat.shape, type(regs), regs.shape)
+    plt.scatter(x, yhat, label='Adjusted')
+    plt.scatter(x, x, label='Initial')
+    plt.legend(frameon=False)
+    plt.xlabel('Inputs')
+    plt.title('Inputs', loc='left')
+    plt.show()

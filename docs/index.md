@@ -53,6 +53,12 @@ stateDiagram-v2
     }
 ```
 
+??? note "Causal Inference"
+
+    - Statistical Learning Theory: "If it turns out that nevertheless we can explain the data at hand, then we have reason to believe that we have found a regularity underlying the data."
+    - "In regularization theory, we construct suitable regularizers and incorporate them into optimization problems to bias our solutions."
+    - Consistency/ Universal Consistency
+
 ### **Principles**
 !!! cite "The Bitter Lesson" 
 

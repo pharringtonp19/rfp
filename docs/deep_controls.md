@@ -2,13 +2,17 @@
 
     The previous section highlighted how bi-level gradient descent is a potentially an attactive approach when estimating nonparametrics estimands with clustered data. It may not be immediatley clear, though, why this "gradient based" partialled out approach is also well suited when were intersted in estimating a parametric estimand. 
 
-
+<figure markdown>
+![Image title](./../fig/reg_ode_0.0.png){ width="500" }
+![Image title](./../fig/reg_ode_1.0.png){ width="500" }
+<figcaption>Normalized Sampling Distribution</figcaption>
+</figure>  
 
 ??? tip "Abstract Algebra"
 
     - Sets
     - Group (functions defined on this set)
-    
+
     What structure on $\mathbb{R}^n$ should we preserve? 
 
     $$\begin{align*} g : {\text{bijections}} \to \mathbb{R^n} \to \mathbb{R^n} \end{align*}  \equiv \text{Sym}(\mathbb{R}^n)$$
@@ -41,5 +45,7 @@ and we allow
 $$Y_{0, i} \approx f(X_i, D_i) $$
 
 But in some sense, this kinda feels like cheating because it suggests that de-panelled selection on observables is easier to work with than cross-sectional selection on observables. 
+
+
 
 [^1]: Repeated cross-section
