@@ -1,5 +1,53 @@
 ### **Perspective**
 
+- Following the approach advocated in Mostly Harmless Econometrics, I tend to view causal inference techniques as methods that attempt to correct for the fact that the data is not generated from a randomized experiment.
+- I prefer to keep my assessments of these methods relatively simple by asking, "Is that a reasonable correction?"[^1]
+
+
+#### **Regression Framework**
+
+- You can think of the regression framework as averaging across $n$ randomized controls trials centered on $x$ with one observation in each trial with no correction/adjustment for the conditional distribution: $\mathbb{P}(D|X)$
+
+$$\begin{align*} 
+\hat{\theta} &= \underset{\theta}{\text{argmin}} \ 
+\sum _i \big(v_i -\theta u_i)\big)^2\end{align*}$$
+
+where
+
+- $v_i = y_i - f_1(x_i)$
+- $u_i= d_i - f_2(x_i)$
+- $f_1(x_i) = E[Y|X=x]$
+- $f_2(x_i) = E[D|X=x]$
+
+#### **Our Gradient Correction Approach**
+
+$$ \begin{align*}  E[Y|X] &= \beta ^T \phi(X) \\ 
+&= \int Y(D)d\mathbb{P}(D|X) \\
+E[Y|D,X] &= \theta^TD + E[Y|X] \end{align*} $$
+
+
+
+
+
+ 
+
+
+
+
+
+??? note "What's Missing"
+    - We don't consider "representation" learning 
+    - We don't consider generative modeling
+    - Model Complexity
+
+``` mermaid
+flowchart LR
+    A(Score);
+    B(Kernels);
+    C(Gaussian Processes);
+    D(Attention);
+    E(Manifolds);
+```
 - the "Which" and "How" of Causal Inference
 
 ??? note "Concepts"
@@ -34,7 +82,6 @@ flowchart LR
     F(Controls);
     F --> G(High);
     F --> Z(Low);
-
 ```
 
 #### **Maybe?!**
@@ -72,3 +119,4 @@ stateDiagram-v2
 
     Ideas should be explained at the level of detail so as to enable composition
    
+[^1]: I recognize that this is a poor measure 
