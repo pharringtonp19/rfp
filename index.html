@@ -135,6 +135,85 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      Flavor of Causal Inference
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="generalizing_across_clusters/overview/" class="md-tabs__link">
+        Generalizing Across Clusters
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="deep_controls/" class="md-tabs__link">
+      Deep Controls
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="rtc/" class="md-tabs__link">
+      Research Question
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="Implementation/base/" class="md-tabs__link">
+        Implementation (JAX)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -147,8 +226,12 @@
                   <div class="md-sidebar__inner">
                     
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="Regularizing the Forward Pass" class="md-nav__button md-logo" aria-label="Regularizing the Forward Pass" data-md-component="logo">
       
@@ -203,31 +286,18 @@
     Perspective
   </a>
   
-    <nav class="md-nav" aria-label="Perspective">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#maybe" class="md-nav__link">
-    Maybe?!
-  </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#identification" class="md-nav__link">
-    Identification
+      
+        <li class="md-nav__item">
+  <a href="#approach" class="md-nav__link">
+    Approach
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#principles" class="md-nav__link">
-    Principles
+  <a href="#preview-of-results" class="md-nav__link">
+    Preview of Results
   </a>
   
 </li>
@@ -254,6 +324,12 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       
+      
+        
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -346,6 +422,24 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -464,8 +558,8 @@
   
   
     <li class="md-nav__item">
-      <a href="Implementation/gan/" class="md-nav__link">
-        GAN
+      <a href="Implementation/kernels/" class="md-nav__link">
+        Kernels
       </a>
     </li>
   
@@ -485,64 +579,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#perspective" class="md-nav__link">
-    Perspective
-  </a>
-  
-    <nav class="md-nav" aria-label="Perspective">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#maybe" class="md-nav__link">
-    Maybe?!
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#identification" class="md-nav__link">
-    Identification
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#principles" class="md-nav__link">
-    Principles
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -552,50 +588,92 @@
 
   <h1>Flavor of Causal Inference</h1>
 
-<h3 id="perspective"><strong>Perspective</strong></h3>
-<p>From when I read Card and Kreuger 1994 in my second year of grad school, I've been interested in the relationship between "clusters" and selection on observables. The latter assumes a local level of variation, while the former prohibits it. </p>
-<p>At a high level, you can think of assuming selection on observables and then cluster-level assignment as transforming the probability measure of interest as follows </p>
-<div class="arithmatex">\[\mathbb{P} \mapsto G(\mathbb{P}) \mapsto H \circ G (\mathbb{P}) \]</div>
-<p>Where we're interested in recovering <span class="arithmatex">\(\theta(\mathbb{P})\)</span> from <span class="arithmatex">\(H \circ G (\mathbb{P})\)</span></p>
+<div class="admonition cite">
+<p class="admonition-title">Motivating Quotes</p>
 <ul>
-<li>Randomized Treatment</li>
-<li>Panel </li>
-<li>Clusters</li>
-<li>Controls</li>
-<li>Policy </li>
-<li>Propensity Score</li>
-</ul>
-<pre class="mermaid"><code>flowchart LR
-    A(Randomized) --&gt;|over|C;
-    A(Randomized) --&gt;|within|F;
-    A(Randomized);
-    B(Propesnity Score) --&gt; |within|C;
-    B(Propesnity Score) --&gt; |within|F;
-    C(Clusters);
-    D(Pannel) --&gt; A;
-    F(Controls);
-    F --&gt; G(High);
-    F --&gt; Z(Low);
-</code></pre>
-<h4 id="maybe"><strong>Maybe?!</strong></h4>
-<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. </p>
-<p>The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality.</p>
-<p>Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe". </p>
-<h4 id="identification"><strong>Identification</strong></h4>
-<p>In observational studies, you are amost never identified underreasonable assumptions. 
-<pre class="mermaid"><code>stateDiagram-v2
-    state Justification {
-    Identification --&gt; Sample 
-    Sample --&gt; Estimator
-    }</code></pre></p>
-<h3 id="principles"><strong>Principles</strong></h3>
-<div class="admonition cite">
-<p class="admonition-title">The Bitter Lesson</p>
+<li>
 <p>The lasting impression from Rich Sutton's <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a> is that one should step in the direction of greater compute. That is, one should work on methods that scale with greater computation.</p>
+</li>
+<li>
+<p>The central takeway from <a href="https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/">Category Theory for Programmers</a> is that <em>Ideas should be explained at the level of detail so as to enable composition</em>  </p>
+</li>
+</ul>
 </div>
-<div class="admonition cite">
-<p class="admonition-title">Category Theory for Programmers</p>
-<p>Ideas should be explained at the level of detail so as to enable composition</p>
+<h3 id="perspective"><strong>Perspective</strong></h3>
+<ul>
+<li>
+<p>Following the approach advocated in <a href="https://www.mostlyharmlesseconometrics.com/">Mostly Harmless Econometrics</a>, we view causal inference techniques as methods that aim to correct for the fact that the data is not generated from a randomized experiment.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> </p>
+</li>
+<li>
+<p>In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. </p>
+</li>
+<li>
+<p>In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.</p>
+</li>
+</ul>
+<h3 id="approach"><strong>Approach</strong></h3>
+<ul>
+<li>We consider the following three sampling correction approaches:</li>
+</ul>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Challenge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Adjustments</td>
+<td>Expensive <span class="arithmatex">\(O(n^2)\)</span></td>
+</tr>
+<tr>
+<td>Re-weighting</td>
+<td>Generative Modeling</td>
+</tr>
+<tr>
+<td>Finetuning</td>
+<td>Right Space</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<ul>
+<li>All of which can be understood as a gradient correction<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+</ul>
+<p><center></p>
+<pre class="mermaid"><code>flowchart TB 
+A(Attention/Kernel) --&gt; Z(Gradient Correction);
+B(Fine-tuning) --&gt;Z;
+C(Re-weighting) --&gt;Z;</code></pre>
+<p></center></p>
+<ul>
+<li>As is the case with applied causal inference we don't select the best option so much as wel choose the "least" bad option!<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>
+</ul>
+<h3 id="preview-of-results"><strong>Preview of Results</strong></h3>
+<p><img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_Standard%20(2).png" alt="drawing" width="350"/> 
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_MAML%20(1).png" alt="drawing" width="350"/> 
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_ESCluster%20(1).png" alt="drawing" width="350"/> </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>We define our problem via a probability space with a probability measure that "corresponds" a randomized control trial.</p>
+<div class="arithmatex">\[\big(\Omega, \mathcal{F}, \mathbb{P}_{\text{randomized}} \big)\]</div>
+<p>Given this probability space, we can define the parameter of interest as some function of the probability measure. </p>
+<div class="arithmatex">\[\theta_0 = f(\mathbb{P}_{\text{randomized}} ) \]</div>
+<p>The non-randomized aspect of the data is then captured via some transformation <span class="arithmatex">\(T\)</span>, such that </p>
+<div class="arithmatex">\[\mathbb{P}_{\text{observed}} = T(\mathbb{P}_{\text{randomized}} )\]</div>
+<p><a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>At a high level, a challenge in applied econometrics is to develop/propose/motivate methods that can make use of the ongoing work in deep learning. We remain model agonstic in the sense that our methods focus on gradient corrections (i.e. within training corrections) which is different from the post-training corrections as proposed in alternative methods like <a href="https://academic.oup.com/ectj/article/21/1/C1/5056401">Double Machine Learning</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality. Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe".&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
 </div>
 
               
@@ -603,6 +681,11 @@
             
           </div>
         </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
         
       </main>
       
@@ -649,7 +732,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
