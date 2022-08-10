@@ -2,11 +2,11 @@ import os
 import jax 
 import jax.numpy as jnp 
 from absl import app, flags
-from rfp.nn import MLP 
-from rfp.utils import batch_sample, init_keys
-from rfp.data import sample1
-from rfp.losses import sqr_error
-from rfp.train import trainer
+from _src.nn import MLP 
+from _src.utils import batch_sample, init_keys
+from _src.data import sample1
+from _src.losses import sqr_error
+from _src.train import trainer
 import optax 
 import matplotlib.pyplot as plt
 from functools import partial 

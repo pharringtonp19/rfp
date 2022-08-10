@@ -53,6 +53,5 @@ K \ x \ z &= \langle \phi(x), \phi(z) \rangle _{\mathcal{H}} \\
 &= k_x(z) \end{align*}$$
  
 
-
-::: rfp.kernels
+ 
 

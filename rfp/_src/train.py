@@ -10,7 +10,7 @@ from numpy import float32
 import optax
 import chex
 from dataclasses import dataclass 
-from rfp.base import Params, Data
+from _src.base import Params, Data
 
 
 @dataclass(frozen=True, slots=True)

@@ -29,21 +29,6 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "mypy (>=0.900,!=0.940)", "pytest-mypy-plugins", "cloudpickle"]
 
 [[package]]
-name = "beartype"
-version = "0.10.4"
-description = "Unbearably fast runtime type checking in pure Python."
-category = "main"
-optional = false
-python-versions = ">=3.6.0"
-
-[package.extras]
-all = ["typing-extensions (>=3.10.0.0)"]
-dev = ["coverage (>=5.5)", "sphinx", "pytest (>=4.0.0)", "tox (>=3.20.1)", "sphinx (>=4.1.0)", "mypy (>=0.800)", "typing-extensions", "numpy"]
-doc-rtd = ["sphinx (==4.1.0)", "sphinx-rtd-theme (==0.5.1)"]
-test-tox = ["sphinx", "pytest (>=4.0.0)", "mypy (>=0.800)", "typing-extensions", "numpy"]
-test-tox-coverage = ["coverage (>=5.5)"]
-
-[[package]]
 name = "black"
 version = "22.6.0"
 description = "The uncompromising code formatter."
@@ -151,7 +136,7 @@ jax = ">=0.3.4"
 
 [[package]]
 name = "etils"
-version = "0.6.0"
+version = "0.7.1"
 description = "Collection of common python utils"
 category = "main"
 optional = false
@@ -160,7 +145,7 @@ python-versions = ">=3.7"
 [package.dependencies]
 etils = {version = "*", extras = ["epy"], optional = true, markers = "extra == \"epath\""}
 importlib_resources = {version = "*", optional = true, markers = "extra == \"epath\""}
-typing_extensions = {version = "*", optional = true, markers = "extra == \"epy\""}
+typing_extensions = {version = "*", optional = true, markers = "extra == \"epath\""}
 zipp = {version = "*", optional = true, markers = "extra == \"epath\""}
 
 [package.extras]
@@ -170,13 +155,12 @@ etree-dm = ["etils", "dm-tree"]
 etree = ["etils", "etils", "etils", "etils"]
 etqdm = ["etils", "tqdm", "absl-py"]
 epy = ["typing-extensions"]
-epath-no-tf = ["etils"]
-epath = ["etils", "zipp", "importlib-resources"]
+epath = ["etils", "zipp", "typing-extensions", "importlib-resources"]
 enp = ["etils", "numpy"]
 edc = ["etils"]
-ecolab = ["etils", "mediapy", "numpy", "jupyter"]
+ecolab = ["etils", "etils", "mediapy", "numpy", "jupyter"]
 dev = ["chex", "yapf", "pylint (>=2.6.0)", "pytest-xdist", "pytest-subtests", "pytest"]
-array-types = ["numpy"]
+array-types = ["etils"]
 all = ["etils", "etils", "etils", "etils", "etils", "etils", "etils", "etils", "etils", "etils", "etils"]
 
 [[package]]
@@ -620,6 +604,21 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "tree-math"
+version = "0.1.0"
+description = ""
+category = "main"
+optional = false
+python-versions = ">=3"
+
+[package.dependencies]
+jax = "*"
+numpy = "*"
+
+[package.extras]
+tests = ["absl-py", "jaxlib", "numpy (>=1.17)", "pytest"]
+
+[[package]]
 name = "typing-extensions"
 version = "4.3.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -642,7 +641,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10"
-content-hash = "7958769a4533f828361e1a8a69445cdd7c25f72b8c5a6da1f06c63fcfe5f9605"
+content-hash = "aa8df6ea6b6f324970da273b28a6d8a3a241d9e55e28026b7b037d29446924f1"
 
 [metadata.files]
 absl-py = [
@@ -655,10 +654,6 @@ atomicwrites = [
 attrs = [
     {file = "attrs-22.1.0-py2.py3-none-any.whl", hash = "sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c"},
     {file = "attrs-22.1.0.tar.gz", hash = "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6"},
-]
-beartype = [
-    {file = "beartype-0.10.4-py3-none-any.whl", hash = "sha256:1a65453bc25b39979bf5ad65fe5e73350551282956456d828fb5783468649e3e"},
-    {file = "beartype-0.10.4.tar.gz", hash = "sha256:24ec69f6a7f4e6e97af403d08de270def3248518060327095d23b1c4df64bf2a"},
 ]
 black = [
     {file = "black-22.6.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:f586c26118bc6e714ec58c09df0157fe2d9ee195c764f630eb0d8e7ccce72e69"},
@@ -738,8 +733,8 @@ equinox = [
     {file = "equinox-0.6.0.tar.gz", hash = "sha256:cfcf3c43a93988aefeac4e28a24855e535b2d630c0abc376b8b1f0f444c929ee"},
 ]
 etils = [
-    {file = "etils-0.6.0-py3-none-any.whl", hash = "sha256:e47b14402f2fc883c70a394e86b3236e4929cfd90187fba58d2f4d3eb2e07c05"},
-    {file = "etils-0.6.0.tar.gz", hash = "sha256:6677241051835d0db11c4947bcad938f57b51ea102290624f892f1e4e51b70e5"},
+    {file = "etils-0.7.1-py3-none-any.whl", hash = "sha256:9b5140835372e3db8b6e8d7da9e16beb2390ae6f24c253107c8127e4d2205189"},
+    {file = "etils-0.7.1.tar.gz", hash = "sha256:207c097dd4180d5e5ab1c7b7ee78b7bf9471e12534deace23b1d392debd292f3"},
 ]
 flake8 = [
     {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
@@ -1179,6 +1174,10 @@ tomli = [
 toolz = [
     {file = "toolz-0.12.0-py3-none-any.whl", hash = "sha256:2059bd4148deb1884bb0eb770a3cde70e7f954cfbbdc2285f1f2de01fd21eb6f"},
     {file = "toolz-0.12.0.tar.gz", hash = "sha256:88c570861c440ee3f2f6037c4654613228ff40c93a6c25e0eba70d17282c6194"},
+]
+tree-math = [
+    {file = "tree-math-0.1.0.tar.gz", hash = "sha256:77eb8d6ba4d6cfdd2d986a6bc3fc2d1b16212f0172863a3ca509720babf75929"},
+    {file = "tree_math-0.1.0-py3-none-any.whl", hash = "sha256:9b3c4685ec0ade78fb3c9eb2d5c3d6b3552d9a0ba7415db01b111f8dd7143fc0"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},

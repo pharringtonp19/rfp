@@ -1,6 +1,6 @@
 import jax 
 import jax.numpy as jnp 
-from rfp.base import Array 
+from _src.base import Array 
 
 
 def weight(xi: Array, xj: Array) -> Array:

@@ -6,11 +6,7 @@ import optax
 from absl import app, flags
 from diffrax import Heun, SaveAt, NoAdjoint
 
-from rfp.data import sample2
-from rfp.featuremap import neuralODE
-from rfp.losses import feature_map_loss
-from rfp.nn import MLP
-from rfp.train import trainer
+from rfp import sample2, neuralODE, feature_map_loss, MLP, trainer
 
 file_link: str = os.getcwd() + "/docs/fig/"
 

@@ -19,9 +19,6 @@ nav:
     - Toy Data Sets: Implementation/data.md
     - Utils: Implementation/utils.md
     - Feature Map: 'Implementation/featuremap.md'
-    - GAN: 'Implementation/gan.md'
-    - Attention: 'Implementation/attention.md'
-    - Gaussian Processes: 'Implementation/gp.md'
     - Kernels: 'Implementation/kernels.md'
 
 theme:
@@ -33,6 +30,13 @@ theme:
     admonition:
       code: fontawesome/solid/code
       note: octicons/tag-16
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.indexes
+    - toc.integrate
+    - navigation.top
+    #- navigation.tabs.sticky
 
 plugins:
   - mkdocstrings

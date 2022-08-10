@@ -1,4 +1,4 @@
-from rfp.add import total 
+from _src.add import total 
 
 def test_total_empty() -> None: 
     assert total([]) == 0.0 

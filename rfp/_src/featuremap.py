@@ -5,8 +5,8 @@ import jax.numpy as jnp
 from diffrax import BacksolveAdjoint, diffeqsolve, ODETerm, PIDController, Heun, SaveAt# type: ignore
 from flax.core import unfreeze
 from dataclasses import dataclass 
-from rfp.base import ODE_Solver, Params, Array, Kleisi
-from rfp.nn import MLP # Is this necessary?
+from rfp._src.base import ODE_Solver, Params, Array, Kleisi
+from rfp._src.nn import MLP # Is this necessary?
 
 @dataclass 
 class neuralODE:
@@ -55,7 +55,7 @@ class neuralODE:
         return phiX, jnp.mean(regs)
 
 if __name__ == '__main__':
-    from rfp.nn import MLP 
+    from rfp._src.nn import MLP 
     import matplotlib.pyplot as plt # type: ignore
     mlp = MLP([32, 1])
     params = mlp.init_fn(jax.random.PRNGKey(0), 2)

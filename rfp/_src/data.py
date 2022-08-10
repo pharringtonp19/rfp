@@ -1,6 +1,6 @@
 import jax 
 import jax.numpy as jnp 
-from rfp.base import Data 
+from _src.base import Data 
 
 def sample1(f, key, features: int) -> Data:
     subkey1, subkey2, subkey3 = jax.random.split(key, 3)

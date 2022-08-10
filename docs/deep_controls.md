@@ -1,3 +1,36 @@
+??? tip "What's In Between?"
+
+    - "De-meaning the estimates" as in a partially linear model 
+    - Reweighting observations as in a fully nonparametric model
+
+
+#### **Regression Framework**
+
+- You can think of the regression framework as averaging across $n$ randomized controls trials centered on $x$ with one observation in each trial with no correction/adjustment for the conditional distribution: $\mathbb{P}(D|X)$
+
+$$\begin{align*} 
+\hat{\theta} &= \underset{\theta}{\text{argmin}} \ 
+\sum _i \big(v_i -\theta u_i)\big)^2\end{align*}$$
+
+where
+
+- $v_i = y_i - f_1(x_i)$
+- $u_i= d_i - f_2(x_i)$
+- $f_1(x_i) = E[Y|X=x]$
+- $f_2(x_i) = E[D|X=x]$
+
+??? note "Causal Inference"
+
+    - Statistical Learning Theory: "If it turns out that nevertheless we can explain the data at hand, then we have reason to believe that we have found a regularity underlying the data."
+   
+
+#### **Our Gradient Correction Approach**
+
+$$ \begin{align*}  E[Y|X] &= \beta ^T \phi(X) \\ 
+&= \int Y(D)d\mathbb{P}(D|X) \\
+E[Y|D,X] &= \theta^TD + E[Y|X] \end{align*} $$
+
+
 !!! tldr "Overview"
 
     The previous section highlighted how bi-level gradient descent is a potentially an attactive approach when estimating nonparametrics estimands with clustered data. It may not be immediatley clear, though, why this "gradient based" partialled out approach is also well suited when were intersted in estimating a parametric estimand. 

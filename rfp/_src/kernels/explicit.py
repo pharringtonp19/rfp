@@ -51,6 +51,8 @@ def batch_loss(kernel, w, data):
     Yhat = batch_predict(kernel, w, X)
     return jnp.mean((Y-Yhat)**2)
 
+
+
 if __name__ == '__main__':
     import matplotlib.pyplot as plt 
     import jax 
