@@ -47,12 +47,13 @@ C(Re-weighting) -->Z;
 - As is the case with applied causal inference we don't select the best option so much as wel choose the "least" bad option![^3]
 
 
-### **Preview of Results** å
+### **Preview of Results**
 
-<figure markdown>
-![Image title](./../fig/preview_results/grad_desc_toy_Standard (2).png){width="700"}
-<figcaption>Visual Effect of Regularizing</figcaption>
-</figure>  
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_Standard%20(2).png" alt="drawing" width="350"/> 
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_MAML%20(1).png" alt="drawing" width="350"/> 
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_ESCluster%20(1).png" alt="drawing" width="350"/> 
+
+ 
 
 [^1]: We define our problem via a probability space with a probability measure that "corresponds" a randomized control trial.
     
