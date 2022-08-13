@@ -1,6 +1,6 @@
 site_name: Regularizing the Forward Pass  
 site_url: https://pharringtonp19.github.io/rfp/
-site_description: pure functions <=> pure simplicity
+site_description: Enabled by Jax
 site_author: Patrick Power
 
 
