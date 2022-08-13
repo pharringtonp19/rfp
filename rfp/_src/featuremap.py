@@ -5,7 +5,7 @@ import jax.numpy as jnp
 from diffrax import BacksolveAdjoint, diffeqsolve, ODETerm, PIDController, Heun, SaveAt# type: ignore
 from flax.core import unfreeze
 from dataclasses import dataclass 
-from rfp._src.base import ODE_Solver, Params, Array, Kleisi
+from rfp._src.types import ODE_Solver, Params, Array, Kleisi
 from rfp._src.nn import MLP # Is this necessary?
 
 @dataclass 

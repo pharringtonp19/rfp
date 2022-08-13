@@ -18,7 +18,7 @@ import jax.numpy as jnp
 import flax.linen as nn
 from typing import Sequence
 from flax.core import unfreeze
-from rfp._src.base import Params, Array, Key  
+from rfp._src.types import Params, Array, Key  
 
 class MLP(nn.Module):
     features: Sequence[int]

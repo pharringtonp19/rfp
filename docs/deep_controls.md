@@ -1,3 +1,11 @@
+!!! tldr "Overview"
+
+    We're going to estimate linear models via fitting non-linear models 
+
+
+How do we "evolve" the partially linear model towards a non-parametric model?
+
+
 ??? tip "What's In Between?"
 
     - "De-meaning the estimates" as in a partially linear model 
@@ -31,9 +39,7 @@ $$ \begin{align*}  E[Y|X] &= \beta ^T \phi(X) \\
 E[Y|D,X] &= \theta^TD + E[Y|X] \end{align*} $$
 
 
-!!! tldr "Overview"
 
-    The previous section highlighted how bi-level gradient descent is a potentially an attactive approach when estimating nonparametrics estimands with clustered data. It may not be immediatley clear, though, why this "gradient based" partialled out approach is also well suited when were intersted in estimating a parametric estimand. 
 
 We incorporate the regularizing strategy proposed in [Learning Differential Equations that are Easy to Solve
 ](https://arxiv.org/abs/2007.04504)  

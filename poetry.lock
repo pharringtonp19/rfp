@@ -77,6 +77,14 @@ python-versions = ">=3.7"
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "cloudpickle"
+version = "2.1.0"
+description = "Extended pickling support for Python objects"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
@@ -104,6 +112,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "decorator"
+version = "5.1.1"
+description = "Decorators for Humans"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[[package]]
 name = "diffrax"
 version = "0.2.1"
 description = "GPU+autodiff-capable ODE/SDE/CDE solvers written in JAX."
@@ -114,6 +130,22 @@ python-versions = "~=3.7"
 [package.dependencies]
 equinox = ">=0.5.4"
 jax = ">=0.3.4"
+
+[[package]]
+name = "distrax"
+version = "0.1.2"
+description = "Distrax: Probability distributions in JAX."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+absl-py = ">=0.9.0"
+chex = ">=0.0.7"
+jax = ">=0.1.55"
+jaxlib = ">=0.1.67"
+numpy = ">=1.18.0"
+tensorflow-probability = ">=0.15.0"
 
 [[package]]
 name = "dm-tree"
@@ -221,6 +253,14 @@ unicode = ["unicodedata2 (>=14.0.0)"]
 woff = ["zopfli (>=0.1.4)", "brotlicffi (>=0.8.0)", "brotli (>=1.0.1)"]
 
 [[package]]
+name = "gast"
+version = "0.5.3"
+description = "Python AST that abstracts the underlying Python version"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[[package]]
 name = "importlib-resources"
 version = "5.9.0"
 description = "Read resources from Python packages"
@@ -242,7 +282,7 @@ python-versions = "*"
 
 [[package]]
 name = "jax"
-version = "0.3.15"
+version = "0.3.16"
 description = "Differentiate, compile, and transform Numpy code."
 category = "main"
 optional = false
@@ -251,19 +291,20 @@ python-versions = ">=3.7"
 [package.dependencies]
 absl-py = "*"
 etils = {version = "*", extras = ["epath"]}
-numpy = ">=1.19"
+numpy = ">=1.20"
 opt_einsum = "*"
 scipy = ">=1.5"
 typing_extensions = "*"
 
 [package.extras]
-ci = ["jaxlib (==0.3.14)"]
+australis = ["protobuf (>=3.13,<4)"]
+ci = ["jaxlib (==0.3.15)"]
 cpu = ["jaxlib (==0.3.15)"]
 cuda = ["jaxlib (==0.3.15+cuda11.cudnn82)"]
 cuda11_cudnn805 = ["jaxlib (==0.3.15+cuda11.cudnn805)"]
 cuda11_cudnn82 = ["jaxlib (==0.3.15+cuda11.cudnn82)"]
 minimum-jaxlib = ["jaxlib (==0.3.14)"]
-tpu = ["jaxlib (==0.3.15)", "libtpu-nightly (==0.1.dev20220722)", "requests"]
+tpu = ["jaxlib (==0.3.15)", "libtpu-nightly (==0.1.dev20220723)", "requests"]
 
 [[package]]
 name = "jaxlib"
@@ -577,6 +618,27 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
+name = "tensorflow-probability"
+version = "0.17.0"
+description = "Probabilistic modeling and statistical inference in TensorFlow"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+absl-py = "*"
+cloudpickle = ">=1.3"
+decorator = "*"
+dm-tree = "*"
+gast = ">=0.3.2"
+numpy = ">=1.13.3"
+six = ">=1.10.0"
+
+[package.extras]
+jax = ["jax", "jaxlib"]
+tfds = ["tensorflow-datasets (>=2.2.0)"]
+
+[[package]]
 name = "tensorstore"
 version = "0.1.22"
 description = "Read and write large, multi-dimensional arrays"
@@ -641,7 +703,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10"
-content-hash = "aa8df6ea6b6f324970da273b28a6d8a3a241d9e55e28026b7b037d29446924f1"
+content-hash = "09ab4627ceb0c3f78f6163de02c01a85ab79abb4151457b82a2c1c7e959bdffe"
 
 [metadata.files]
 absl-py = [
@@ -688,6 +750,10 @@ click = [
     {file = "click-8.1.3-py3-none-any.whl", hash = "sha256:bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48"},
     {file = "click-8.1.3.tar.gz", hash = "sha256:7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e"},
 ]
+cloudpickle = [
+    {file = "cloudpickle-2.1.0-py3-none-any.whl", hash = "sha256:b5c434f75c34624eedad3a14f2be5ac3b5384774d5b0e3caf905c21479e6c4b1"},
+    {file = "cloudpickle-2.1.0.tar.gz", hash = "sha256:bb233e876a58491d9590a676f93c7a5473a08f747d5ab9df7f9ce564b3e7938e"},
+]
 colorama = [
     {file = "colorama-0.4.5-py2.py3-none-any.whl", hash = "sha256:854bf444933e37f5824ae7bfc1e98d5bce2ebe4160d46b5edf346a89358e99da"},
     {file = "colorama-0.4.5.tar.gz", hash = "sha256:e6c6b4334fc50988a639d9b98aa429a0b57da6e17b9a44f0451f930b6967b7a4"},
@@ -700,9 +766,17 @@ cycler = [
     {file = "cycler-0.11.0-py3-none-any.whl", hash = "sha256:3a27e95f763a428a739d2add979fa7494c912a32c17c4c38c4d5f082cad165a3"},
     {file = "cycler-0.11.0.tar.gz", hash = "sha256:9c87405839a19696e837b3b818fed3f5f69f16f1eec1a1ad77e043dcea9c772f"},
 ]
+decorator = [
+    {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
+    {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
+]
 diffrax = [
     {file = "diffrax-0.2.1-py3-none-any.whl", hash = "sha256:9dd338bc584ac1cf32220f48b831507342f1dbf28957f8ff81f409e0ff8a3ba1"},
     {file = "diffrax-0.2.1.tar.gz", hash = "sha256:07806ad221d7c381da336e2689c88805bbce777408045a64046fe0924d2f67de"},
+]
+distrax = [
+    {file = "distrax-0.1.2-py3-none-any.whl", hash = "sha256:0f56710372bbca799ae42524dc68b064996a16889c4915011e501b6e9a9d3590"},
+    {file = "distrax-0.1.2.tar.gz", hash = "sha256:6fffabc63768c0d32e854061442b8de39cff8946e3d61375a82490aaa02d648c"},
 ]
 dm-tree = [
     {file = "dm-tree-0.1.7.tar.gz", hash = "sha256:30fec8aca5b92823c0e796a2f33b875b4dccd470b57e91e6c542405c5f77fd2a"},
@@ -748,6 +822,10 @@ fonttools = [
     {file = "fonttools-4.34.4-py3-none-any.whl", hash = "sha256:d73f25b283cd8033367451122aa868a23de0734757a01984e4b30b18b9050c72"},
     {file = "fonttools-4.34.4.zip", hash = "sha256:9a1c52488045cd6c6491fd07711a380f932466e317cb8e016fc4e99dc7eac2f0"},
 ]
+gast = [
+    {file = "gast-0.5.3-py3-none-any.whl", hash = "sha256:211aac1e58c167b25d3504998f2db694454a24bb1fb1225bce99420166f21d6a"},
+    {file = "gast-0.5.3.tar.gz", hash = "sha256:cfbea25820e653af9c7d1807f659ce0a0a9c64f2439421a7bba4f0983f532dea"},
+]
 importlib-resources = [
     {file = "importlib_resources-5.9.0-py3-none-any.whl", hash = "sha256:f78a8df21a79bcc30cfd400bdc38f314333de7c0fb619763f6b9dabab8268bb7"},
     {file = "importlib_resources-5.9.0.tar.gz", hash = "sha256:5481e97fb45af8dcf2f798952625591c58fe599d0735d86b10f54de086a61681"},
@@ -757,7 +835,7 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 jax = [
-    {file = "jax-0.3.15.tar.gz", hash = "sha256:7ab82cb617dfa3ca94e3e8cc22ad51fcdd2e59391182635e7fcd570aafa9a6c2"},
+    {file = "jax-0.3.16.tar.gz", hash = "sha256:211e6fb083fe846721285d5b9a6a22d16733f21a2ace350300039decfc7bf9a4"},
 ]
 jaxlib = [
     {file = "jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl", hash = "sha256:7555be95d567572579a2010ed03506e31ff87d55c21c1bc80eddcccd87b3f723"},
@@ -1148,6 +1226,9 @@ setuptools-scm = [
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
+tensorflow-probability = [
+    {file = "tensorflow_probability-0.17.0-py2.py3-none-any.whl", hash = "sha256:4cb04201c2fb92593c9a73514f4da3897554f927305c38f6aa6cc4caa14a7357"},
 ]
 tensorstore = [
     {file = "tensorstore-0.1.22-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:4fe51095fffa989a6537dc538e906a8753d6a5faeb38a1f0f22b43fd7c91e5b3"},

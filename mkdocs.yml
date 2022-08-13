@@ -6,13 +6,14 @@ site_author: Patrick Power
 
 nav:
   - Flavor of Causal Inference: index.md
-  - Generalizing Across Clusters: 
-    - Overview: "generalizing_across_clusters/overview.md"
-    - The Problem: "generalizing_across_clusters/the_problem.md"
-  - Deep Controls: "deep_controls.md"
-  - Research Question: "rtc.md"
+  - Generalizing Across Clusters: "papers/Generalizing_Across_Clusters.pdf"
+  - Unintended Consequences of Right to Counsel: "papers/Unintended_Consequences_of_a_Right_to_Counsel.pdf"
+  - Score Guided Attention: "papers/Score_Guided_Attention.pdf"
+    #- Overview: "generalizing_across_clusters/overview.md"
+    #- The Problem: "generalizing_across_clusters/the_problem.md"
+  #- Deep Controls: "deep_controls.md"
+  #- Research Question: "rtc.md"
   - Implementation (JAX): 
-    - Types: Implementation/base.md
     - Neural Network Models: Implementation/networks.md
     - Training: "Implementation/train.md"
     - Losses: Implementation/losses.md
@@ -54,6 +55,9 @@ markdown_extensions:
     - pymdownx.arithmatex:  # Render LaTeX via MathJax
         generic: true
     - footnotes
+    - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra_javascript: 
     # The below three make MathJax work, see https://squidfunk.github.io/mkdocs-material/reference/mathjax/
