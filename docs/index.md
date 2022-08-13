@@ -8,7 +8,11 @@
     ### **Composition**
     - The central takeway from [Category Theory for Programmers](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/) is that *Ideas should be explained at the level of detail so as to enable composition*  
 
+<center>
+
 <iframe src="https://slides.com/pharringtonp19/minimal/embed?token=FxFf2FUF" width="576" height="420" title="Minimal" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+</center>
  
 ### **Introduction**
 
