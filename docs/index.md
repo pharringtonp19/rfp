@@ -2,10 +2,7 @@
 
 ??? cite "Motivating Quotes" 
 
-    ### **Direction of Great Compute**
     - The lasting impression from Rich Sutton's [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) is that one should step in the direction of greater compute. That is, one should work on methods that scale with greater computation.
-
-    ### **Composition**
     - The central takeway from [Category Theory for Programmers](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/) is that *Ideas should be explained at the level of detail so as to enable composition*  
 
 <center>
@@ -68,7 +65,7 @@ C(Re-weighting) -->Z;
     
     $$\big(\Omega, \mathcal{F}, \mathbb{P}_{\text{randomized}} \big)$$
     
-    Given this probability space, we can define the parameter of interest as some function of the probability measure. 
+    Given this probability space, we can define the parameter of interest as some function(al) of the probability measure. 
 
     $$\theta_0 = f(\mathbb{P}_{\text{randomized}} ) $$
 
