@@ -5,7 +5,7 @@ site_author: Patrick Power
 
 
 nav:
-  - Flavor of Causal Inference: index.md
+  - Regularizing the Forward Pass: index.md
   - Generalizing Across Clusters: "papers/Generalizing_Across_Clusters.pdf"
   - Unintended Consequences of Right to Counsel: "papers/Unintended_Consequences_of_a_Right_to_Counsel.pdf"
   - Score Guided Attention: "papers/Score_Guided_Attention.pdf"
