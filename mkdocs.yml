@@ -7,7 +7,7 @@ site_author: Patrick Power
 nav:
   - Regularizing the Forward Pass: index.md
   - Generalizing Across Clusters: "papers/Generalizing_Across_Clusters.pdf"
-  - Unintended Consequences of Right to Counsel: "papers/Unintended_Consequences_of_a_Right_to_Counsel.pdf"
+  - The Consequences of Right to Counsel: "papers/The_Consequences_of_a_Right_to_Counsel.pdf"
   - Score Guided Attention: "papers/Score_Guided_Attention.pdf"
     #- Overview: "generalizing_across_clusters/overview.md"
     #- The Problem: "generalizing_across_clusters/the_problem.md"
