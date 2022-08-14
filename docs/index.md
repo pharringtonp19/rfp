@@ -5,6 +5,10 @@ hide:
 ---
 
 <center>
+# **Regularizing the Forward Pass**
+</center>
+
+<center>
 
 <iframe src="https://slides.com/pharringtonp19/rtc-9622e5/embed?token=-ZfhPcFe&style=transparent" width="460" height="336" title="gac" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
