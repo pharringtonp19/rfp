@@ -217,7 +217,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -285,13 +287,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#related-literature" class="md-nav__link">
-    Related Literature
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#approach" class="md-nav__link">
     Approach
   </a>
@@ -300,7 +295,7 @@
       
         <li class="md-nav__item">
   <a href="#preview-of-cherry-picked-results" class="md-nav__link">
-    Preview of Cherry-Picked Results
+    Preview of (Cherry-Picked) Results
   </a>
   
 </li>
@@ -522,13 +517,6 @@
 
   <h1>Regularizing the Forward Pass</h1>
 
-<details class="cite">
-<summary>Motivating Quotes</summary>
-<ul>
-<li>The lasting impression from Rich Sutton's <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a> is that one should step in the direction of greater compute. That is, one should work on methods that scale with greater computation.</li>
-<li>The central takeway from <a href="https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/">Category Theory for Programmers</a> is that <em>Ideas should be explained at the level of detail so as to enable composition</em>  </li>
-</ul>
-</details>
 <p><center></p>
 <iframe src="https://slides.com/pharringtonp19/rtc-9622e5/embed?token=-ZfhPcFe&style=transparent" width="460" height="336" title="gac" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
@@ -536,25 +524,10 @@
 
 <p></center></p>
 <h3 id="introduction"><strong>Introduction</strong></h3>
-<ul>
-<li>
-<p>Following the approach advocated in <a href="https://www.mostlyharmlesseconometrics.com/">Mostly Harmless Econometrics</a>, we view causal inference techniques as methods that aim to correct for the fact that the data is not generated from a randomized experiment.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> </p>
-</li>
-<li>
-<p>In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. </p>
-</li>
-<li>
-<p>In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.</p>
-</li>
-</ul>
-<h3 id="related-literature"><strong>Related Literature</strong></h3>
-<ul>
-<li>"The main result is going to be a methodology based on double robust estimation that can as inputs generic, black-box type machine learning estimates, and as outputs give you confidence intervals \dots and all the guarantees that you would like" --<a href="https://youtu.be/ZA8iOjUR8aY?list=PLxq_lXOUlvQAoWZEqhRqHNezS30lI49G-&amp;t=224">ref</a></li>
-</ul>
+<p>Following the approach advocated in <a href="https://www.mostlyharmlesseconometrics.com/">Mostly Harmless Econometrics</a>, we view causal inference techniques as methods that aim to correct for the fact that the data is not generated from a randomized experiment.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 
+In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.</p>
 <h3 id="approach"><strong>Approach</strong></h3>
-<ul>
-<li>We consider the following three sampling correction approaches:</li>
-</ul>
+<p>We consider the following three sampling correction approaches. All of which can be understood as a gradient correction<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. As is the case with applied causal inference we don't select the best option so much as wel choose the "least" bad option!<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
 <p><center></p>
 <table>
 <thead>
@@ -579,39 +552,40 @@
 </tbody>
 </table>
 <p></center></p>
-<ul>
-<li>All of which can be understood as a gradient correction<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
-</ul>
-<p><center></p>
-<pre class="mermaid"><code>flowchart TB 
-A(Attention/Kernel) --&gt; Z(Gradient Correction);
-B(Fine-tuning) --&gt;Z;
-C(Re-weighting) --&gt;Z;</code></pre>
-<p></center></p>
-<ul>
-<li>As is the case with applied causal inference we don't select the best option so much as wel choose the "least" bad option!<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></li>
-</ul>
-<h3 id="preview-of-cherry-picked-results"><strong>Preview of Cherry-Picked Results</strong></h3>
-<p><img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_Standard%20(2).png" alt="drawing" width="350"/> 
+<h3 id="preview-of-cherry-picked-results"><strong>Preview of (Cherry-Picked) Results</strong></h3>
+<p><center>
+<img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_Standard%20(2).png" alt="drawing" width="350"/> 
 <img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_MAML%20(1).png" alt="drawing" width="350"/> 
 <img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_ESCluster%20(1).png" alt="drawing" width="350"/> </p>
+<p></center></p>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
+<details class="tip">
+<summary>Probability Theory</summary>
 <p>We define our problem via a probability space with a probability measure that "corresponds" a randomized control trial.</p>
 <div class="arithmatex">\[\big(\Omega, \mathcal{F}, \mathbb{P}_{\text{randomized}} \big)\]</div>
 <p>Given this probability space, we can define the parameter of interest as some function(al) of the probability measure. </p>
 <div class="arithmatex">\[\theta_0 = f(\mathbb{P}_{\text{randomized}} ) \]</div>
 <p>The non-randomized aspect of the data is then captured via some transformation <span class="arithmatex">\(T\)</span>, such that </p>
 <div class="arithmatex">\[\mathbb{P}_{\text{observed}} = T(\mathbb{P}_{\text{randomized}} )\]</div>
+</details>
 <p><a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>At a high level, a challenge in applied econometrics is to develop/propose/motivate methods that can make use of the ongoing work in deep learning. We remain model agonstic in the sense that our methods focus on gradient corrections (i.e. within training corrections) which is different from the post-training corrections as proposed in alternative methods like <a href="https://academic.oup.com/ectj/article/21/1/C1/5056401">Double Machine Learning</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<details class="tip">
+<summary>Deep Learning</summary>
+<p>At a high level, a challenge in applied econometrics is to develop/propose/motivate methods that can make use of the ongoing work in deep learning. We remain model agonstic in the sense that our methods focus on gradient corrections (i.e. within training corrections) which is different from the post-training corrections as proposed in alternative methods like <a href="https://academic.oup.com/ectj/article/21/1/C1/5056401">Double Machine Learning</a></p>
+</details>
+<p><a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality. Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe".&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<details class="tip">
+<summary>Applied Econometrics</summary>
+<p>Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality. Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe".</p>
+</details>
+<p><a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -631,6 +605,8 @@ C(Re-weighting) --&gt;Z;</code></pre>
       
         <footer class="md-footer">
   
+    
+      
     
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
