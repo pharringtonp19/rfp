@@ -2,15 +2,17 @@ from functools import partial
 import jax.numpy as jnp 
 from dataclasses import dataclass
 
+
 class sqr_error:
     """Square Error """
     
     def __init__(self, mlp):
         self.mlp = mlp 
+        self.aux_status : bool = False
     
-    def apply(self, params, data):
+    def __call__(self, params, data):
         """compute loss"""
-        inputs, targets = data
+        targets, inputs = data
         prediction = self.mlp.fwd_pass(params, inputs)
         return jnp.mean((prediction-targets)**2)
 
@@ -47,3 +49,11 @@ class supervised_loss:
         phiX, vector_field_penalty = partial_feature_map(params)
         prediction_error, prediction_penalty = partial_linear_layer(phiX)
         return prediction_error, vector_field_penalty + prediction_penalty
+
+if __name__ == '__main__':
+    from rfp import MLP 
+    mlp = MLP([32,32,1])
+    print(type(mlp))
+
+    loss = sqr_error(mlp)
+    print(loss.aux_status)

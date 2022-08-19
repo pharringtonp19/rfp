@@ -1,32 +1,31 @@
 import os 
+from pathlib import Path
 import jax 
 import jax.numpy as jnp 
 from absl import app, flags
-from _src.nn import MLP 
-from _src.utils import batch_sample, init_keys
-from _src.data import sample1
-from _src.losses import sqr_error
-from _src.train import trainer
+from rfp import MLP, f1, sample1, sqr_error, trainer
 import optax 
 import matplotlib.pyplot as plt
 from functools import partial 
 import numpy as np 
 from typing import Any, Type
 
-file_link: str = os.getcwd() + "/docs/fig/"
+
+github_folder = str(Path(os.getcwd()).parent.absolute())
+file_link: str = github_folder + "/isga/examples/"
+
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
 flags.DEFINE_integer("n", 200, "number of observations")
 flags.DEFINE_integer("features", 2, "number of features")
 flags.DEFINE_float("lr", 0.01, "learning rate")
 flags.DEFINE_integer("epochs", 1000, "epochs")
-flags.DEFINE_bool("simulate", False, "simulate")
+flags.DEFINE_bool("single_run", False, "single run")
+flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
 
 FLAGS: Any = flags.FLAGS
 
-def outcome(d) -> Any:
-    return jnp.log(d**2 + 1.0 + jnp.sin(d * 1.5)) + 1.5
 
 def main(argv) -> None:
     del argv
@@ -36,20 +35,24 @@ def main(argv) -> None:
         
         # Data
         train_key, test_key, params_key = jax.random.split(init_key, 3)
-        D, X, Y = batch_sample(partial(sample1, outcome), train_key, FLAGS.n, FLAGS.features)
-        
+        sampler = partial(sample1, f1)
+        Y, D, X = jax.vmap(sampler, in_axes=(0, None))(jax.random.split(train_key, FLAGS.n), FLAGS.features) 
+        Y, D = Y.reshape(-1,1), D.reshape(-1,1)
+   
         # Model 
         mlp = MLP([32, 1])
         params = mlp.init_fn(params_key, FLAGS.features)
 
         # Training 
-        loss_fn = sqr_error(mlp).apply
-        yuri = trainer(loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs)    
-        opt_paramsD, lossesD = yuri.train(params, (X, D))
-        opt_paramsY, lossesY = yuri.train(params, (X, Y))
+        loss_fn = sqr_error(mlp)
+        z = loss_fn(params, (Y,X))
+        yuri = trainer(loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs)
+        opt_paramsD, lossesD = yuri.train(params, (D, X))
+        opt_paramsY, lossesY = yuri.train(params, (Y, X))
 
         # Eval 
-        D, X, Y = batch_sample(partial(sample1, outcome), test_key, FLAGS.n, FLAGS.features)
+        Y, D, X = jax.vmap(sampler, in_axes=(0, None))(jax.random.split(test_key, FLAGS.n), FLAGS.features) 
+        Y, D = Y.reshape(-1,1), D.reshape(-1,1)
         residual_d = D - mlp.fwd_pass(opt_paramsD, X)
         residual_y = Y - mlp.fwd_pass(opt_paramsY, X)
         z = jnp.linalg.lstsq(residual_d, residual_y)[0]
@@ -58,10 +61,10 @@ def main(argv) -> None:
             return z, lossesD, lossesY
         return z 
 
-    if FLAGS.simulate:
+    if FLAGS.multi_run:
         treatment = jnp.linspace(-3., 3, 1000).reshape(-1,1)
         regs = jnp.hstack((jnp.ones_like(treatment), treatment))
-        y = jax.vmap(outcome)(treatment)
+        y = jax.vmap(f1)(treatment)
         target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
         print(target_coef)
         coeffs = jax.vmap(simulate)(jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)).squeeze()
@@ -75,12 +78,9 @@ def main(argv) -> None:
         fig.savefig(filename, format="png")
         plt.show()
     
-    else:
-        coef, lossesD, lossesY = simulate(jax.random.PRNGKey(FLAGS.init_key_num), True)
-        fig = plt.figure(dpi=300, tight_layout=True)
-        plt.plot(lossesD)
-        plt.plot(lossesY)
-        plt.show()
+    if FLAGS.single_run:
+        _, lossesD, lossesY = simulate(jax.random.PRNGKey(FLAGS.init_key_num), True)
+        print(lossesD[-1], lossesY[-1])
 
 
 

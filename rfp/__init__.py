@@ -18,7 +18,8 @@ from rfp._src.nn import (
 
 # LOSSES 
 from rfp._src.losses import (
-    feature_map_loss
+    feature_map_loss,
+    sqr_error
 )
 
 # FEATURE MAP
@@ -30,3 +31,5 @@ from rfp._src.featuremap import (
 from rfp._src.train import (
     trainer
 )
+
+ 
