@@ -46,7 +46,6 @@ contested their evictions.
 ##### Expectations
 - read [1](https://www.jstor.org/stable/1228343), [2](https://ir.lawnet.fordham.edu/ulj/vol18/iss3/2/#:~:text=To%20create%20an%20EFZ%2C%20local,gentrification%2C%20and%20ultimately%20block%20displacement.)
 
-$$\theta_) = f()$$
 
 #### Differentiating Outcomes
 -  landlords withdrew their

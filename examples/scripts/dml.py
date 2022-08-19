@@ -10,10 +10,7 @@ from functools import partial
 import numpy as np 
 from typing import Any, Type
 
-
-github_folder = str(Path(os.getcwd()).parent.absolute())
-file_link: str = github_folder + "/isga/examples/"
-
+np_file_link : str =  os.getcwd() + "/examples/data/"
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
 flags.DEFINE_integer("n", 200, "number of observations")
@@ -70,13 +67,8 @@ def main(argv) -> None:
         coeffs = jax.vmap(simulate)(jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)).squeeze()
         std = jnp.std(coeffs)
         array_plot = np.array((coeffs - target_coef)/ std)
-        fig = plt.figure(dpi=300, tight_layout=True)
-        plt.hist(array_plot, edgecolor='black', density=True, bins=40)
-        plt.title('Density', loc='left', size=14)
-        plt.xlabel(r'$(\hat{\theta} - \theta_0)/\sigma(\hat{\theta})$')
-        filename = file_link + "dml.png"
-        fig.savefig(filename, format="png")
-        plt.show()
+        np.save(np_file_link+f"dml.npy", np.asarray(array_plot))
+
     
     if FLAGS.single_run:
         _, lossesD, lossesY = simulate(jax.random.PRNGKey(FLAGS.init_key_num), True)
