@@ -8,7 +8,8 @@ from rfp._src.types import (
 from rfp._src.data import (
     f1, 
     sample1,
-    sample2
+    sample2, 
+    sample3
 )
 
 # NEURAL NETWORKS 
@@ -19,7 +20,8 @@ from rfp._src.nn import (
 # LOSSES 
 from rfp._src.losses import (
     feature_map_loss,
-    sqr_error
+    sqr_error, 
+    supervised_loss_time
 )
 
 # FEATURE MAP
@@ -30,6 +32,11 @@ from rfp._src.featuremap import (
 # TRAIN 
 from rfp._src.train import (
     trainer
+)
+
+# LINEAR MODEL 
+from rfp._src.linear_model import (
+    linear_model_time
 )
 
  

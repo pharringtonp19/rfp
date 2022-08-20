@@ -17,8 +17,15 @@ def sample2(key, n: int) -> Data:
     ys = xs**3 
     return (ys, xs)
 
+def sample3(key, features: int) -> Data:
+    subkey1, subkey2, subkey3, subkey4 = jax.random.split(key, 4)
+    treatment = jax.random.normal(subkey1)
+    time = jax.random.bernoulli(subkey2).astype(jnp.float32)
+    covariates = jax.random.normal(subkey3, shape=(features,))
+    outcome = 1*time + 1*treatment + 2*treatment*time + jax.random.normal(subkey4)
+    return outcome, treatment, time, covariates
+
 
 if __name__ == "__main__":
-    for i in [2., jnp.array([2.])]:
-        z = f1(2.)
-        print(type(z))
+    s = sample3(jax.random.PRNGKey(0), 2)
+    print(s)
