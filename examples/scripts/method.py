@@ -45,6 +45,14 @@ def main(argv) -> None:
     np.save(np_file_link+f"method_svl_prediction.npy", np.asarray(prediction_loss))
     np.save(np_file_link+f"method_svl_reg.npy", np.asarray(regularization))
 
+    def get_coeff(feature_map, params, data):
+        Y, D, T, X = data 
+        phiX, _ = feature_map(params, X)
+        regressors = jnp.hstack((D*T, D, T, jnp.ones_like(D), phiX))
+        coeff = jnp.linalg.lstsq(regressors, Y)[0][0]
+        return coeff
 
+    z = get_coeff(feature_map, opt_params, (Y, D, T, X))
+    print(z)
 if __name__ == "__main__":
     app.run(main)
