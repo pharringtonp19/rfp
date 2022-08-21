@@ -18,3 +18,7 @@ def batch_sample_time(n):
         return wrapper
 
     return decorator
+
+
+def data_loader():
+    pass
