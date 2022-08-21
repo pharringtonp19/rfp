@@ -1,4 +1,10 @@
+#----------------------------------- Based on: https://github.com/github/gitignore/blob/main/Python.gitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+# Distribution / packaging
+*.egg-info/
+
+# Documentation
 site/
