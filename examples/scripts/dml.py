@@ -1,15 +1,16 @@
 import os
-from pathlib import Path
-import jax
-import jax.numpy as jnp
-from absl import app, flags
-from rfp import MLP, f1, sample1, sqr_error, trainer
-import optax
-import matplotlib.pyplot as plt
 from functools import partial
-import numpy as np
+from pathlib import Path
 from typing import Any, Type
 
+import jax
+import jax.numpy as jnp
+import matplotlib.pyplot as plt
+import numpy as np
+import optax
+from absl import app, flags
+
+from rfp import MLP, f1, sample1, sqr_error, trainer
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
