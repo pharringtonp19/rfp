@@ -8,3 +8,12 @@ __pycache__/
 
 # Documentation
 site/
+
+# Development
+.vscode
+.venv
+
+# Other -- look into these
+.pytype 
+.pytest_cache
+.mypy_cache
