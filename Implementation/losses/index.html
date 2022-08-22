@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Implementation/losses/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
@@ -43,7 +43,7 @@
     
   
   
-  <style>:root{--md-admonition-icon--code:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m414.8 40.79-128 448.01c-4.9 17-22.6 26.8-39.6 22-17-4.9-26.8-22.6-22-39.6l128-447.99c4.9-16.994 22.6-26.834 39.6-21.978 17 4.855 26.8 22.568 22 39.558zm103.8 80.61 112 112c12.5 12.5 12.5 32.7 0 45.2l-112 112c-12.5 12.5-32.7 12.5-45.2 0s-12.5-32.7 0-45.2l89.3-89.4-89.3-89.4c-12.5-12.5-12.5-32.7 0-45.2s32.7-12.5 45.2 0zm-352 45.2L77.25 256l89.35 89.4c12.5 12.5 12.5 32.7 0 45.2s-32.7 12.5-45.2 0L9.372 278.6c-12.496-12.5-12.496-32.7 0-45.2l112.028-112c12.5-12.5 32.7-12.5 45.2 0s12.5 32.7 0 45.2z"/></svg>');--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');}</style>
+  <style>:root{--md-admonition-icon--code:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m414.8 40.79-128 448.01c-4.9 17-22.6 26.8-39.6 22-17-4.9-26.8-22.6-22-39.6l128-447.99c4.9-16.994 22.6-26.834 39.6-21.978 17 4.855 26.8 22.568 22 39.558zm103.8 80.61 112 112c12.5 12.5 12.5 32.7 0 45.2l-112 112c-12.5 12.5-32.7 12.5-45.2 0s-12.5-32.7 0-45.2l89.3-89.4-89.3-89.4c-12.5-12.5-12.5-32.7 0-45.2s32.7-12.5 45.2 0zm-352 45.2L77.25 256l89.35 89.4c12.5 12.5 12.5 32.7 0 45.2s-32.7 12.5-45.2 0L9.372 278.6c-12.496-12.5-12.496-32.7 0-45.2l112.028-112c12.5-12.5 32.7-12.5 45.2 0s12.5 32.7 0 45.2z"/></svg>');--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');}</style>
 
     
     
@@ -59,7 +59,7 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -170,7 +170,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../papers/The_Consequences_of_a_Right_to_Counsel.pdf" class="md-tabs__link">
+    <a href="../../papers/RTC.pdf" class="md-tabs__link">
       The Consequences of Right to Counsel
     </a>
   </li>
@@ -278,7 +278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../papers/The_Consequences_of_a_Right_to_Counsel.pdf" class="md-nav__link">
+      <a href="../../papers/RTC.pdf" class="md-nav__link">
         The Consequences of Right to Counsel
       </a>
     </li>
@@ -432,8 +432,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rfp._src.losses.sqr_error.apply" class="md-nav__link">
-    apply()
+  <a href="#rfp._src.losses.sqr_error.__call__" class="md-nav__link">
+    __call__()
   </a>
   
 </li>
@@ -453,6 +453,26 @@
         
           <li class="md-nav__item">
   <a href="#rfp._src.losses.supervised_loss.supervised_loss" class="md-nav__link">
+    supervised_loss()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rfp._src.losses.supervised_loss_time" class="md-nav__link">
+    supervised_loss_time
+  </a>
+  
+    <nav class="md-nav" aria-label="supervised_loss_time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rfp._src.losses.supervised_loss_time.supervised_loss" class="md-nav__link">
     supervised_loss()
   </a>
   
@@ -590,9 +610,7 @@
 
         <details class="quote">
           <summary>Source code in <code>rfp/_src/losses.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -601,7 +619,9 @@
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span> 
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span> 
 <span class="k">class</span> <span class="nc">feature_map_loss</span><span class="p">:</span> 
     <span class="sd">&quot;&quot;&quot;Computes the Feature Map Loss&quot;&quot;&quot;</span>
     <span class="n">feature_map</span><span class="p">:</span> <span class="n">callable</span>
@@ -655,8 +675,7 @@
 
         <details class="quote">
           <summary>Source code in <code>rfp/_src/losses.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
-<span class="normal"> 6</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -665,15 +684,18 @@
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">sqr_error</span><span class="p">:</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">sqr_error</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Square Error &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mlp</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">mlp</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux_status</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;compute loss&quot;&quot;&quot;</span>
-        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">targets</span><span class="p">,</span> <span class="n">inputs</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="o">.</span><span class="n">fwd_pass</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">prediction</span><span class="o">-</span><span class="n">targets</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -695,8 +717,8 @@
 
 
 
-<h3 id="rfp._src.losses.sqr_error.apply" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">apply</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
+<h3 id="rfp._src.losses.sqr_error.__call__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
 
 </h3>
 
@@ -707,13 +729,13 @@
 
       <details class="quote">
         <summary>Source code in <code>rfp/_src/losses.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;compute loss&quot;&quot;&quot;</span>
-    <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="n">targets</span><span class="p">,</span> <span class="n">inputs</span> <span class="o">=</span> <span class="n">data</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="o">.</span><span class="n">fwd_pass</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">prediction</span><span class="o">-</span><span class="n">targets</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -751,9 +773,7 @@
 
         <details class="quote">
           <summary>Source code in <code>rfp/_src/losses.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
@@ -768,7 +788,9 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">supervised_loss</span><span class="p">:</span>
     <span class="n">linear_layer</span><span class="p">:</span> <span class="n">callable</span> 
     <span class="n">feature_map</span><span class="p">:</span> <span class="n">callable</span> 
@@ -817,9 +839,7 @@
 
       <details class="quote">
         <summary>Source code in <code>rfp/_src/losses.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
@@ -828,7 +848,9 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">supervised_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">supervised_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;We implement this function as composition of partially evaluated functions&quot;&quot;&quot;</span>
     <span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">data</span>
 
@@ -854,6 +876,133 @@
 
 </div>
 
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="rfp._src.losses.supervised_loss_time" class="doc doc-heading">
+        <code>supervised_loss_time</code>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+
+
+        <details class="quote">
+          <summary>Source code in <code>rfp/_src/losses.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">supervised_loss_time</span><span class="p">:</span>
+    <span class="n">linear_layer</span><span class="p">:</span> <span class="n">callable</span> 
+    <span class="n">feature_map</span><span class="p">:</span> <span class="n">callable</span> 
+    <span class="n">reg_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span> 
+    <span class="n">aux_status</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span> 
+
+    <span class="c1"># @jax.jit</span>
+    <span class="k">def</span> <span class="nf">supervised_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;We implement this function as composition of partially evaluated functions&quot;&quot;&quot;</span>
+        <span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">data</span>                                           <span class="c1"># This is the only difference</span>
+
+        <span class="c1"># Partial Evaluation</span>
+        <span class="n">partial_feature_map</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_map</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">partial_linear_layer</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>  <span class="c1"># And this too!</span>
+
+        <span class="c1"># Composition</span>
+        <span class="n">phiX</span><span class="p">,</span> <span class="n">vector_field_penalty</span> <span class="o">=</span> <span class="n">partial_feature_map</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">prediction_error</span><span class="p">,</span> <span class="n">prediction_penalty</span> <span class="o">=</span> <span class="n">partial_linear_layer</span><span class="p">(</span><span class="n">phiX</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prediction_error</span><span class="p">,</span>  <span class="n">vector_field_penalty</span> <span class="o">+</span> <span class="n">prediction_penalty</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">prediction_error</span><span class="p">,</span> <span class="n">penalty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supervised_loss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prediction_error</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">reg_value</span><span class="o">*</span><span class="n">penalty</span><span class="p">,</span> <span class="p">(</span><span class="n">prediction_error</span><span class="p">,</span> <span class="n">penalty</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="rfp._src.losses.supervised_loss_time.supervised_loss" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">supervised_loss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>We implement this function as composition of partially evaluated functions</p>
+
+      <details class="quote">
+        <summary>Source code in <code>rfp/_src/losses.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">supervised_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;We implement this function as composition of partially evaluated functions&quot;&quot;&quot;</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">data</span>                                           <span class="c1"># This is the only difference</span>
+
+    <span class="c1"># Partial Evaluation</span>
+    <span class="n">partial_feature_map</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_map</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">partial_linear_layer</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>  <span class="c1"># And this too!</span>
+
+    <span class="c1"># Composition</span>
+    <span class="n">phiX</span><span class="p">,</span> <span class="n">vector_field_penalty</span> <span class="o">=</span> <span class="n">partial_feature_map</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">prediction_error</span><span class="p">,</span> <span class="n">prediction_penalty</span> <span class="o">=</span> <span class="n">partial_linear_layer</span><span class="p">(</span><span class="n">phiX</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prediction_error</span><span class="p">,</span>  <span class="n">vector_field_penalty</span> <span class="o">+</span> <span class="n">prediction_penalty</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
 
 
 
@@ -862,6 +1011,18 @@
   </div>
 
 </div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
 
               
             </article>
@@ -934,10 +1095,11 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "toc.integrate", "navigation.top"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "toc.integrate", "navigation.top"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
         <script src="../../_static/mathjax.js"></script>
       
