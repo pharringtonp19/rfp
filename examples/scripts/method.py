@@ -18,6 +18,7 @@ from rfp import (
     neuralODE,
     sample3,
     supervised_loss_time,
+    time_grad,
     trainer,
     training_sampler,
 )
@@ -55,8 +56,11 @@ def main(argv) -> None:
 
     params = mlp.init_fn(params_key, FLAGS.features + 1)
     feature_map = neuralODE(mlp, solver, t1)
+
+    # LOSS FUNCTION
     loss_fn = supervised_loss_time(linear_model_time, feature_map, FLAGS.reg_val, True)
-    z = loss_fn(params, (Y, D, T, X))
+    time_grad(loss_fn, params, (Y, D, T, X))
+
     yuri = trainer(
         loss_fn,
         optax.sgd(learning_rate=FLAGS.lr, momentum=0.9),

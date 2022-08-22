@@ -1,4 +1,4 @@
-from operator import ilshift
+import timeit
 
 import jax
 import jax.numpy as jnp
@@ -35,6 +35,18 @@ def training_sampler(batch_size, data, *, key):
         batch_perm = perm[:batch_size]
         sample = tuple(array[batch_perm] for array in data)
         return sample
+
+
+def time_grad(loss_fn, params, data):
+    jitted_grad_loss_fn = jax.jit(
+        jax.grad(loss_fn.__call__, has_aux=loss_fn.aux_status)
+    )
+    trials = timeit.repeat(
+        stmt=lambda: jitted_grad_loss_fn(params, data), number=1, repeat=2
+    )
+    print(
+        f"Compile Time: {trials[0]:.4f} | Run Time: {trials[1]:.4f} | Ratio: {trials[0] / trials[1]:.4f}"
+    )
 
 
 if __name__ == "__main__":
