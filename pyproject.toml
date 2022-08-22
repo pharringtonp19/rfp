@@ -17,6 +17,7 @@ jaxlib = [
     {platform = 'darwin', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"}
  ]
 jax = "^0.3.16"
+mkdocstrings = {extras = ["python"], version = "^0.19.0"}
 
 
 [tool.poetry.dev-dependencies]
