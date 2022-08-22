@@ -56,7 +56,7 @@ def main(argv) -> None:
     yuri = trainer(
         loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
     )
-    opt_params, (_, (prediction_loss, regularization)) = yuri.train(
+    opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(
         params, (Y, D, T, X)
     )
     np.save(np_file_link + f"method_svl_prediction.npy", np.asarray(prediction_loss))

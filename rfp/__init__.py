@@ -21,4 +21,4 @@ from rfp._src.train import trainer
 from rfp._src.linear_model import linear_model_time
 
 # UTILS
-from rfp._src.utils import batch_sample_time
+from rfp._src.utils import batch_sample_time, batch_sample
