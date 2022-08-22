@@ -1,23 +1,26 @@
 """Non-Cluster Diff-in-Diff Application"""
 
 import os
+from typing import Any, Type
+
 import jax
 import jax.numpy as jnp
-from chex import assert_shape
-from absl import app, flags
-from typing import Any, Type
-from diffrax import Heun
-import optax
 import numpy as np
+import optax
+from absl import app, flags
+from chex import assert_shape
+from diffrax import Heun
+
 from rfp import (
-    sample3,
     MLP,
-    neuralODE,
-    supervised_loss_time,
+    batch_sample_time,
     linear_model_time,
+    neuralODE,
+    sample3,
+    supervised_loss_time,
     trainer,
+    training_sampler,
 )
-from rfp._src.utils import batch_sample_time
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -31,6 +34,7 @@ flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
+flags.DEFINE_integer("batch_size", 32, "batch size")
 
 FLAGS: Any = flags.FLAGS
 
@@ -38,8 +42,8 @@ FLAGS: Any = flags.FLAGS
 def main(argv) -> None:
     del argv
 
-    train_key, test_key, params_key = jax.random.split(
-        jax.random.PRNGKey(FLAGS.init_key_num), 3
+    train_key, test_key, params_key, batch_key = jax.random.split(
+        jax.random.PRNGKey(FLAGS.init_key_num), 4
     )
 
     # DATA
@@ -54,7 +58,12 @@ def main(argv) -> None:
     loss_fn = supervised_loss_time(linear_model_time, feature_map, FLAGS.reg_val, True)
     z = loss_fn(params, (Y, D, T, X))
     yuri = trainer(
-        loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
+        loss_fn,
+        optax.sgd(learning_rate=FLAGS.lr, momentum=0.9),
+        FLAGS.epochs,
+        batch_key,
+        training_sampler,
+        FLAGS.batch_size,
     )
     opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(
         params, (Y, D, T, X)

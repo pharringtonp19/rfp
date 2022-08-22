@@ -5,13 +5,15 @@ The Pink Panther. If you recall from the movie,
 Yuri is the tainer who trains! 
 """
 
-import jax
-from numpy import float32
-import optax
-import chex
 from dataclasses import dataclass
-from rfp._src.types import Params, Data
-from rfp._src.utils import batch_sample
+
+import chex
+import jax
+import optax
+from numpy import float32
+
+from rfp._src.types import Data, Params
+from rfp._src.utils import training_sampler
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,7 +22,7 @@ class trainer:
     opt: optax.GradientTransformation
     epochs: int
     init_key: int = jax.random.PRNGKey(0)
-    batch_sampler: callable = batch_sample
+    sampler: callable = training_sampler
     batch_size: int = 32
 
     def train(self, params: Params, data: Data):
@@ -28,7 +30,7 @@ class trainer:
 
         def update_fn(carry, key):
             params, opt_state = carry
-            sample = self.batch_sampler(self.batch_size, data, key=key)
+            sample = self.sampler(self.batch_size, data, key=key)
             loss_values, grads = jax.value_and_grad(
                 self.loss_fn, has_aux=self.loss_fn.aux_status
             )(params, sample)

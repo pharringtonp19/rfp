@@ -1,4 +1,5 @@
 from operator import ilshift
+
 import jax
 import jax.numpy as jnp
 from chex import assert_shape
@@ -22,7 +23,7 @@ def batch_sample_time(n):
     return decorator
 
 
-def batch_sample(batch_size, data, *, key):
+def training_sampler(batch_size, data, *, key):
     """
     Instead of greating a data loader as a generator as in https://docs.kidger.site/equinox/examples/train_rnn/
     during the training loop, we scan over keys and draw samples of `batch_size`
