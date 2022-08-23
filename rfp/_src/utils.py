@@ -1,10 +1,14 @@
 import timeit
+from dataclasses import dataclass
 from functools import partial, wraps
 
+import flax.struct
 import jax
 import jax.numpy as jnp
 from chex import assert_shape
 from einops import reduce
+
+from rfp._src.types import Params
 
 
 def einops_reduce(str1: str, str2: str) -> callable:
@@ -89,6 +93,10 @@ def split(data):
         T = data[:, 2].reshape(-1, 1)
         X = data[:, 3:].reshape(data.shape[0], -1)
         return Y, D, T, X
+
+
+def Model_Params(params, linear_params=None):
+    return {"ode_params": params, "linear_params": linear_params}
 
 
 if __name__ == "__main__":

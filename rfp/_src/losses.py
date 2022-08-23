@@ -70,10 +70,12 @@ class supervised_loss_time:
 
         # Partial Evaluation
         partial_feature_map = partial(self.feature_map, X=X)
-        partial_linear_layer = partial(self.linear_layer, Y, D, T)  # And this too!
+        partial_linear_layer = partial(
+            self.linear_layer, params["linear_params"], Y, D, T
+        )  # And this too!
 
         # Composition
-        phiX, vector_field_penalty = partial_feature_map(params)
+        phiX, vector_field_penalty = partial_feature_map(params["ode_params"])
         prediction_error, prediction_penalty = partial_linear_layer(phiX)
         return prediction_error, vector_field_penalty + prediction_penalty
 

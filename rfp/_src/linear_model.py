@@ -4,15 +4,22 @@ import chex
 import jax
 import jax.numpy as jnp
 
-
 # --------------- TYPES --------------------------#
 
 Array: TypeAlias = chex.Array
 
-def linear_model_time(Y, D, T, X):
-    regressors = jnp.hstack((D*T, D, T, jnp.ones_like(D), X))
+
+def linear_model_time(params, Y, D, T, X):
+    regressors = jnp.hstack((D * T, D, T, jnp.ones_like(D), X))
     residuals = jnp.linalg.lstsq(regressors, Y)[1][0]
     return residuals / X.shape[0], 0.0
+
+
+def linear_model_trainable_time(params, Y, D, T, X):
+    regs = jnp.hstack((D * T, D, T, X))
+    yhat = jnp.dot(regs, params).reshape(-1, 1)
+    return jnp.mean((yhat - Y) ** 2), 0.0
+
 
 def linear_model1(Y, D, X):
     regressors = jnp.hstack((D, jnp.ones_like(D), X))
