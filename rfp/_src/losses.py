@@ -1,7 +1,10 @@
 from dataclasses import dataclass
 from functools import partial
 
+import jax
 import jax.numpy as jnp
+
+from rfp._src.utils import batchify, split
 
 
 class sqr_error:
@@ -63,7 +66,7 @@ class supervised_loss_time:
     # @jax.jit
     def supervised_loss(self, params, data):
         """We implement this function as composition of partially evaluated functions"""
-        Y, D, T, X = data  # This is the only difference
+        Y, D, T, X = split(data)  # This is the only difference
 
         # Partial Evaluation
         partial_feature_map = partial(self.feature_map, X=X)
@@ -77,6 +80,31 @@ class supervised_loss_time:
     def __call__(self, params, data):
         prediction_error, penalty = self.supervised_loss(params, data)
         return prediction_error + self.reg_value * penalty, (prediction_error, penalty)
+
+
+@dataclass
+class cluster_loss:
+    supervised_loss: callable
+    inner_trainer: callable
+    reg_value: float = 1.0
+    aux_status: bool = False
+
+    @batchify
+    def cluster_loss(params, data):
+
+        # Partial Evaluation
+        partial_supervised_pass = partial(self.supervised_loss, data=data)
+        partial_cluster_map = partial(self.inner_trainer.train, data=data)
+
+        # Composition
+        a, a1 = partial_cluster_map(params)
+        b, b1 = partial_supervised_pass(a)
+        return (
+            b + self.reg_value * a1 + self.supervised_loss * b1
+        )  # not exactly the composition we wanted (alas!)
+
+    def __call__(params, data):
+        return cluster_loss(params, data)
 
 
 if __name__ == "__main__":

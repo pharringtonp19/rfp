@@ -20,4 +20,10 @@ from rfp._src.train import trainer
 from rfp._src.types import Data
 
 # UTILS
-from rfp._src.utils import batch_sample_time, time_grad, training_sampler
+from rfp._src.utils import (
+    batch_sample_time,
+    batchify,
+    split,
+    time_grad,
+    training_sampler,
+)

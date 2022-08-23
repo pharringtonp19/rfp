@@ -17,10 +17,10 @@ from rfp import (
     linear_model_time,
     neuralODE,
     sample3,
+    split,
     supervised_loss_time,
     time_grad,
     trainer,
-    training_sampler,
 )
 
 np_file_link: str = os.getcwd() + "/examples/data/"
@@ -36,6 +36,7 @@ flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
 flags.DEFINE_integer("batch_size", 32, "batch size")
+flags.DEFINE_bool("jnp_data", False, "dataset as a jnp.array")
 
 FLAGS: Any = flags.FLAGS
 
@@ -49,6 +50,10 @@ def main(argv) -> None:
 
     # DATA
     Y, D, T, X = batch_sample_time(FLAGS.n)(sample3)(train_key, FLAGS.features)
+    if FLAGS.jnp_data:
+        data = jnp.hstack((Y, D, T, X))
+    else:
+        data = (Y, D, T, X)
 
     mlp = MLP([32, FLAGS.features])
     solver = Heun()
@@ -59,24 +64,19 @@ def main(argv) -> None:
 
     # LOSS FUNCTION
     loss_fn = supervised_loss_time(linear_model_time, feature_map, FLAGS.reg_val, True)
-    time_grad(loss_fn, params, (Y, D, T, X))
+    time_grad(loss_fn, params, data)
 
     yuri = trainer(
-        loss_fn,
-        optax.sgd(learning_rate=FLAGS.lr, momentum=0.9),
-        FLAGS.epochs,
-        batch_key,
-        training_sampler,
-        FLAGS.batch_size,
+        loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
     )
     opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(
-        params, (Y, D, T, X)
+        params, data
     )
     np.save(np_file_link + f"method_svl_prediction.npy", np.asarray(prediction_loss))
     np.save(np_file_link + f"method_svl_reg.npy", np.asarray(regularization))
 
     def get_coeff(feature_map, params, data):
-        Y, D, T, X = data
+        Y, D, T, X = split(data)
         phiX, _ = feature_map(params, X)
         regressors = jnp.hstack((D * T, D, T, jnp.ones_like(D), phiX))
         coeff = jnp.linalg.lstsq(regressors, Y)[0][0]
