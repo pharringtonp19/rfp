@@ -17,7 +17,7 @@ from rfp._src.utils import training_sampler
 
 
 @dataclass(frozen=True, slots=True)
-class trainer:
+class Trainer:
     loss_fn: callable  # This is actually not a callable!
     opt: optax.GradientTransformation
     epochs: int

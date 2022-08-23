@@ -14,15 +14,15 @@ from diffrax import Heun
 from rfp import (
     MLP,
     Model_Params,
+    Supervised_Loss_Time,
+    Trainer,
     batch_sample_time,
     linear_model_time,
     linear_model_trainable_time,
     neuralODE,
     sample3,
     split,
-    supervised_loss_time,
     time_grad,
-    trainer,
 )
 
 np_file_link: str = os.getcwd() + "/examples/data/"
@@ -77,14 +77,10 @@ def main(argv) -> None:
         linear_model_trainable_time if FLAGS.grad_layer else linear_model_time
     )
 
-    # regs = jnp.hstack((D*T, D, T, jnp.ones_like(D)))
-    # z = jnp.matmul(regs, linear_params)
-    # print(regs.shape, z.shape)
-
-    loss_fn = supervised_loss_time(linear_layer, feature_map, FLAGS.reg_val, True)
+    loss_fn = Supervised_Loss_Time(linear_layer, feature_map, FLAGS.reg_val, True)
     time_grad(loss_fn, params, data)
 
-    yuri = trainer(
+    yuri = Trainer(
         loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
     )
     opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(

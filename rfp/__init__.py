@@ -10,13 +10,18 @@ from rfp._src.featuremap import neuralODE
 from rfp._src.linear_model import linear_model_time, linear_model_trainable_time
 
 # LOSSES
-from rfp._src.losses import feature_map_loss, sqr_error, supervised_loss_time
+from rfp._src.losses import (
+    Cluster_Loss,
+    Supervised_Loss_Time,
+    feature_map_loss,
+    sqr_error,
+)
 
 # NEURAL NETWORKS
 from rfp._src.nn import MLP
 
 # TRAIN
-from rfp._src.train import trainer
+from rfp._src.train import Trainer
 from rfp._src.types import Data
 
 # UTILS

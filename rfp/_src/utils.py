@@ -71,8 +71,7 @@ def time_grad(loss_fn, params, data):
 
 
 def batchify(func):
-    @wraps
-    def wrapper(params, data):
+    def wrapper(self, params, data):
         cluster_losses = jax.tree_util.tree_map(partial(func, params), data)
         loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
             lambda a, b: a + b, cluster_losses

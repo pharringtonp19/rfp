@@ -1,5 +1,13 @@
-import os
-
 import jax
+import jax.numpy as jnp
 
-print("hi")
+
+@jax.jit
+def f(x):
+    jax.debug.print("🤯 {x} 🤯", x=x)
+    y = jnp.sin(x)
+    jax.debug.print("🤯 {y} 🤯", y=y)
+    return y
+
+
+f(2.0)
