@@ -21,26 +21,20 @@ class trainer:
     loss_fn: callable  # This is actually not a callable!
     opt: optax.GradientTransformation
     epochs: int
-    init_key: int = jax.random.PRNGKey(0)
-    sampler: callable = training_sampler
-    batch_size: int = 32
 
     def train(self, params: Params, data: Data):
         """Params and Data"""
 
-        def update_fn(carry, key):
+        def update_fn(carry, t):
             params, opt_state = carry
-            sample = self.sampler(self.batch_size, data, key=key)
             loss_values, grads = jax.value_and_grad(
                 self.loss_fn, has_aux=self.loss_fn.aux_status
-            )(params, sample)
+            )(params, data)
             updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
             return (params, opt_state), loss_values
 
         (opt_params, _), loss_values_history = jax.lax.scan(
-            update_fn,
-            (params, self.opt.init(params)),
-            xs=jax.random.split(self.init_key),
+            update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
         return opt_params, loss_values_history
