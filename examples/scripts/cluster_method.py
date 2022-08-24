@@ -104,7 +104,14 @@ def main(argv) -> None:
     print("Cluster Loss")
     time_grad(cluster_loss, params, data)
 
-    # time_grad(loss_fn, params, data)
+    yuri = Trainer(
+        cluster_loss, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
+    )
+    opt_params, losses = jax.jit(yuri.train)(
+        params, data
+    )
+    print(losses)
+
 
 
 if __name__ == "__main__":

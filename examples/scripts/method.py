@@ -10,6 +10,7 @@ import optax
 from absl import app, flags
 from chex import assert_shape
 from diffrax import Heun
+from functools import partial 
 
 from rfp import (
     MLP,
@@ -23,9 +24,12 @@ from rfp import (
     sample3,
     split,
     time_grad,
+    pjit_time_grad
 )
 
 import warnings
+
+from rfp._src.utils import pjit_time_grad
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
@@ -81,27 +85,43 @@ def main(argv) -> None:
         linear_model_trainable_time if FLAGS.grad_layer else linear_model_time
     )
 
-    loss_fn = Supervised_Loss_Time(linear_layer, feature_map, FLAGS.reg_val, True)
-    time_grad(loss_fn, params, data)
+    print(data.shape)
 
-    yuri = Trainer(
-        loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
-    )
-    opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(
-        params, data
-    )
-    np.save(np_file_link + f"method_svl_prediction.npy", np.asarray(prediction_loss))
-    np.save(np_file_link + f"method_svl_reg.npy", np.asarray(regularization))
+    # @jax.grad
+    # def f(params, data):
+    #     Y, D, T, X = split(data)
+    #     regs = jnp.hstack((D, T, X))
+    #     loss = (Y - jnp.dot(regs, params))**2
+    #     return jnp.mean(loss)
+    #f = lambda params, data : jnp.dot(data, params)
 
-    def get_coeff(feature_map, params, data):
-        Y, D, T, X = split(data)
-        phiX, _ = feature_map(params, X)
-        regressors = jnp.hstack((D * T, D, T, jnp.ones_like(D), phiX))
-        coeff = jnp.linalg.lstsq(regressors, Y)[0][0]
-        return coeff
 
-    z = get_coeff(feature_map, opt_params["ode_params"], (Y, D, T, X))
-    print(z)
+    # loss_fn = Supervised_Loss_Time(linear_layer, feature_map, FLAGS.reg_val, False)
+    #me_params = jax.random.normal(jax.random.PRNGKey(0), shape=(4,))
+    f = partial(feature_map, params['ode_params'])
+    val = f(X)
+    print(type(val))
+    pjit_time_grad(f, X)
+    # time_grad(loss_fn, params, data)
+
+    # yuri = Trainer(
+    #     loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
+    # )
+    # opt_params, (_, (prediction_loss, regularization)) = jax.jit(yuri.train)(
+    #     params, data
+    # )
+    # np.save(np_file_link + f"method_svl_prediction.npy", np.asarray(prediction_loss))
+    # np.save(np_file_link + f"method_svl_reg.npy", np.asarray(regularization))
+
+    # def get_coeff(feature_map, params, data):
+    #     Y, D, T, X = split(data)
+    #     phiX, _ = feature_map(params, X)
+    #     regressors = jnp.hstack((D * T, D, T, jnp.ones_like(D), phiX))
+    #     coeff = jnp.linalg.lstsq(regressors, Y)[0][0]
+    #     return coeff
+
+    # z = get_coeff(feature_map, opt_params["ode_params"], (Y, D, T, X))
+    # print(z)
 
 
 if __name__ == "__main__":

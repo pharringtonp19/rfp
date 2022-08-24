@@ -66,6 +66,7 @@ class Supervised_Loss_Time:
     # @jax.jit
     def loss_fn(self, params, data):
         """We implement this function as composition of partially evaluated functions"""
+        jax.debug.print("data_shape: {}", data.shape)
         Y, D, T, X = split(data)  # This is the only difference
 
         # Partial Evaluation
@@ -80,6 +81,7 @@ class Supervised_Loss_Time:
         return prediction_error, vector_field_penalty + prediction_penalty
 
     def __call__(self, params, data):
+        """Why don't we ever return the sum of the losses???"""
         prediction_error, penalty = self.loss_fn(params, data)
         if self.aux_status:
             return prediction_error + self.reg_value * penalty, (
