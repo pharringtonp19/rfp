@@ -1,13 +1,14 @@
 import jax
 import jax.numpy as jnp
+from jax import random
 
 
 @jax.jit
-def f(x):
-    jax.debug.print("🤯 {x} 🤯", x=x)
-    y = jnp.sin(x)
-    jax.debug.print("🤯 {y} 🤯", y=y)
-    return y
+def jax_fn(x):
+    y = random.randint(random.PRNGKey(0), (1000, 1000), 0, 100)
+    y2 = y @ y
+    x2 = jnp.sum(y2) * x
+    return x2
 
 
-f(2.0)
+print(jax_fn(2.0))

@@ -66,7 +66,7 @@ def time_grad(loss_fn, params, data):
         stmt=lambda: jitted_grad_loss_fn(params, data), number=1, repeat=2
     )
     print(
-        f"Compile Time: {trials[0]:.4f} | Run Time: {trials[1]:.4f} | Ratio: {trials[0] / trials[1]:.4f}"
+        f"Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
 
 

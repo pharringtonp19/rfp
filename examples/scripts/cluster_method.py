@@ -88,6 +88,7 @@ def main(argv) -> None:
     supervised_loss = Supervised_Loss_Time(
         linear_layer, feature_map, FLAGS.reg_val_vector, False
     )
+    print("Supervised Loss")
     time_grad(supervised_loss, params, data[0])
     inner_trainer = Trainer(
         supervised_loss,
@@ -97,6 +98,7 @@ def main(argv) -> None:
     cluster_loss = Cluster_Loss(
         supervised_loss, inner_trainer, FLAGS.reg_val_vector, False
     )
+    print("Cluster Loss")
     time_grad(cluster_loss, params, data)
 
     # time_grad(loss_fn, params, data)
