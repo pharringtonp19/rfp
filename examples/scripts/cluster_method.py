@@ -26,6 +26,9 @@ from rfp import (
     split,
     time_grad,
 )
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 

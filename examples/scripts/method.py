@@ -25,6 +25,10 @@ from rfp import (
     time_grad,
 )
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+
 np_file_link: str = os.getcwd() + "/examples/data/"
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
