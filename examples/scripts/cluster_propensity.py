@@ -55,9 +55,9 @@ for i in ps:
     lower_results.append(ans[0] - 2 * ans[1])
 
 fig = plt.figure(dpi=300, tight_layout=True)
-plt.plot(ps, mean_results, label=r"$\hat{\mu}$")
-plt.plot(ps, upper_results, label=r"$\hat{\mu} + 2\sigma_{\hat{\mu}}$")
-plt.plot(ps, lower_results, label=r"$\hat{\mu} - 2\sigma_{\hat{\mu}}$")
+plt.plot(ps, mean_results, label=r"$\hat{\beta}$")
+plt.plot(ps, upper_results, label=r"$\hat{\beta} + 2\sigma_{\hat{\beta}}$")
+plt.plot(ps, lower_results, label=r"$\hat{\beta} - 2\sigma_{\hat{\beta}}$")
 plt.legend(frameon=False)
 plt.title("Estimate", loc="left", size=14)
 plt.xlabel("Propensity Score", size=14)
