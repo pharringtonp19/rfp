@@ -1,0 +1,2 @@
+- when training across cluster, `aux_status` on the supervised loss function should be `False`
+- `time_grad` the supervised loss function across one cluster
