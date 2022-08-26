@@ -1,14 +1,15 @@
-import jax
-import jax.numpy as jnp
-from jax import random
+from rfp import pjit_time_grad, MLP
+import jax 
+from functools import partial 
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
-@jax.jit
-def jax_fn(x):
-    y = random.randint(random.PRNGKey(0), (1000, 1000), 0, 100)
-    y2 = y @ y
-    x2 = jnp.sum(y2) * x
-    return x2
+mlp = MLP([32, 1])
 
+params = mlp.init_fn(jax.random.PRNGKey(0), 1)
+x = jax.random.normal(jax.random.PRNGKey(1), shape=(100, 1))
 
-print(jax_fn(2.0))
+f = partial(mlp.fwd_pass, params)
+
+pjit_time_grad(f, x)

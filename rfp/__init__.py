@@ -31,5 +31,6 @@ from rfp._src.utils import (
     batchify,
     split,
     time_grad,
+    pjit_time_grad, 
     training_sampler,
 )

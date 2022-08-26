@@ -70,6 +70,31 @@ def time_grad(loss_fn, params, data):
     )
 
 
+def pjit_time_grad(f, data):
+    import jax
+    from jax.experimental import maps
+    from jax.experimental import PartitionSpec
+    from jax.experimental.pjit import pjit
+    import numpy as np
+
+    mesh_shape = (4,) # This is hardcoded atm 
+    devices = np.asarray(jax.devices()).reshape(*mesh_shape)
+    mesh = maps.Mesh(devices, ('x',))
+    print(devices)
+    f = pjit(f, in_axis_resources=PartitionSpec('x'), out_axis_resources=None)
+ 
+    # Sends data to accelerators based on partition_spec
+    with maps.Mesh(mesh.devices, mesh.axis_names):
+        jax.debug.breakpoint()
+        loss = f(data)
+    print(type(loss))
+    # y = jnp.mean(loss)
+    # print(y, y.shape)
+    # print(loss.shape)
+    # for i in loss.device_buffers:
+    #     print(i.shape)
+    # print(len(loss.device_buffers))
+
 def batchify(func):
     def wrapper(self, params, data):
         cluster_losses = jax.tree_util.tree_map(partial(func, params), data)
@@ -81,17 +106,25 @@ def batchify(func):
     return wrapper
 
 
-def split(data):
-    """We should include a check for this"""
+# def split(data):
+#     """We should include a check for this"""
 
-    if isinstance(data, tuple):
-        return data
-    else:
-        Y = data[:, 0].reshape(-1, 1)
-        D = data[:, 1].reshape(-1, 1)
-        T = data[:, 2].reshape(-1, 1)
-        X = data[:, 3:].reshape(data.shape[0], -1)
-        return Y, D, T, X
+#     if isinstance(data, tuple):
+#         return data
+#     else:
+#         Y = data[:, 0].reshape(-1, 1)
+#         D = data[:, 1].reshape(-1, 1)
+#         T = data[:, 2].reshape(-1, 1)
+#         X = data[:, 3:].reshape(data.shape[0], -1)
+#         return Y, D, T, X
+
+def split(data):
+    Y = data[:, 0].reshape(-1, 1)
+    D = data[:, 1].reshape(-1, 1)
+    T = data[:, 2].reshape(-1, 1)
+    X = data[:, 3:].reshape(data.shape[0], -1)
+    return Y, D, T, X
+
 
 
 def Model_Params(params, linear_params=None):
