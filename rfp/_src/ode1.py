@@ -27,21 +27,21 @@ def Path(dynamics, params):
         t0=0,
         t1=1,
         dt0=None,
-        y0=params["other"],
+        y0=params.other,
         stepsize_controller=PIDController(rtol=1e-3, atol=1e-3),
-        args=params["body"],
+        args=params.body,
         saveat=SaveAt(dense=True),
     )
 
 
-def predict(path, xs):
-    return path.evaluate(xs)
+def predict(path, x):
+    return path.evaluate(x)
 
 
 @dataclass
-class loss_fn:
+class Loss_fn:
     dynamics: callable
-    aux_status: False
+    aux_status: bool = False
 
     def __call__(self, params, data):
         ys, ws, xs = data
