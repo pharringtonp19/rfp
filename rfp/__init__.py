@@ -1,6 +1,7 @@
 """Public API for rfp."""
 
 # DATA
+import rfp._src.ode1 as ode1
 from rfp._src.data import f1, sample1, sample2, sample3
 
 # FEATURE MAP
@@ -29,8 +30,9 @@ from rfp._src.utils import (
     Model_Params,
     batch_sample_time,
     batchify,
+    init_ode1_model,
+    pjit_time_grad,
     split,
     time_grad,
-    pjit_time_grad, 
     training_sampler,
 )

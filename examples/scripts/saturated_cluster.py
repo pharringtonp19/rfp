@@ -23,14 +23,17 @@ def batch_sample(key, p, effect, n):
     return ds, ys
 
 
+def get_coeff(ds, ys):
+    return jnp.linalg.lstsq(ds - jnp.mean(ds), ys)[0][0]
+
+
 def estimate(key, p1, p2, e1, e2, n):
     subkey1, subkey2 = jax.random.split(key)
     ds1, ys1 = batch_sample(subkey1, p1, e1, n)
+    coef1 = get_coeff(ds1, ys1)
     ds2, ys2 = batch_sample(subkey2, p2, e2, n)
-    ds = jnp.vstack((ds1 - jnp.mean(ds1), ds2 - jnp.mean(ds2)))
-    ys = jnp.vstack((ys1, ys2))
-    coef = jnp.linalg.lstsq(ds, ys)[0][0]
-    return coef
+    coef2 = get_coeff(ds2, ys2)
+    return 0.5 * coef1 + 0.5 * coef2
 
 
 def simulate(p):
@@ -62,6 +65,6 @@ plt.legend(frameon=False)
 plt.title("Estimate", loc="left", size=14)
 plt.xlabel("Propensity Score", size=14)
 plt.ylim(1.4, 2.1)
-filename = file_link + "cluster_varying_propensity.png"
+filename = file_link + "saturated_cluster.png"
 fig.savefig(filename, format="png")
 plt.show()

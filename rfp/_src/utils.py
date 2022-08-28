@@ -1,6 +1,7 @@
 import timeit
 from dataclasses import dataclass
 from functools import partial, wraps
+from typing import NamedTuple
 
 import flax.struct
 import jax
@@ -72,17 +73,16 @@ def time_grad(loss_fn, params, data):
 
 def pjit_time_grad(f, data):
     import jax
-    from jax.experimental import maps
-    from jax.experimental import PartitionSpec
-    from jax.experimental.pjit import pjit
     import numpy as np
+    from jax.experimental import PartitionSpec, maps
+    from jax.experimental.pjit import pjit
 
-    mesh_shape = (4,) # This is hardcoded atm 
+    mesh_shape = (4,)  # This is hardcoded atm
     devices = np.asarray(jax.devices()).reshape(*mesh_shape)
-    mesh = maps.Mesh(devices, ('x',))
+    mesh = maps.Mesh(devices, ("x",))
     print(devices)
-    f = pjit(f, in_axis_resources=PartitionSpec('x'), out_axis_resources=None)
- 
+    f = pjit(f, in_axis_resources=PartitionSpec("x"), out_axis_resources=None)
+
     # Sends data to accelerators based on partition_spec
     with maps.Mesh(mesh.devices, mesh.axis_names):
         jax.debug.breakpoint()
@@ -94,6 +94,7 @@ def pjit_time_grad(f, data):
     # for i in loss.device_buffers:
     #     print(i.shape)
     # print(len(loss.device_buffers))
+
 
 def batchify(func):
     def wrapper(self, params, data):
@@ -118,6 +119,7 @@ def batchify(func):
 #         X = data[:, 3:].reshape(data.shape[0], -1)
 #         return Y, D, T, X
 
+
 def split(data):
     Y = data[:, 0].reshape(-1, 1)
     D = data[:, 1].reshape(-1, 1)
@@ -126,9 +128,16 @@ def split(data):
     return Y, D, T, X
 
 
+class Model_Params(NamedTuple):
+    body: Params
+    other: Params
 
-def Model_Params(params, linear_params=None):
-    return {"ode_params": params, "linear_params": linear_params}
+
+def init_ode1_model(key, mlp):
+    subkey1, subkey2 = jax.random.split(key, 2)
+    other = jax.random.normal(subkey1, shape=(1,))
+    body = mlp.init_fn(subkey2, 2)
+    return Model_Params(body, other)
 
 
 if __name__ == "__main__":
