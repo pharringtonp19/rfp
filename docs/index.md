@@ -14,16 +14,20 @@ hide:
 
 </center>
 
-### **Perspective**
+### **The Three Stages of Applied Econometric Maturity**
 To some extent, we're all a bit like Richard McElreath (author of Rethinking Stastics) in that we've spent some time thinking about the statistics/ causal inference course we would have like to have in graduate school. 
 
-??? tip "The Three Stages of Applied Econometric Maturity"
+1. As a fresh graudate student, your narrowly focused on identification. Your constantly thinking "Am I identified, under what assumptions am I identified?" 
 
-    1. As a fresh graudate student, your narrowly focused on identification. Your constantly thinking "Am I identified, under what assumptions am I identified?" 
+2. Later on in your time at grad school, you realize that this idea of "Identification" $+$ "Sample Analogy" is really just one way to answer the more general question an audience member/reader might ask -- "In order to believe your results, what am I betting on?" 
 
-    2. Later on in your time at grad school, you realize that this idea of "Identification" $+$ "Sample Analogy" is really just one way to answer the more general question an audience member/reader might ask -- "In order to believe your results, what am I betting on?" 
+3. Just before your graduate, though, you realize that this idea that your trying to convince someone to interpret your results in a similair way is absurd. What you "learn" from the data depends upon your initial beliefs (we're all Bayesians!) so to the aim cannot be to convince anyone. Rather, given that you don't have non-parametric identification, your facing a host of sampling issues, you want to walk your audience through the tradeoffs that you made in your stastical analysis so that they might learn something from your work (note this something might be very different from what you learned!)
 
-    3. Just before your graduate, though, you realize that this idea that your trying to convince someone to interpret your results in a similair way is absurd. What you "learn" from the data depends upon your initial beliefs (we're all Bayesians!) so to the aim cannot be to convince anyone. Rather, given that you don't have non-parametric identification, your facing a host of sampling issues, you want to walk your audience through the tradeoffs that you made in your stastical analysis so that they might learn something from your work (note this something might be very different from what you learned!)
+<center>
+
+<img src="https://raw.githubusercontent.com/pharringtonp19/isga_paper/main/examples/dml.png" alt="dml" width="450"/> 
+<div> Under selection of observables a partially linear model fit via Double Machine Learning can perform poorly because it doesn't account for the propensity score.</div>
+</center>
  
 ### **Introduction**
 
