@@ -1,6 +1,7 @@
 """Public API for rfp."""
 
-# DATA
+# Examples
+import rfp._src.ff1 as ff1
 import rfp._src.ode1 as ode1
 from rfp._src.data import f1, sample1, sample2, sample3
 
@@ -36,3 +37,5 @@ from rfp._src.utils import (
     time_grad,
     training_sampler,
 )
+
+# DATA
