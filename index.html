@@ -284,8 +284,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#perspective" class="md-nav__link">
-    Perspective
+  <a href="#the-three-stages-of-applied-econometric-maturity" class="md-nav__link">
+    The Three Stages of Applied Econometric Maturity
   </a>
   
 </li>
@@ -562,10 +562,8 @@
 <iframe src="https://slides.com/pharringtonp19/rtc/embed?token=FxFf2FUF&style=transparent" width="460" height="336" title="rtc" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 <p></center></p>
-<h3 id="perspective"><strong>Perspective</strong></h3>
+<h3 id="the-three-stages-of-applied-econometric-maturity"><strong>The Three Stages of Applied Econometric Maturity</strong></h3>
 <p>To some extent, we're all a bit like Richard McElreath (author of Rethinking Stastics) in that we've spent some time thinking about the statistics/ causal inference course we would have like to have in graduate school. </p>
-<details class="tip">
-<summary>The Three Stages of Applied Econometric Maturity</summary>
 <ol>
 <li>
 <p>As a fresh graudate student, your narrowly focused on identification. Your constantly thinking "Am I identified, under what assumptions am I identified?" </p>
@@ -577,7 +575,10 @@
 <p>Just before your graduate, though, you realize that this idea that your trying to convince someone to interpret your results in a similair way is absurd. What you "learn" from the data depends upon your initial beliefs (we're all Bayesians!) so to the aim cannot be to convince anyone. Rather, given that you don't have non-parametric identification, your facing a host of sampling issues, you want to walk your audience through the tradeoffs that you made in your stastical analysis so that they might learn something from your work (note this something might be very different from what you learned!)</p>
 </li>
 </ol>
-</details>
+<p><center></p>
+<p><img src="https://raw.githubusercontent.com/pharringtonp19/isga_paper/main/examples/dml.png" alt="dml" width="450"/> </p>
+<div> Under selection of observables a partially linear model fit via Double Machine Learning can perform poorly because it doesn't account for the propensity score.</div>
+<p></center></p>
 <h3 id="introduction"><strong>Introduction</strong></h3>
 <p>Following the approach advocated in <a href="https://www.mostlyharmlesseconometrics.com/">Mostly Harmless Econometrics</a>, we view causal inference techniques as methods that aim to correct for the fact that the data is not generated from a randomized experiment.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 
 In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.</p>
