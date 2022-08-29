@@ -42,6 +42,29 @@ def batch_sample_time(n):
     return decorator
 
 
+def batch_sample_weight(n):
+    def decorator(sampler):
+        def wrapper(key):
+            subkey1, subkey2 = jax.random.split(key)
+            scale = jax.random.uniform(subkey1, shape=(3,), maxval=0.7)
+            print(scale)
+            ys, ws, ts, ds = jax.vmap(sampler, in_axes=(0, None))(
+                jax.random.split(key, n), scale
+            )
+            ys, ws, ts, ds = (
+                ys.reshape(-1, 1),
+                ws.reshape(-1, 1),
+                ts.reshape(-1, 1),
+                ds.reshape(-1, 1),
+            )
+            assert_shape([ys, ws, ts, ds], [(n, 1), (n, 1), (n, 1), (n, 1)])
+            return ys, ws, ts, ds
+
+        return wrapper
+
+    return decorator
+
+
 def training_sampler(batch_size, data, *, key):
     """
     Instead of greating a data loader as a generator as in https://docs.kidger.site/equinox/examples/train_rnn/
@@ -107,25 +130,22 @@ def batchify(func):
     return wrapper
 
 
-# def split(data):
-#     """We should include a check for this"""
-
-#     if isinstance(data, tuple):
-#         return data
-#     else:
-#         Y = data[:, 0].reshape(-1, 1)
-#         D = data[:, 1].reshape(-1, 1)
-#         T = data[:, 2].reshape(-1, 1)
-#         X = data[:, 3:].reshape(data.shape[0], -1)
-#         return Y, D, T, X
-
-
 def split(data):
     Y = data[:, 0].reshape(-1, 1)
     D = data[:, 1].reshape(-1, 1)
     T = data[:, 2].reshape(-1, 1)
     X = data[:, 3:].reshape(data.shape[0], -1)
     return Y, D, T, X
+
+
+def split_weight(data):
+    """
+    Example Outcome: Change in eviction fillings
+    Model: Bi-level FFWD"""
+    ys = data[:, 0].reshape(-1, 1)
+    ws = data[:, 1].reshape(-1, 1)
+    ts = data[:, 2].reshape(-1, 1)
+    return ys, ws, ts
 
 
 class Model_Params(NamedTuple):

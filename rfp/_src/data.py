@@ -3,6 +3,7 @@
 
 import jax
 import jax.numpy as jnp
+
 from rfp._src.types import Data
 
 
@@ -33,6 +34,15 @@ def sample3(key, features: int) -> Data:
         1 * time + 1 * treatment + 2 * treatment * time + jax.random.normal(subkey4)
     )
     return outcome, treatment, time, covariates
+
+
+def sample4(key, scales) -> Data:
+    """Work on This!"""
+    subkey1, subkey2 = jax.random.split(key, 2)
+    treatment = jax.random.bernoulli(subkey1).astype(jnp.float32)
+    rate = scales[0] + jax.random.uniform(subkey2, minval=0.0, maxval=0.3)
+    outcome = rate + jnp.sin(rate * 10) * scales[1] + 0.3 * scales[2]
+    return outcome, jnp.ones_like(outcome), rate, treatment
 
 
 if __name__ == "__main__":

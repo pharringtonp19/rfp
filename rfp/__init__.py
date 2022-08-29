@@ -3,7 +3,7 @@
 # Examples
 import rfp._src.ff1 as ff1
 import rfp._src.ode1 as ode1
-from rfp._src.data import f1, sample1, sample2, sample3
+from rfp._src.data import f1, sample1, sample2, sample3, sample4
 
 # FEATURE MAP
 from rfp._src.featuremap import neuralODE
@@ -13,7 +13,7 @@ from rfp._src.linear_model import linear_model_time, linear_model_trainable_time
 
 # LOSSES
 from rfp._src.losses import (
-    Cluster_Loss,
+    Cluster_Loss_ff,
     Supervised_Loss_Time,
     feature_map_loss,
     sqr_error,
@@ -30,12 +30,12 @@ from rfp._src.types import Data
 from rfp._src.utils import (
     Model_Params,
     batch_sample_time,
-    batchify,
+    batch_sample_weight,
     init_ode1_model,
     pjit_time_grad,
     split,
+    split_weight,
     time_grad,
-    training_sampler,
 )
 
 # DATA

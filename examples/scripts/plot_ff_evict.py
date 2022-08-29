@@ -37,7 +37,7 @@ def main(argv):
     est_effect = np.load(np_file_link + f"ode1_est_effect_{FLAGS.person}_ff.npy")
     annualized_effect = 52 * est_effect
     ts = np.load(np_file_link + f"ode1_eviction_rt_{FLAGS.person}_ff.npy")
-    ts = ts * 100
+    ts = ts
     print(np.max(ts))
     fig = plt.figure(dpi=300, tight_layout=True)
     plt.plot(ts, annualized_effect)
