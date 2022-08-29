@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://pharringtonp19.github.io/rfp/deep_controls/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.2">
     
     
       
@@ -197,7 +197,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../Implementation/networks/" class="md-tabs__link">
+      <a href="../Implementation/How%20to%20Train%20Your%20RFP/" class="md-tabs__link">
         Implementation (JAX)
       </a>
     </li>
@@ -328,6 +328,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -341,6 +343,20 @@
           Implementation (JAX)
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/How%20to%20Train%20Your%20RFP/" class="md-nav__link">
+        How to Train Your RFP
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -527,7 +543,7 @@ Y_{1,i}  &amp;= \beta_0 + \beta_1 D_i + Y_{0,i} +  \varepsilon _i \end{align*} \
     ![Image title](./../fig/dml.png){ width="500" }
     <figcaption>Normalized Sampling Distribution</figcaption>
     </figure> -->
-<p>In practice, we don't usually condition on <span class="arithmatex">\(X_i\)</span> (which means there's no reason to correct for <span class="arithmatex">\(\mathbb{P}(D|X)\)</span>, and this is very attractive because we know that the partially linear model fails to correct for this! --&gt; See <a href="../examples/">Double Machine Learning Example</a>)
+<p>In practice, we don't usually condition on <span class="arithmatex">\(X_i\)</span> (which means there's no reason to correct for <span class="arithmatex">\(\mathbb{P}(D|X)\)</span>, and this is very attractive because we know that the partially linear model fails to correct for this! --&gt; See <a href="./examples.md">Double Machine Learning Example</a>)
 and we allow </p>
 <div class="arithmatex">\[Y_{0, i} \approx f(X_i, D_i) \]</div>
 <p>But in some sense, this kinda feels like cheating because it suggests that de-panelled selection on observables is easier to work with than cross-sectional selection on observables. </p>

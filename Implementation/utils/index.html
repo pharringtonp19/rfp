@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Implementation/utils/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.2">
     
     
       
@@ -199,7 +199,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../networks/" class="md-tabs__link md-tabs__link--active">
+      <a href="../How%20to%20Train%20Your%20RFP/" class="md-tabs__link md-tabs__link--active">
         Implementation (JAX)
       </a>
     </li>
@@ -332,6 +332,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -345,6 +347,20 @@
           Implementation (JAX)
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Train%20Your%20RFP/" class="md-nav__link">
+        How to Train Your RFP
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -445,8 +461,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rfp._src.utils.batch_sample" class="md-nav__link">
-    batch_sample()
+  <a href="#rfp._src.utils.training_sampler" class="md-nav__link">
+    training_sampler()
   </a>
   
 </li>
@@ -532,8 +548,8 @@
 
 
 
-<h2 id="rfp._src.utils.batch_sample" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">batch_sample</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></code>
+<h2 id="rfp._src.utils.training_sampler" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">training_sampler</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></code>
 
 </h2>
 
@@ -542,24 +558,34 @@
   
       <p>Instead of greating a data loader as a generator as in https://docs.kidger.site/equinox/examples/train_rnn/
 during the training loop, we scan over keys and draw samples of <code>batch_size</code></p>
+<ul>
+<li>For supervised training, we want to subsample observations</li>
+<li>For cluster training, though, we want to subsample clusters</li>
+</ul>
 
       <details class="quote">
         <summary>Source code in <code>rfp/_src/utils.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">batch_sample</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">training_sampler</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instead of greating a data loader as a generator as in https://docs.kidger.site/equinox/examples/train_rnn/</span>
 <span class="sd">    during the training loop, we scan over keys and draw samples of `batch_size`</span>
+
+<span class="sd">    - For supervised training, we want to subsample observations</span>
+<span class="sd">    - For cluster training, though, we want to subsample clusters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
         <span class="k">return</span> <span class="n">data</span>

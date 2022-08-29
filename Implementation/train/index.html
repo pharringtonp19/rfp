@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://pharringtonp19.github.io/rfp/Implementation/train/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.2">
     
     
       
@@ -199,7 +199,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../networks/" class="md-tabs__link md-tabs__link--active">
+      <a href="../How%20to%20Train%20Your%20RFP/" class="md-tabs__link md-tabs__link--active">
         Implementation (JAX)
       </a>
     </li>
@@ -332,6 +332,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -345,6 +347,20 @@
           Implementation (JAX)
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Train%20Your%20RFP/" class="md-nav__link">
+        How to Train Your RFP
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -403,15 +419,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rfp._src.train.trainer" class="md-nav__link">
-    trainer
+  <a href="#rfp._src.train.Trainer" class="md-nav__link">
+    Trainer
   </a>
   
-    <nav class="md-nav" aria-label="trainer">
+    <nav class="md-nav" aria-label="Trainer">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#rfp._src.train.trainer.train" class="md-nav__link">
+  <a href="#rfp._src.train.Trainer.train" class="md-nav__link">
     train()
   </a>
   
@@ -549,8 +565,8 @@ Yuri is the tainer who trains!</p>
 
 
 
-<h2 id="rfp._src.train.trainer" class="doc doc-heading">
-        <code>trainer</code>
+<h2 id="rfp._src.train.Trainer" class="doc doc-heading">
+        <code>Trainer</code>
 
   
   <span class="doc doc-labels">
@@ -566,9 +582,7 @@ Yuri is the tainer who trains!</p>
 
         <details class="quote">
           <summary>Source code in <code>rfp/_src/train.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -589,36 +603,26 @@ Yuri is the tainer who trains!</p>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">trainer</span><span class="p">:</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Trainer</span><span class="p">:</span>
     <span class="n">loss_fn</span><span class="p">:</span> <span class="n">callable</span>  <span class="c1"># This is actually not a callable!</span>
     <span class="n">opt</span><span class="p">:</span> <span class="n">optax</span><span class="o">.</span><span class="n">GradientTransformation</span>
     <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">init_key</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">batch_sampler</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">batch_sample</span>
-    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span>
 
     <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Params and Data&quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">update_fn</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">update_fn</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
             <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span> <span class="o">=</span> <span class="n">carry</span>
-            <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_sampler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
             <span class="n">loss_values</span><span class="p">,</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">value_and_grad</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="o">.</span><span class="n">aux_status</span>
-            <span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+            <span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
             <span class="n">updates</span><span class="p">,</span> <span class="n">opt_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
             <span class="n">params</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">apply_updates</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">updates</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">),</span> <span class="n">loss_values</span>
 
         <span class="p">(</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">loss_values_history</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
-            <span class="n">update_fn</span><span class="p">,</span>
-            <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)),</span>
-            <span class="n">xs</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init_key</span><span class="p">),</span>
+            <span class="n">update_fn</span><span class="p">,</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)),</span> <span class="n">xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">epochs</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">opt_params</span><span class="p">,</span> <span class="n">loss_values_history</span>
 </code></pre></div></td></tr></table></div>
@@ -640,7 +644,7 @@ Yuri is the tainer who trains!</p>
 
 
 
-<h3 id="rfp._src.train.trainer.train" class="doc doc-heading">
+<h3 id="rfp._src.train.Trainer.train" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
 
 </h3>
@@ -652,7 +656,8 @@ Yuri is the tainer who trains!</p>
 
       <details class="quote">
         <summary>Source code in <code>rfp/_src/train.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
@@ -666,27 +671,20 @@ Yuri is the tainer who trains!</p>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">):</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Params</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Params and Data&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">update_fn</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">update_fn</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span> <span class="o">=</span> <span class="n">carry</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_sampler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
         <span class="n">loss_values</span><span class="p">,</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">value_and_grad</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="o">.</span><span class="n">aux_status</span>
-        <span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+        <span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="n">updates</span><span class="p">,</span> <span class="n">opt_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">apply_updates</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">updates</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">),</span> <span class="n">loss_values</span>
 
     <span class="p">(</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">loss_values_history</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
-        <span class="n">update_fn</span><span class="p">,</span>
-        <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)),</span>
-        <span class="n">xs</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init_key</span><span class="p">),</span>
+        <span class="n">update_fn</span><span class="p">,</span> <span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)),</span> <span class="n">xs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">epochs</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">opt_params</span><span class="p">,</span> <span class="n">loss_values_history</span>
 </code></pre></div></td></tr></table></div>
