@@ -35,7 +35,6 @@ Following the approach advocated in [Mostly Harmless Econometrics](https://www.m
 In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.
 
 
-
 ### **Approach**
 
 We consider the following three sampling correction approaches. All of which can be understood as a gradient correction[^2]. As is the case with applied causal inference we don't select the best option so much as wel choose the "least" bad option![^3]
