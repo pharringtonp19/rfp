@@ -15,11 +15,24 @@ hide:
 <iframe src="https://slides.com/pharringtonp19/rtc/embed?token=FxFf2FUF&style=transparent" width="460" height="336" title="rtc" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </center>
+
+### **Perspective**
+To some extent, we're all a bit like Richard McElreath (author of Rethinking Stastics) in that we've spent some time thinking about the statistics/ causal inference course we would have like to have in graduate school. 
+
+??? tip "The Three Stages of Applied Econometric Maturity"
+
+    1. As a fresh graudate student, your narrowly focused on identification. Your constantly thinking "Am I identified, under what assumptions am I identified?" 
+
+    2. Later on in your time at grad school, you realize that this idea of "Identification" $+$ "Sample Analogy" is really just one way to answer the more general question an audience member/reader might ask -- "In order to believe your results, what am I betting on?" 
+
+    3. Just before your graduate, though, you realize that this idea that your trying to convince someone to interpret your results in a similair way is absurd. What you "learn" from the data depends upon your initial beliefs (we're all Bayesians!) so to the aim cannot be to convince anyone. Rather, given that you don't have non-parametric identification, your facing a host of sampling issues, you want to walk your audience through the tradeoffs that you made in your stastical analysis so that they might learn something from your work (note this something might be very different from what you learned!)
  
 ### **Introduction**
 
 Following the approach advocated in [Mostly Harmless Econometrics](https://www.mostlyharmlesseconometrics.com/), we view causal inference techniques as methods that aim to correct for the fact that the data is not generated from a randomized experiment.[^1] 
 In this project, we specifically consider problems that can be thought of as "sampling" problems. That is, contexts where you have clusters of observations or where the proposenity-score is non-uniform. In this setting, the problem of correcting for the non-RCT natue of one's data becomes the challenge of implementing a "local" correction in a statistically and computationally reasonable way.
+
+
 
 ### **Approach**
 
@@ -39,7 +52,9 @@ We consider the following three sampling correction approaches. All of which can
 
 
 
-### **Preview of (Cherry-Picked) Results**
+### **Preview of Results**
+
+#### **Generalizing Across Clusters**
 <center>
 <img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_Standard%20(2).png" alt="drawing" width="350"/> 
 <img src="https://raw.githubusercontent.com/pharringtonp19/rfp/main/docs/fig/preview_results/grad_desc_toy_MAML%20(1).png" alt="drawing" width="350"/> 
