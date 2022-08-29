@@ -22,6 +22,7 @@ mkdocs-material = "^8.4.1"
 isort = "^5.10.1"
 pyupgrade = "^2.37.3"
 einops = "^0.4.1"
+pandas = "^1.4.3"
 
 
 [tool.poetry.dev-dependencies]

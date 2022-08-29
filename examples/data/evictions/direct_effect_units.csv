@@ -1,4 +1,4 @@
-zip_codes,Treated,diff,eviction_rate_unit,fraction_total_renters
+zip_codes,Treated,diff_outcome,eviction_rate,fraction
 6831,False,0.0,0.0135734795092664,0.6401209070177704
 6831,False,0.0,0.0135734795092664,0.6401209070177704
 6831,False,-0.666666666666667,0.0135734795092664,0.6401209070177704

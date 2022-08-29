@@ -20,7 +20,7 @@ def dynamics(mlp, t, y, args):
     return mlp.fwd_pass(args, state)
 
 
-def Path(dynamics, params):
+def Path(dynamics, t1, params):
     return diffeqsolve(
         ODETerm(dynamics),
         Heun(),
@@ -41,11 +41,12 @@ def predict(path, x):
 @dataclass
 class Loss_fn:
     dynamics: callable
+    t1: float = 1.0
     aux_status: bool = False
 
     def __call__(self, params, data):
         ys, ws, xs = data
-        path = Path(self.dynamics, params)
+        path = Path(self.dynamics, self.t1, params)
         yhat = jax.vmap(predict, in_axes=(None, 0))(path, xs).reshape(
             -1,
         )
