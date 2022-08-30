@@ -18,6 +18,7 @@ from rfp import (
     sample4,
     split_weight,
     time_grad,
+    parallel
 )
 
 FLAGS = flags.FLAGS
@@ -32,7 +33,7 @@ flags.DEFINE_bool("multi_run", False, "Multi Run of Training Loop")
 flags.DEFINE_bool("real_data", False, "Real Data")
 flags.DEFINE_float("frac", 0.8, "Subsampling Fraction")
 flags.DEFINE_float("reg_value", 0.9, "Subsampling Fraction")
-flags.DEFINE_integer("sims", 50, "Simulations")
+flags.DEFINE_integer("sims", 40, "Simulations")
 flags.DEFINE_integer("clusters", 10, "clusters")
 flags.DEFINE_integer("n", 100, "obs")
 
@@ -68,6 +69,7 @@ def main(argv):
     time_grad(cluster_loss, params, data)
     yuri = Trainer(cluster_loss, optax.sgd(learning_rate=FLAGS.lr), FLAGS.epochs)
 
+    @parallel.pjit_key(FLAGS.sims)
     def run(key):
 
         ### Train
@@ -83,15 +85,16 @@ def main(argv):
         # est_effect = t_yhat - c_yhat
 
         return loss_history, ts, yhat  # c_loss_history, t_loss_history, ts, est_effect
-
+    
     loss_history, ts, yhat = run(jax.random.PRNGKey(0))
-    plt.plot(loss_history)
-    plt.show()
+    print(type(loss_history), len(loss_history))
+    # plt.plot(loss_history)
+    # plt.show()
 
-    plt.plot(ts, yhat)
-    for i in range(FLAGS.clusters):
-        plt.scatter(data[i][:, 2], data[i][:, 0])
-    plt.show()
+    # plt.plot(ts, yhat)
+    # for i in range(FLAGS.clusters):
+    #     plt.scatter(data[i][:, 2], data[i][:, 0])
+    # plt.show()
 
     # init_key = jax.random.PRNGKey(FLAGS.init_key_num)
     # control_data = (c_ys, jnp.ones_like(c_ws), c_ts)

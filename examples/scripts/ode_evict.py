@@ -1,5 +1,7 @@
 import os
 from functools import partial
+from time import perf_counter
+from pathlib import Path
 
 import jax
 import jax.numpy as jnp
@@ -9,7 +11,7 @@ import optax
 import pandas as pd
 from absl import app, flags
 
-from rfp import MLP, Model_Params, Trainer, ode1, time_grad
+from rfp import MLP, Model_Params, Trainer, ode1, time_grad, parallel
 
 FLAGS = flags.FLAGS
 flags.DEFINE_bool("person", False, "person")
@@ -19,10 +21,14 @@ flags.DEFINE_float("lr", 0.1, "learning rate")
 flags.DEFINE_bool("single_run", False, "Single Run of Training Loop")
 flags.DEFINE_bool("multi_run", False, "Multi Run of Training Loop")
 flags.DEFINE_bool("real_data", False, "Real Data")
+flags.DEFINE_bool("pjit", False, "pjit")
 flags.DEFINE_float("frac", 0.8, "Subsampling Fraction")
-flags.DEFINE_integer("sims", 30, "Simulations")
+flags.DEFINE_integer("sims", 40, "Simulations")
 
+github_folder = str(Path(os.getcwd()).parent.absolute())
 np_file_link: str = os.getcwd() + "/examples/data/"
+
+print(github_folder)
 
 
 def main(argv):
@@ -34,11 +40,11 @@ def main(argv):
         # READ IN THE DATASET
         if FLAGS.person:
             df = pd.read_csv(
-                "/Users/patrickpower/Documents/GitHub/rfp/examples/data/evictions/direct_effect_person.csv"
+                np_file_link + "evictions/direct_effect_person.csv"
             )
         else:
             df = pd.read_csv(
-                "/Users/patrickpower/Documents/GitHub/rfp/examples/data/evictions/direct_effect_units.csv"
+                np_file_link + "evictions/direct_effect_units.csv"
             )
         # DIVIDE DATASET INTO TREATED AND CONTROL GROUPS
         c_ts = df[df.Treated == 0]["eviction_rate"].values
@@ -134,13 +140,25 @@ def main(argv):
         )
 
     if FLAGS.multi_run:
-        es = jax.vmap(
-            lambda key: simulate(key, FLAGS.frac, control_data, treated_data)
-        )(jax.random.split(init_key, FLAGS.sims))
-        np.save(
-            np_file_link + f"ode1_multi_run_{FLAGS.frac}_{FLAGS.person}.npy",
-            np.asarray(es),
-        )
+
+        if FLAGS.pjit: 
+            t1_start = perf_counter()
+            parallel_run = parallel.pjit_key(FLAGS.sims)(lambda key: run(key, control_data, treated_data))
+            ans = parallel_run(init_key)
+            t1_stop = perf_counter()
+            print(f"Total Elapsed time: {t1_stop- t1_start:.3f} | Time Per Simulation: {(t1_stop- t1_start)/FLAGS.sims:.3f}")
+    
+        else: 
+            t1_start = perf_counter()
+            es = jax.vmap(
+                lambda key: simulate(key, FLAGS.frac, control_data, treated_data)
+            )(jax.random.split(init_key, FLAGS.sims))
+            np.save(
+                np_file_link + f"ode1_multi_run_{FLAGS.frac}_{FLAGS.person}.npy",
+                np.asarray(es),
+            )
+            t1_stop = perf_counter()
+            print(f"Total Elapsed time: {t1_stop- t1_start:.3f} | Time Per Simulation: {(t1_stop- t1_start)/FLAGS.sims:.3f}")
 
 
 if __name__ == "__main__":

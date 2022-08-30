@@ -3,6 +3,8 @@
 # Examples
 import rfp._src.ff1 as ff1
 import rfp._src.ode1 as ode1
+import rfp._src.parallel as parallel
+
 from rfp._src.data import f1, sample1, sample2, sample3, sample4
 
 # FEATURE MAP
@@ -32,7 +34,6 @@ from rfp._src.utils import (
     batch_sample_time,
     batch_sample_weight,
     init_ode1_model,
-    pjit_time_grad,
     split,
     split_weight,
     time_grad,
