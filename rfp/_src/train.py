@@ -15,6 +15,9 @@ from numpy import float32
 from rfp._src.types import Data, Params
 from rfp._src.utils import training_sampler
 
+# jaxlib = [ {platform = 'linux', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"},
+#           {platform = 'darwin', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"} ]
+
 
 @dataclass(frozen=True, slots=True)
 class Trainer:
