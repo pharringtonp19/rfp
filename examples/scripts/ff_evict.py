@@ -7,7 +7,7 @@ import optax
 import pandas as pd
 from absl import app, flags
 
-from rfp import MLP, Trainer, ff1, time_grad, parallel, split_weight    
+from rfp import MLP, Trainer, ff1, time_grad, parallel, split_weight, store_time_results  
 
 FLAGS = flags.FLAGS
 flags.DEFINE_bool("person", False, "person")
@@ -124,16 +124,26 @@ def main(argv):
 
         if FLAGS.pjit: 
             t1_start = perf_counter()
-            parallel_run = parallel.pjit_key(FLAGS.sims)(lambda key: run(key, control_data, treated_data))
+            parallel_run = parallel.pjit_key(FLAGS.sims)(lambda key: run(key, control_data, treated_data)[2])
             ans = parallel_run(init_key)
+
+            n_ans = jnp.vstack([jnp.expand_dims(i,0) for i in ans])
+            print(n_ans.shape)
             t1_stop = perf_counter()
-            print(f"Total Elapsed time: {t1_stop- t1_start:.3f} | Time Per Simulation: {(t1_stop- t1_start)/FLAGS.sims:.3f}")
+            text = f"Number of Simulations: {FLAGS.sims}    |   Total Elapsed time: {t1_stop- t1_start:.3f} |   Time Per Simulation: {(t1_stop- t1_start)/FLAGS.sims:.3f}"
+            print(text)
+            text = "1D Feed Forward |   " + text
+            path = os.getcwd() + "/examples/stats.txt"
+            store_time_results(path, 1, text)
+
+            
     
         else: 
             t1_start = perf_counter()
             es = jax.vmap(
                 lambda key: simulate(key, FLAGS.frac, control_data, treated_data)
             )(jax.random.split(init_key, FLAGS.sims))
+            print(es.shape)
             np.save(
                 np_file_link + f"ff_multi_run_{FLAGS.frac}_{FLAGS.person}.npy",
                 np.asarray(es),

@@ -4,26 +4,31 @@ from jax.experimental import maps
 from jax.experimental import PartitionSpec 
 from jax.experimental.pjit import pjit 
 import numpy as np 
-from rfp import MLP 
-from functools import partial 
+from diffrax import diffeqsolve, ODETerm, Dopri5
 
-mlp = MLP([32, 32, 1])
-params = mlp.init_fn(jax.random.PRNGKey(0), 2)
 
+print(jax.devices())
+print(jax.devices('cpu'))
 mesh_shape = (4,)
 devices = np.array(jax.devices()).reshape(*mesh_shape)
 mesh = maps.Mesh(devices, ('x',))
 print(mesh)
 
+def vector_field(t, y, args):
+    return -y
+
+term = ODETerm(vector_field)
+solver = Dopri5()
 input_data = np.arange(8 * 2).reshape(8, 2).astype(jnp.float32)
 
-@jax.grad
-def loss_fn(params, data):
-    yhat = mlp.fwd_pass(params, data)
-    return jnp.reshape(yhat**2, ())
+def ivp(y0):  
+    solution = diffeqsolve(term, solver, t0=0, t1=1, dt0=0.1, y0=y0).ys
+    return solution
+
+print(jax.vmap(ivp)(input_data).shape)
 
 f = pjit(
-  lambda data: jax.vmap(partial(mlp.fwd_pass, params))(data),
+  lambda data: jax.vmap(ivp)(data),
   in_axis_resources=PartitionSpec('x',),
   out_axis_resources=PartitionSpec('x',))
  
@@ -31,7 +36,4 @@ f = pjit(
 with maps.Mesh(mesh.devices, mesh.axis_names):
     data = f(input_data)
 print(type(data))
-# for i in data.device_buffers:
-#     print(i.shape)
-# z = jax.vmap(partial(mlp.fwd_pass, params))(input_data)
-# print(z)
+

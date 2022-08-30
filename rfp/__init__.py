@@ -37,6 +37,7 @@ from rfp._src.utils import (
     split,
     split_weight,
     time_grad,
+    store_time_results
 )
 
 # DATA

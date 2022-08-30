@@ -159,6 +159,19 @@ def init_ode1_model(key, mlp):
     body = mlp.init_fn(subkey2, 2)
     return Model_Params(body, other)
 
+def store_time_results(path, n, text):
+    """Taken from https://stackoverflow.com/questions/4719438/editing-specific-line-in-text-file-in-python"""
+    with open(path, 'r') as file:
+        # read a list of lines into data
+        data = file.readlines()
+        print(data)
+
+        # now change the 2nd line, note that you have to add a newline
+        data[n] = text
+
+        # and write everything back
+        with open(path, 'w') as file:
+            file.writelines( data )
 
 if __name__ == "__main__":
     """This should be made into a test"""
