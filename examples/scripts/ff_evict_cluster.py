@@ -15,10 +15,10 @@ from rfp import (
     Trainer,
     batch_sample_weight,
     ff1,
+    parallel,
     sample4,
     split_weight,
     time_grad,
-    parallel
 )
 
 FLAGS = flags.FLAGS
@@ -52,11 +52,7 @@ def main(argv):
         data_key, _ = jax.random.split(data_key)
         data[i] = cluster_data
 
-    # plt.scatter(data[0][:,2], data[0][:,0])
-    # plt.scatter(data[1][:,2], data[1][:,0])
-    # plt.show()
-
-    mlp = MLP([32, 1])
+    mlp = MLP([32, 32, 1])
     params = mlp.init_fn(jax.random.PRNGKey(FLAGS.init_key_num), 1)
     loss_fn = ff1.Loss_fn(mlp)
 
@@ -67,14 +63,15 @@ def main(argv):
     )
     cluster_loss = Cluster_Loss_ff(inner_yuri, FLAGS.reg_value, False)
     time_grad(cluster_loss, params, data)
-    yuri = Trainer(cluster_loss, optax.sgd(learning_rate=FLAGS.lr), FLAGS.epochs)
+    yuri = Trainer(
+        cluster_loss, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
+    )
 
-    @parallel.pjit_key(FLAGS.sims)
     def run(key):
 
         ### Train
         params = mlp.init_fn(key, 1)
-        opt_params, loss_history = yuri.train(params, data)
+        opt_params, loss_history = inner_yuri.train(params, data[0])
         # c_opt_params, c_loss_history = yuri.train(params, (c_ys, c_ws, c_ts))
         # t_opt_params, t_loss_history = yuri.train(params, (t_ys, t_ws, t_ts))
 
@@ -85,16 +82,15 @@ def main(argv):
         # est_effect = t_yhat - c_yhat
 
         return loss_history, ts, yhat  # c_loss_history, t_loss_history, ts, est_effect
-    
-    loss_history, ts, yhat = run(jax.random.PRNGKey(0))
-    print(type(loss_history), len(loss_history))
-    # plt.plot(loss_history)
-    # plt.show()
 
-    # plt.plot(ts, yhat)
-    # for i in range(FLAGS.clusters):
-    #     plt.scatter(data[i][:, 2], data[i][:, 0])
-    # plt.show()
+    loss_history, ts, yhat = run(jax.random.PRNGKey(0))
+    plt.plot(loss_history)
+    plt.show()
+
+    plt.plot(ts, yhat)
+    for i in range(FLAGS.clusters):
+        plt.scatter(data[i][:, 2], data[i][:, 0])
+    plt.show()
 
     # init_key = jax.random.PRNGKey(FLAGS.init_key_num)
     # control_data = (c_ys, jnp.ones_like(c_ws), c_ts)
