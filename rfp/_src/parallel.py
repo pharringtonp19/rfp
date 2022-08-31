@@ -1,9 +1,12 @@
+from dataclasses import dataclass
 import jax 
 import jax.numpy as jnp 
 from jax.experimental import maps 
 from jax.experimental import PartitionSpec 
 from jax.experimental.pjit import pjit 
 import numpy as np 
+from einops import rearrange 
+from functools import partial 
 
 def pjit_key(sims):
 
@@ -25,6 +28,26 @@ def pjit_key(sims):
         return wrapper 
 
     return pjit_decorator
+
+
+def pre_pmap(devices, data):
+    return rearrange(data, '(b h) w -> b h w', b=devices)
+
+
+
+
+def pv_map(n_devices):
+
+  def decorator(f):
+
+    def wrapper(params, data):
+      data = pre_pmap(n_devices, data)
+      t = lambda data: jax.tree_util.tree_map(partial(f, params), data)
+      return jnp.mean(jax.pmap(t)(data))
+
+    return wrapper 
+  
+  return decorator 
 
     
  

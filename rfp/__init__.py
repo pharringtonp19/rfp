@@ -18,7 +18,7 @@ from rfp._src.losses import (
     Cluster_Loss_ff,
     Supervised_Loss_Time,
     feature_map_loss,
-    sqr_error,
+    Sqr_Error
 )
 
 # NEURAL NETWORKS
@@ -37,7 +37,8 @@ from rfp._src.utils import (
     split,
     split_weight,
     time_grad,
-    store_time_results
+    store_time_results, 
+    time_grad_pvmap
 )
 
 # DATA

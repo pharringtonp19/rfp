@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 github_folder = str(Path(os.getcwd()).parent.absolute())
-file_link: str = github_folder + "/isga_paper/examples/"
+file_link: str = github_folder + "/eviction_paper/examples/"
 np_file_link: str = os.getcwd() + "/examples/data/"
 
 results = np.load(np_file_link + "dml.npy")

@@ -10,6 +10,7 @@ from chex import assert_shape
 from einops import reduce
 
 from rfp._src.types import Params
+from rfp._src import parallel 
 
 
 def einops_reduce(str1: str, str2: str) -> callable:
@@ -82,7 +83,17 @@ def training_sampler(batch_size, data, *, key):
         return sample
 
 
+def time_grad_pvmap(loss_fn, params, data):
+    pv_mapped_loss_fn = parallel.pv_map(4)(loss_fn)
+    trials = timeit.repeat(
+        stmt=lambda: pv_mapped_loss_fn(params, data), number=1, repeat=2
+    )
+    print(
+        f"Vectorized:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
+    )
+
 def time_grad(loss_fn, params, data):
+
     jitted_grad_loss_fn = jax.jit(
         jax.grad(loss_fn.__call__, has_aux=loss_fn.aux_status)
     )
@@ -90,8 +101,19 @@ def time_grad(loss_fn, params, data):
         stmt=lambda: jitted_grad_loss_fn(params, data), number=1, repeat=2
     )
     print(
-        f"Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
+        f"Standard:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
+
+# def time_grad(loss_fn, params, data):
+#     jitted_grad_loss_fn = jax.jit(
+#         jax.grad(loss_fn.__call__, has_aux=loss_fn.aux_status)
+#     )
+#     trials = timeit.repeat(
+#         stmt=lambda: jitted_grad_loss_fn(params, data), number=1, repeat=2
+#     )
+#     print(
+#         f"Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
+#     )
 
 
 # def pjit_time_grad(f, data):
@@ -172,6 +194,9 @@ def store_time_results(path, n, text):
         # and write everything back
         with open(path, 'w') as file:
             file.writelines( data )
+
+
+
 
 if __name__ == "__main__":
     """This should be made into a test"""

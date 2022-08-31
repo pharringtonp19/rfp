@@ -7,16 +7,16 @@ import jax.numpy as jnp
 from rfp._src.utils import batchify, split
 
 
-class sqr_error:
+@dataclass 
+class Sqr_Error:
     """Square Error"""
-
-    def __init__(self, mlp):
-        self.mlp = mlp
-        self.aux_status: bool = False
+    mlp: callable 
+    data_split: callable = lambda x : x 
+    aux_status: bool = False 
 
     def __call__(self, params, data):
         """compute loss"""
-        targets, inputs = data
+        targets, inputs = self.data_split(data)
         prediction = self.mlp.fwd_pass(params, inputs)
         return jnp.mean((prediction - targets) ** 2)
 
