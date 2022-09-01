@@ -10,7 +10,7 @@ import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, f1, sample1, sqr_error, trainer
+from rfp import MLP, Sqr_Error, Trainer, f1, sample1
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -45,9 +45,9 @@ def main(argv) -> None:
         params = mlp.init_fn(params_key, FLAGS.features)
 
         # Training
-        loss_fn = sqr_error(mlp)
+        loss_fn = Sqr_Error(mlp)
         z = loss_fn(params, (Y, X))
-        yuri = trainer(
+        yuri = Trainer(
             loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
         )
         opt_paramsD, lossesD = yuri.train(params, (D, X))
