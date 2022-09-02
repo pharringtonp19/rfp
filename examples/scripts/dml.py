@@ -22,6 +22,7 @@ flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
+flags.DEFINE_bool("continuous", False, "continuous treatment")
 
 FLAGS: Any = flags.FLAGS
 
@@ -29,12 +30,21 @@ FLAGS: Any = flags.FLAGS
 def main(argv) -> None:
     del argv
 
+    if FLAGS.continuous:
+        treatment = jnp.linspace(-3.0, 3, 1000).reshape(-1, 1)
+        regs = jnp.hstack((jnp.ones_like(treatment), treatment))
+        y = jax.vmap(f1)(treatment)
+        target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
+    else:
+        target_coef = f1(1.0) - f1(0.0)
+    print(f"Target Coefficient: {target_coef:.2f}")
+
     @partial(jax.jit, static_argnums=(1))
     def simulate(init_key, plots: bool = False):
 
         # Data
         train_key, test_key, params_key = jax.random.split(init_key, 3)
-        sampler = partial(sample1, f1)
+        sampler = partial(sample1, FLAGS.continuous, f1)
         Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
             jax.random.split(train_key, FLAGS.n), FLAGS.features
         )
@@ -67,21 +77,22 @@ def main(argv) -> None:
         return z
 
     if FLAGS.multi_run:
-        treatment = jnp.linspace(-3.0, 3, 1000).reshape(-1, 1)
-        regs = jnp.hstack((jnp.ones_like(treatment), treatment))
-        y = jax.vmap(f1)(treatment)
-        target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
-        print(target_coef)
         coeffs = jax.vmap(simulate)(
             jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)
         ).squeeze()
         std = jnp.std(coeffs)
         array_plot = np.array((coeffs - target_coef) / std)
-        np.save(np_file_link + f"dml.npy", np.asarray(array_plot))
+        np.save(np_file_link + f"dml_{FLAGS.continuous}.npy", np.asarray(array_plot))
 
     if FLAGS.single_run:
-        _, lossesD, lossesY = simulate(jax.random.PRNGKey(FLAGS.init_key_num), True)
-        print(lossesD[-1], lossesY[-1])
+        estimated_coeff, lossesD, lossesY = simulate(
+            jax.random.PRNGKey(FLAGS.init_key_num), True
+        )
+        print(f"Estimated Coefficient: {estimated_coeff.item():.2f}")
+        plt.plot(lossesD)
+        plt.plot(lossesY)
+        plt.show()
+        # print(lossesD[-1], lossesY[-1])
 
 
 if __name__ == "__main__":

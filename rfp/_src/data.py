@@ -11,9 +11,12 @@ def f1(x):
     return jnp.log(x**2 + 1.0 + jnp.sin(x * 1.5)) + 1.5
 
 
-def sample1(f, key, features: int) -> Data:
+def sample1(continuous, f, key, features: int) -> Data:
     subkey1, subkey2, subkey3 = jax.random.split(key, 3)
-    treatment = jax.random.normal(subkey1)
+    if continuous:
+        treatment = jax.random.normal(subkey1)
+    else:
+        treatment = jax.random.bernoulli(subkey1).astype(jnp.float32)
     covariates = jax.random.normal(subkey2, shape=(features,))
     outcome = f(treatment) + jax.random.normal(subkey3)
     return outcome, treatment, covariates
