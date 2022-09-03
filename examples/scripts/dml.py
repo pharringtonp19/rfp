@@ -10,7 +10,7 @@ import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, Sqr_Error, Trainer, f1, sample1
+from rfp import MLP, Sqr_Error, Trainer, data
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -23,6 +23,8 @@ flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
 flags.DEFINE_bool("continuous", False, "continuous treatment")
+flags.DEFINE_bool("original", False, "original dataset")
+flags.DEFINE_float("theta", 0.5, "constant treatment effect")
 
 FLAGS: Any = flags.FLAGS
 
@@ -33,10 +35,14 @@ def main(argv) -> None:
     if FLAGS.continuous:
         treatment = jnp.linspace(-3.0, 3, 1000).reshape(-1, 1)
         regs = jnp.hstack((jnp.ones_like(treatment), treatment))
-        y = jax.vmap(f1)(treatment)
+        y = jax.vmap(data.f1)(treatment)
         target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
+
+    elif FLAGS.original:
+        target_coef = FLAGS.theta
     else:
         target_coef = f1(1.0) - f1(0.0)
+
     print(f"Target Coefficient: {target_coef:.2f}")
 
     @partial(jax.jit, static_argnums=(1))
@@ -44,11 +50,16 @@ def main(argv) -> None:
 
         # Data
         train_key, test_key, params_key = jax.random.split(init_key, 3)
-        sampler = partial(sample1, FLAGS.continuous, f1)
-        Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
-            jax.random.split(train_key, FLAGS.n), FLAGS.features
-        )
-        Y, D = Y.reshape(-1, 1), D.reshape(-1, 1)
+
+        if FLAGS.original:
+            Y, D, X = data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+
+        else:
+            sampler = partial(data.sample1, FLAGS.continuous, data.f1)
+            Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
+                jax.random.split(train_key, FLAGS.n), FLAGS.features
+            )
+            Y, D = Y.reshape(-1, 1), D.reshape(-1, 1)
 
         # Model
         mlp = MLP([32, 1])
@@ -64,10 +75,14 @@ def main(argv) -> None:
         opt_paramsY, lossesY = yuri.train(params, (Y, X))
 
         # Eval
-        Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
-            jax.random.split(test_key, FLAGS.n), FLAGS.features
-        )
-        Y, D = Y.reshape(-1, 1), D.reshape(-1, 1)
+        if FLAGS.original:
+            Y, D, X = data.VC2015(test_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+
+        else:
+            Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
+                jax.random.split(test_key, FLAGS.n), FLAGS.features
+            )
+            Y, D = Y.reshape(-1, 1), D.reshape(-1, 1)
         residual_d = D - mlp.fwd_pass(opt_paramsD, X)
         residual_y = Y - mlp.fwd_pass(opt_paramsY, X)
         z = jnp.linalg.lstsq(residual_d, residual_y)[0]
@@ -82,7 +97,10 @@ def main(argv) -> None:
         ).squeeze()
         std = jnp.std(coeffs)
         array_plot = np.array((coeffs - target_coef) / std)
-        np.save(np_file_link + f"dml_{FLAGS.continuous}.npy", np.asarray(array_plot))
+        np.save(
+            np_file_link + f"dml_{FLAGS.continuous}_{FLAGS.original}.npy",
+            np.asarray(array_plot),
+        )
 
     if FLAGS.single_run:
         estimated_coeff, lossesD, lossesY = simulate(

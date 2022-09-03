@@ -1,11 +1,10 @@
 """Public API for rfp."""
 
 # Examples
+import rfp._src.data as data
 import rfp._src.ff1 as ff1
 import rfp._src.ode1 as ode1
 import rfp._src.parallel as parallel
-
-from rfp._src.data import f1, sample1, sample2, sample3, sample4
 
 # FEATURE MAP
 from rfp._src.featuremap import neuralODE
@@ -16,9 +15,9 @@ from rfp._src.linear_model import linear_model_time, linear_model_trainable_time
 # LOSSES
 from rfp._src.losses import (
     Cluster_Loss_ff,
+    Sqr_Error,
     Supervised_Loss_Time,
     feature_map_loss,
-    Sqr_Error
 )
 
 # NEURAL NETWORKS
@@ -36,9 +35,9 @@ from rfp._src.utils import (
     init_ode1_model,
     split,
     split_weight,
+    store_time_results,
     time_grad,
-    store_time_results, 
-    time_grad_pvmap
+    time_grad_pvmap,
 )
 
 # DATA

@@ -15,13 +15,18 @@ file_link: str = github_folder + "/eviction_paper/examples/"
 np_file_link: str = os.getcwd() + "/examples/data/"
 
 flags.DEFINE_bool("continuous", False, "continuous treatment")
+flags.DEFINE_bool("original", False, "original dataset")
+flags.DEFINE_bool("linear", False, "linear")
 FLAGS = flags.FLAGS
 
 
 def main(argv) -> None:
     del argv
 
-    results = np.load(np_file_link + f"dml_{FLAGS.continuous}.npy")
+    if FLAGS.linear:
+        results = np.load(np_file_link + f"dml_linear_comp.npy")
+    else:
+        results = np.load(np_file_link + f"dml_{FLAGS.continuous}.npy")
     div = jnp.max(results)
     fig = plt.figure(dpi=300, tight_layout=True)
     plt.hist(results, edgecolor="black", density=True, bins=40)
@@ -31,7 +36,10 @@ def main(argv) -> None:
     plt.axvline(0, linestyle="--", color="black")
     plt.xlim(-6.0, 6.0)
     plt.ylim(0, 0.5)
-    filename = file_link + f"dml__{FLAGS.continuous}.png"
+    if FLAGS.linear:
+        filename = file_link + "dml_linear_comp.png"
+    else:
+        filename = file_link + f"dml_{FLAGS.continuous}_{FLAGS.original}.png"
     fig.savefig(filename, format="png")
     plt.show()
 

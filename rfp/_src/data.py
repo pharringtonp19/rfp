@@ -48,6 +48,36 @@ def sample4(key, scales) -> Data:
     return outcome, jnp.ones_like(outcome), rate, treatment
 
 
+# ================================================
+#               DOUBLE MACHINE LEARNING
+# ================================================
+from scipy.linalg import cholesky, toeplitz
+
+
+def VC2015(key, theta, n_obs, features):
+    a0 = 1
+    a1 = 0.25
+    s1 = 1
+    b0 = 1
+    b1 = 0.25
+    s2 = 1
+    subkey1, subkey2, subkey3 = jax.random.split(key, 3)
+    vec = [0.7 ** (i) for i in range(features)]
+    S = cholesky(toeplitz(vec))
+    X = jnp.dot(jax.random.normal(subkey1, (n_obs, features)), S)
+    z = jnp.exp(X)
+    D = (
+        a0 * X[:, 1].reshape(-1, 1)
+        + a1 * jnp.exp(X[:, 3]).reshape(-1, 1) / (1 + jnp.exp(X[:, 3])).reshape(-1, 1)
+        + jax.random.normal(subkey2, (n_obs, 1))
+    )
+    G = b0 * jnp.exp(X[:, 1]).reshape(-1, 1) / (1 + jnp.exp(X[:, 1])).reshape(
+        -1, 1
+    ) + b1 * X[:, 3].reshape(-1, 1)
+    Y = theta * D + G + s2 * jax.random.normal(subkey3, (n_obs, 1))
+    return Y, D, X
+
+
 if __name__ == "__main__":
     s = sample3(jax.random.PRNGKey(0), 2)
     print(s)
