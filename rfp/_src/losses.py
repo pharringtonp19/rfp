@@ -65,10 +65,10 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def embellished_predict(self, params, data):
+    def loss_fn(self, params, data):
         # """We implement this function as composition of partially evaluated functions"""
         # jax.debug.print("data_shape: {}", data.shape)
-        Y, D, X = data  # This is the only difference
+        Y, X = data  # This is the only difference
 
         # Partial Evaluation
         partial_feature_map = partial(self.feature_map, X=X)
@@ -79,10 +79,11 @@ class Supervised_Loss:
         # Composition
         phiX, vector_field_penalty = partial_feature_map(params["body"])
         prediction = partial_linear_layer(phiX)
-        return prediction, vector_field_penalty
+        empirical_loss = jnp.mean((prediction - Y) ** 2)
+        return empirical_loss + self.value * vector_field_penalty
 
     def __call__(self, params, data):
-        return self.embellished_predict(params, data)
+        return self.loss_fn(params, data)
 
 
 @dataclass
