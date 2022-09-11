@@ -59,28 +59,22 @@ class feature_map_loss:
 
 @dataclass
 class Supervised_Loss:
-    linear_layer: callable
     feature_map: callable
     reg_value: float = 1.0
     aux_status: bool = False
 
     # @jax.jit
     def loss_fn(self, params, data):
-        # """We implement this function as composition of partially evaluated functions"""
-        # jax.debug.print("data_shape: {}", data.shape)
-        Y, X = data  # This is the only difference
-
-        # Partial Evaluation
-        partial_feature_map = partial(self.feature_map, X=X)
-        partial_linear_layer = partial(
-            self.linear_layer, params["other"]
-        )  # And this too!
-
-        # Composition
-        phiX, vector_field_penalty = partial_feature_map(params["body"])
-        prediction = partial_linear_layer(phiX)
-        empirical_loss = jnp.mean((prediction - Y) ** 2)
-        return empirical_loss + self.value * vector_field_penalty
+        Y, X = data
+        phiX, vector_field_penalty = self.feature_map(params.body)
+        Yhat = phiX @ params.other
+        empirical_loss = jnp.mean((Yhat - Y) ** 2)
+        if self.aux_status:
+            return (
+                empirical_loss + self.reg_value * vector_field_penalty,
+                vector_field_penalty,
+            )
+        return empirical_loss + self.reg_value * vector_field_penalty
 
     def __call__(self, params, data):
         return self.loss_fn(params, data)
