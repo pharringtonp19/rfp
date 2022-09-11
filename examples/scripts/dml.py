@@ -41,7 +41,7 @@ def main(argv) -> None:
     elif FLAGS.original:
         target_coef = FLAGS.theta
     else:
-        target_coef = f1(1.0) - f1(0.0)
+        target_coef = data.f1(1.0) - data.f1(0.0)
 
     print(f"Target Coefficient: {target_coef:.2f}")
 

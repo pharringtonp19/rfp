@@ -7,12 +7,13 @@ import jax.numpy as jnp
 from rfp._src.utils import batchify, split
 
 
-@dataclass 
+@dataclass
 class Sqr_Error:
     """Square Error"""
-    mlp: callable 
-    data_split: callable = lambda x : x 
-    aux_status: bool = False 
+
+    mlp: callable
+    data_split: callable = lambda x: x
+    aux_status: bool = False
 
     def __call__(self, params, data):
         """compute loss"""
@@ -37,7 +38,7 @@ class feature_map_loss:
 
 
 @dataclass
-class supervised_loss:
+class Supervised_Loss:
     linear_layer: callable
     feature_map: callable
 
