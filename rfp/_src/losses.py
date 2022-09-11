@@ -66,7 +66,7 @@ class Supervised_Loss:
     # @jax.jit
     def loss_fn(self, params, data):
         Y, X = data
-        phiX, vector_field_penalty = self.feature_map(params.body)
+        phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other
         empirical_loss = jnp.mean((Yhat - Y) ** 2)
         if self.aux_status:
