@@ -10,7 +10,7 @@ import rfp._src.parallel as parallel
 from rfp._src.featuremap import neuralODE
 
 # LINEAR MODEL
-from rfp._src.linear_model import linear_model_time, linear_model_trainable_time
+from rfp._src.linear_model import linear_map
 
 # LOSSES
 from rfp._src.losses import (
