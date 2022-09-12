@@ -65,7 +65,7 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def loss_fn(self, params, data):
+    def eval_loss(self, params, data):
         Y, X = data
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other
@@ -78,7 +78,7 @@ class Supervised_Loss:
         return empirical_loss + self.reg_value * vector_field_penalty
 
     def __call__(self, params, data):
-        return self.loss_fn(params, data)
+        return self.eval_loss(params, data)
 
 
 # @dataclass
