@@ -59,8 +59,8 @@ class Sqr_Error:
 
 @dataclass
 class Supervised_Loss:
-    loss_fn: callable
-    feature_map: callable
+    loss_fn: callable = lambda x: x
+    feature_map: callable = lambda x: x
     reg_value: float = 1.0
     aux_status: bool = False
 
