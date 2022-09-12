@@ -13,12 +13,7 @@ from rfp._src.featuremap import neuralODE
 from rfp._src.linear_model import linear_map
 
 # LOSSES
-from rfp._src.losses import (
-    Cluster_Loss_ff,
-    Sqr_Error,
-    Supervised_Loss,
-    feature_map_loss,
-)
+from rfp._src.losses import Sqr_Error, Supervised_Loss
 
 # NEURAL NETWORKS
 from rfp._src.nn import MLP
