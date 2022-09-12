@@ -59,6 +59,7 @@ class feature_map_loss:
 
 @dataclass
 class Supervised_Loss:
+    loss_fn: callable
     feature_map: callable
     reg_value: float = 1.0
     aux_status: bool = False
@@ -68,7 +69,7 @@ class Supervised_Loss:
         Y, X = data
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other
-        empirical_loss = jnp.mean((Yhat - Y) ** 2)
+        empirical_loss = jnp.mean(jax.vmap(self.loss_fn, in_axes=(0, 0))(Yhat, Y))
         if self.aux_status:
             return (
                 empirical_loss + self.reg_value * vector_field_penalty,
