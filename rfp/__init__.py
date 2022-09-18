@@ -8,7 +8,7 @@ import rfp._src.ode1 as ode1
 import rfp._src.parallel as parallel
 
 # FEATURE MAP
-from rfp._src.featuremap import neuralODE
+from rfp._src.featuremap import NeuralODE, predict
 
 # LINEAR MODEL
 from rfp._src.linear_model import linear_map

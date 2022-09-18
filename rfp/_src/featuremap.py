@@ -27,7 +27,7 @@ def predict(feature_map, params, X, real=True):
 
 
 @dataclass
-class neuralODE:
+class NeuralODE:
     """Neural ODE"""
 
     mlp: MLP
