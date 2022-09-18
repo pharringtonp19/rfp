@@ -3,6 +3,7 @@
 # Examples
 import rfp._src.data as data
 import rfp._src.ff1 as ff1
+import rfp._src.losses as losses
 import rfp._src.ode1 as ode1
 import rfp._src.parallel as parallel
 
@@ -11,9 +12,6 @@ from rfp._src.featuremap import neuralODE
 
 # LINEAR MODEL
 from rfp._src.linear_model import linear_map
-
-# LOSSES
-from rfp._src.losses import Sqr_Error, Supervised_Loss
 
 # NEURAL NETWORKS
 from rfp._src.nn import MLP
