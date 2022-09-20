@@ -2,7 +2,6 @@
 
 # Examples
 import rfp._src.ff1 as ff1
-import rfp._src.losses as losses
 import rfp._src.ode1 as ode1
 import rfp._src.parallel as parallel
 import rfp._src.simulated_data as simulated_data
@@ -12,6 +11,9 @@ from rfp._src.featuremap import NeuralODE, predict
 
 # LINEAR MODEL
 from rfp._src.linear_model import linear_map
+
+# LOSSES
+from rfp._src.losses import Supervised_Loss, loss_fn_binary, loss_fn_real
 
 # NEURAL NETWORKS
 from rfp._src.nn import MLP

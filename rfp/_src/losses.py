@@ -21,7 +21,7 @@ def loss_fn_binary(predict, target):
 class Supervised_Loss:
     loss_fn: callable = lambda x: x
     feature_map: callable = lambda x: x
-    reg_value: float = 1.0
+    reg_value: float = 0.0
     aux_status: bool = False
 
     # @jax.jit

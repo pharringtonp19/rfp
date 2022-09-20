@@ -9,8 +9,8 @@ import jax.numpy as jnp
 from chex import assert_shape
 from einops import reduce
 
+from rfp._src import parallel
 from rfp._src.types import Params
-from rfp._src import parallel 
 
 
 def einops_reduce(str1: str, str2: str) -> callable:
@@ -26,21 +26,6 @@ def einops_reduce(str1: str, str2: str) -> callable:
 
 """
 - A decorator is just syntactic sugar for a partially evaluated higher order function?"""
-
-
-def batch_sample_time(n):
-    def decorator(sampler):
-        def wrapper(key, features):
-            Y, D, T, X = jax.vmap(sampler, in_axes=(0, None))(
-                jax.random.split(key, n), features
-            )
-            Y, D, T = Y.reshape(-1, 1), D.reshape(-1, 1), T.reshape(-1, 1)
-            assert_shape([Y, D, T, X], [(n, 1), (n, 1), (n, 1), (n, features)])
-            return Y, D, T, X
-
-        return wrapper
-
-    return decorator
 
 
 def batch_sample_weight(n):
@@ -92,6 +77,7 @@ def time_grad_pvmap(loss_fn, params, data):
         f"Vectorized:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
 
+
 def time_grad(loss_fn, params, data):
 
     jitted_grad_loss_fn = jax.jit(
@@ -103,6 +89,7 @@ def time_grad(loss_fn, params, data):
     print(
         f"Standard:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
+
 
 # def time_grad(loss_fn, params, data):
 #     jitted_grad_loss_fn = jax.jit(
@@ -133,12 +120,12 @@ def time_grad(loss_fn, params, data):
 #         jax.debug.breakpoint()
 #         loss = f(data)
 #     print(type(loss))
-    # y = jnp.mean(loss)
-    # print(y, y.shape)
-    # print(loss.shape)
-    # for i in loss.device_buffers:
-    #     print(i.shape)
-    # print(len(loss.device_buffers))
+# y = jnp.mean(loss)
+# print(y, y.shape)
+# print(loss.shape)
+# for i in loss.device_buffers:
+#     print(i.shape)
+# print(len(loss.device_buffers))
 
 
 def batchify(func):
@@ -181,9 +168,10 @@ def init_ode1_model(key, mlp):
     body = mlp.init_fn(subkey2, 2)
     return Model_Params(body, other)
 
+
 def store_time_results(path, n, text):
     """Taken from https://stackoverflow.com/questions/4719438/editing-specific-line-in-text-file-in-python"""
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         # read a list of lines into data
         data = file.readlines()
         print(data)
@@ -192,10 +180,8 @@ def store_time_results(path, n, text):
         data[n] = text
 
         # and write everything back
-        with open(path, 'w') as file:
-            file.writelines( data )
-
-
+        with open(path, "w") as file:
+            file.writelines(data)
 
 
 if __name__ == "__main__":

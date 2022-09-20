@@ -19,7 +19,7 @@ from rfp._src.utils import training_sampler
 #           {platform = 'darwin', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"} ]
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass
 class Trainer:
     loss_fn: callable  # This is actually not a callable!
     opt: optax.GradientTransformation
