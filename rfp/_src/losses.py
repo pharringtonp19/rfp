@@ -50,7 +50,7 @@ class Cluster_Loss:
     def cluster_loss(self, params, array_data):
 
         # Partial Evaluation
-        data = (data[:, 0].reshape(-1, 1), data[:, 1:])
+        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
         cluster_params, _ = self.inner_yuri.train(params, data)
         a2 = self.inner_yuri.loss_fn(cluster_params, data)
         a1 = self.inner_yuri.loss_fn(params, data)
