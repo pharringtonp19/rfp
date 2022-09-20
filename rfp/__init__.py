@@ -1,11 +1,11 @@
 """Public API for rfp."""
 
 # Examples
-import rfp._src.data as data
 import rfp._src.ff1 as ff1
 import rfp._src.losses as losses
 import rfp._src.ode1 as ode1
 import rfp._src.parallel as parallel
+import rfp._src.simulated_data as simulated_data
 
 # FEATURE MAP
 from rfp._src.featuremap import NeuralODE, predict
