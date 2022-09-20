@@ -41,6 +41,30 @@ class Supervised_Loss:
         return self.eval_loss(params, data)
 
 
+@dataclass
+class Cluster_Loss:
+    inner_yuri: callable
+    reg_value: float = 1.0
+    aux_status: bool = False
+
+    def cluster_loss(self, params, data):
+
+        # Partial Evaluation
+        cluster_params, _ = self.inner_yuri.train(params, data)
+        a2 = self.inner_yuri.loss_fn(cluster_params, data)
+        a1 = self.inner_yuri.loss_fn(params, data)
+        return (1 - self.reg_value) * a1 + self.reg_value * a2
+
+    def __call__(self, params, data):
+        cluster_losses = jax.tree_util.tree_map(
+            partial(self.cluster_loss, params), data
+        )
+        loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
+            lambda a, b: a + b, cluster_losses
+        )
+        return loss
+
+
 # @dataclass
 # class Sqr_Error:
 #     """Square Error"""
