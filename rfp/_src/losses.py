@@ -59,10 +59,10 @@ class Cluster_Loss:
         cluster_losses = jax.tree_util.tree_map(
             partial(self.cluster_loss, params), data
         )
-        loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
-            lambda a, b: a + b, cluster_losses
-        )
-        return loss
+        # loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
+        #     lambda a, b: a + b, cluster_losses
+        # )
+        return cluster_losses
 
 
 # @dataclass
