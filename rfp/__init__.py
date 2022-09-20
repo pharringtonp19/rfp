@@ -25,7 +25,6 @@ from rfp._src.types import Data
 # UTILS
 from rfp._src.utils import (
     Model_Params,
-    batch_sample_time,
     batch_sample_weight,
     init_ode1_model,
     split,
