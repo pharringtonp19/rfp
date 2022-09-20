@@ -3,12 +3,28 @@
 
 import jax
 import jax.numpy as jnp
+from chex import assert_shape
 
 from rfp._src.types import Data
 
 
 def f1(x):
     return jnp.log(x**2 + 1.0 + jnp.sin(x * 1.5)) + 1.5
+
+
+def batch_sample_time(n):
+    def decorator(sampler):
+        def wrapper(key, features):
+            Y, D, T, X = jax.vmap(sampler, in_axes=(0, None))(
+                jax.random.split(key, n), features
+            )
+            Y, D, T = Y.reshape(-1, 1), D.reshape(-1, 1), T.reshape(-1, 1)
+            assert_shape([Y, D, T, X], [(n, 1), (n, 1), (n, 1), (n, features)])
+            return Y, D, T, X
+
+        return wrapper
+
+    return decorator
 
 
 def sample1(continuous, f, key, features: int) -> Data:
