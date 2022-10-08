@@ -10,11 +10,8 @@ def loss_fn_real(predict, target):
 
 
 def loss_fn_binary(predict, target):
-    return jnp.where(
-        target == 1.0,
-        -jnp.log(jax.nn.sigmoid(predict)),
-        -jnp.log(1 - jax.nn.sigmoid(predict)),
-    )
+    act = jnp.where(target == 1.0, predict, -1.0 * predict)
+    return -jax.nn.log_sigmoid(act)
 
 
 @dataclass
