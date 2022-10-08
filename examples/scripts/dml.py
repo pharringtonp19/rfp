@@ -10,7 +10,7 @@ import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, Sqr_Error, Trainer, data
+from rfp import MLP, Sqr_Error, Trainer, simulated_data
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -35,13 +35,13 @@ def main(argv) -> None:
     if FLAGS.continuous:
         treatment = jnp.linspace(-3.0, 3, 1000).reshape(-1, 1)
         regs = jnp.hstack((jnp.ones_like(treatment), treatment))
-        y = jax.vmap(data.f1)(treatment)
+        y = jax.vmap(simulated_data.f1)(treatment)
         target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
 
     elif FLAGS.original:
         target_coef = FLAGS.theta
     else:
-        target_coef = data.f1(1.0) - data.f1(0.0)
+        target_coef = simulated_data.f1(1.0) - simulated_data.f1(0.0)
 
     print(f"Target Coefficient: {target_coef:.2f}")
 
@@ -52,10 +52,14 @@ def main(argv) -> None:
         train_key, test_key, params_key = jax.random.split(init_key, 3)
 
         if FLAGS.original:
-            Y, D, X = data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+            Y, D, X = simulated_data.VC2015(
+                train_key, FLAGS.theta, FLAGS.n, FLAGS.features
+            )
 
         else:
-            sampler = partial(data.sample1, FLAGS.continuous, data.f1)
+            sampler = partial(
+                simulated_data.sample1, FLAGS.continuous, simulated_data.f1
+            )
             Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
                 jax.random.split(train_key, FLAGS.n), FLAGS.features
             )
@@ -76,7 +80,9 @@ def main(argv) -> None:
 
         # Eval
         if FLAGS.original:
-            Y, D, X = data.VC2015(test_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+            Y, D, X = simulated_data.VC2015(
+                test_key, FLAGS.theta, FLAGS.n, FLAGS.features
+            )
 
         else:
             Y, D, X = jax.vmap(sampler, in_axes=(0, None))(

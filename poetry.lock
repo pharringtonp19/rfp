@@ -249,7 +249,7 @@ jax = ">=0.3.4"
 
 [[package]]
 name = "etils"
-version = "0.7.1"
+version = "0.8.0"
 description = "Collection of common python utils"
 category = "main"
 optional = false
@@ -262,6 +262,7 @@ typing_extensions = {version = "*", optional = true, markers = "extra == \"epath
 zipp = {version = "*", optional = true, markers = "extra == \"epath\""}
 
 [package.extras]
+lazy-imports = ["etils"]
 etree-tf = ["etils", "tf-nightly"]
 etree-jax = ["etils", "jax"]
 etree-dm = ["etils", "dm-tree"]
@@ -508,7 +509,7 @@ pipfile_deprecated_finder = ["requirementslib", "pipreqs"]
 
 [[package]]
 name = "jax"
-version = "0.3.17"
+version = "0.3.20"
 description = "Differentiate, compile, and transform Numpy code."
 category = "main"
 optional = false
@@ -525,16 +526,16 @@ typing_extensions = "*"
 [package.extras]
 australis = ["protobuf (>=3.13,<4)"]
 ci = ["jaxlib (==0.3.15)"]
-cpu = ["jaxlib (==0.3.15)"]
-cuda = ["jaxlib (==0.3.15+cuda11.cudnn82)"]
-cuda11_cudnn805 = ["jaxlib (==0.3.15+cuda11.cudnn805)"]
-cuda11_cudnn82 = ["jaxlib (==0.3.15+cuda11.cudnn82)"]
-minimum-jaxlib = ["jaxlib (==0.3.14)"]
-tpu = ["jaxlib (==0.3.15)", "libtpu-nightly (==0.1.dev20220723)", "requests"]
+cpu = ["jaxlib (==0.3.20)"]
+cuda = ["jaxlib (==0.3.20+cuda11.cudnn82)"]
+cuda11_cudnn805 = ["jaxlib (==0.3.20+cuda11.cudnn805)"]
+cuda11_cudnn82 = ["jaxlib (==0.3.20+cuda11.cudnn82)"]
+minimum-jaxlib = ["jaxlib (==0.3.15)"]
+tpu = ["jaxlib (==0.3.20)", "libtpu-nightly (==0.1.dev20220928)", "requests"]
 
 [[package]]
 name = "jaxlib"
-version = "0.3.15"
+version = "0.3.20"
 description = "XLA library for JAX"
 category = "main"
 optional = false
@@ -542,28 +543,9 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 absl-py = "*"
-numpy = ">=1.19"
+numpy = ">=1.20"
 scipy = ">=1.5"
 
-[package.source]
-type = "url"
-url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"
-[[package]]
-name = "jaxlib"
-version = "0.3.15+cuda11.cudnn82"
-description = "XLA library for JAX"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-absl-py = "*"
-numpy = ">=1.19"
-scipy = ">=1.5"
-
-[package.source]
-type = "url"
-url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"
 [[package]]
 name = "jedi"
 version = "0.18.1"
@@ -1422,7 +1404,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10"
-content-hash = "d792472780c673403d6e47955c5f9b6cee67c923cad230b5fb4ca6298d339802"
+content-hash = "3d0589caab6789ecbdf600cdec982c67fcb8b8a481fb68bcccea855b0ac85be3"
 
 [metadata.files]
 absl-py = [
@@ -1640,8 +1622,8 @@ equinox = [
     {file = "equinox-0.7.0.tar.gz", hash = "sha256:9f831ca3bdefcaf599522a832202a0fef4e9c218eae1cdd5a7f4821a1b136ff1"},
 ]
 etils = [
-    {file = "etils-0.7.1-py3-none-any.whl", hash = "sha256:9b5140835372e3db8b6e8d7da9e16beb2390ae6f24c253107c8127e4d2205189"},
-    {file = "etils-0.7.1.tar.gz", hash = "sha256:207c097dd4180d5e5ab1c7b7ee78b7bf9471e12534deace23b1d392debd292f3"},
+    {file = "etils-0.8.0-py3-none-any.whl", hash = "sha256:b6299d2a835206b063498e443bd8036edb974058899169677dd6ddb92430bb84"},
+    {file = "etils-0.8.0.tar.gz", hash = "sha256:d1d5af7bd9c784a273c4e1eccfaa8feaca5e0481a08717b5313fa231da22a903"},
 ]
 executing = [
     {file = "executing-1.0.0-py2.py3-none-any.whl", hash = "sha256:550d581b497228b572235e633599133eeee67073c65914ca346100ad56775349"},
@@ -1704,9 +1686,21 @@ isort = [
     {file = "isort-5.10.1.tar.gz", hash = "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"},
 ]
 jax = [
-    {file = "jax-0.3.17.tar.gz", hash = "sha256:2a2794e4e0c93595a1b1d625026580c0686be93bd60d4f6906b090446692cadc"},
+    {file = "jax-0.3.20.tar.gz", hash = "sha256:69eaf007c0b3d37cd0592090f355c14c2af9c2ec9f1ec62aacc2c70deb142509"},
 ]
-jaxlib = []
+jaxlib = [
+    {file = "jaxlib-0.3.20-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:02e5f13ce268531bd873b0a3dcf31b9d6e5f954d6fa1c682025167ff593b1f4e"},
+    {file = "jaxlib-0.3.20-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:41a2020e7ceb6adc298cedb6f905399f0ae2e1213898592a838c5634f7dbbca6"},
+    {file = "jaxlib-0.3.20-cp310-cp310-manylinux2014_x86_64.whl", hash = "sha256:f50e99b76b96f9d060f1db12f9848241308daa675e3c1346ae5ca76d0cca9057"},
+    {file = "jaxlib-0.3.20-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:fb34e70f0adf60e69396741112241a47c3dd757f917e78f4576e88795b40e755"},
+    {file = "jaxlib-0.3.20-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:ce982049521eb6e61867985eed28504b7497835f25a87c013a8e73f472040731"},
+    {file = "jaxlib-0.3.20-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:13fd05a4d12c7215e3a65a00852ccacbc0a598613e09efa897a2c88e02f55730"},
+    {file = "jaxlib-0.3.20-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:c71fc38dab1ee54c9b7d43accacfcbc5e398939de85dca456a6f6f31b4ad6773"},
+    {file = "jaxlib-0.3.20-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:2ff354f99d73a190a650e15018968b0d08f3308fd410f109e5b7fb9056788d91"},
+    {file = "jaxlib-0.3.20-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:13f91d46a242900da64ed76033f73289314c51c047d4e04800a3be092d841607"},
+    {file = "jaxlib-0.3.20-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:a530597ef6f5d09b9eee8b52e52769c40c30f2ca04b9e3e2836d77df70301dac"},
+    {file = "jaxlib-0.3.20-cp39-cp39-manylinux2014_x86_64.whl", hash = "sha256:92b00e491d9bb3aa557dc31b09c4f609df385aee850b7cfa50fc479066852c5a"},
+]
 jedi = [
     {file = "jedi-0.18.1-py2.py3-none-any.whl", hash = "sha256:637c9635fcf47945ceb91cd7f320234a7be540ded6f3e99a50cb6febdfd1ba8d"},
     {file = "jedi-0.18.1.tar.gz", hash = "sha256:74137626a64a99c8eb6ae5832d99b3bdd7d29a3850fe2aa80a4126b2a7d949ab"},

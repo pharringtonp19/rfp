@@ -12,7 +12,7 @@ import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, Sqr_Error, Trainer, data
+from rfp import MLP, Sqr_Error, Trainer, simulated_data
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -36,7 +36,7 @@ def main(argv) -> None:
         # Data
         train_key, test_key = jax.random.split(init_key, 2)
 
-        Y, D, X = data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+        Y, D, X = simulated_data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
         regs = jnp.hstack((D, jnp.ones_like(D), X))
         coeff = jnp.linalg.lstsq(regs, Y)[0][0]
         return coeff
