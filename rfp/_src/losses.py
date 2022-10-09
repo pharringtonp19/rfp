@@ -25,7 +25,7 @@ class Supervised_Loss:
     def eval_loss(self, params, data):
         Y, X = data
         phiX, vector_field_penalty = self.feature_map(params.body, X)
-        Yhat = phiX @ params.other
+        Yhat = phiX @ params.other + params.bias
         empirical_loss = jnp.mean(
             jax.vmap(self.loss_fn, in_axes=(0, 0))(Yhat.reshape(-1, 1), Y)
         )

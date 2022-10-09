@@ -20,9 +20,9 @@ from rfp._src.types import Array, Kleisi, ODE_Solver, Params
 
 def predict(feature_map, params, X, real=True):
     if real:
-        return feature_map(params.body, X)[0] @ params.other
+        return feature_map(params.body, X)[0] @ params.other + params.bias
     else:
-        logits = feature_map(params.body, X)[0] @ params.other
+        logits = feature_map(params.body, X)[0] @ params.other + params.bias
         return jax.nn.sigmoid(logits)
 
 

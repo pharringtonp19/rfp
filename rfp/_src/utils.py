@@ -160,6 +160,7 @@ def split_weight(data):
 class Model_Params(NamedTuple):
     body: Params
     other: Params
+    bias: Params
 
 
 def init_ode1_model(key, mlp):
