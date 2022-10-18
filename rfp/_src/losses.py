@@ -65,19 +65,19 @@ class Cluster_Loss:
         return loss
 
 
-# @dataclass
-# class Sqr_Error:
-#     """Square Error"""
+@dataclass
+class Sqr_Error:
+    """Square Error"""
 
-#     mlp: callable
-#     data_split: callable = lambda x: x
-#     aux_status: bool = False
+    mlp: callable
+    data_split: callable = lambda x: x
+    aux_status: bool = False
 
-#     def __call__(self, params, data):
-#         """compute loss"""
-#         targets, inputs = self.data_split(data)
-#         prediction = self.mlp.fwd_pass(params, inputs)
-#         return jnp.mean((prediction - targets) ** 2)
+    def __call__(self, params, data):
+        """compute loss"""
+        targets, inputs = self.data_split(data)
+        prediction = self.mlp.fwd_pass(params, inputs)
+        return jnp.mean((prediction - targets) ** 2)
 
 
 # @dataclass

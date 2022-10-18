@@ -22,7 +22,6 @@ flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
 flags.DEFINE_integer("simulations", 3000, "simulations")
-flags.DEFINE_bool("continuous", False, "continuous treatment")
 flags.DEFINE_bool("original", False, "original dataset")
 flags.DEFINE_float("theta", 0.5, "constant treatment effect")
 
@@ -32,16 +31,7 @@ FLAGS: Any = flags.FLAGS
 def main(argv) -> None:
     del argv
 
-    if FLAGS.continuous:
-        treatment = jnp.linspace(-3.0, 3, 1000).reshape(-1, 1)
-        regs = jnp.hstack((jnp.ones_like(treatment), treatment))
-        y = jax.vmap(simulated_data.f1)(treatment)
-        target_coef = jnp.linalg.lstsq(regs, y)[0][1].item()
-
-    elif FLAGS.original:
-        target_coef = FLAGS.theta
-    else:
-        target_coef = simulated_data.f1(1.0) - simulated_data.f1(0.0)
+    target_coef = FLAGS.theta
 
     print(f"Target Coefficient: {target_coef:.2f}")
 
@@ -57,9 +47,7 @@ def main(argv) -> None:
             )
 
         else:
-            sampler = partial(
-                simulated_data.sample1, FLAGS.continuous, simulated_data.f1
-            )
+            sampler = partial(simulated_data.sample1, False, simulated_data.f1)
             Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
                 jax.random.split(train_key, FLAGS.n), FLAGS.features
             )
@@ -102,9 +90,10 @@ def main(argv) -> None:
             jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)
         ).squeeze()
         std = jnp.std(coeffs)
+        print(f"Mean Error: {jnp.mean(coeffs)-target_coef}")
         array_plot = np.array((coeffs - target_coef) / std)
         np.save(
-            np_file_link + f"dml_{FLAGS.continuous}_{FLAGS.original}.npy",
+            np_file_link + f"dml_{FLAGS.original}.npy",
             np.asarray(array_plot),
         )
 
@@ -116,7 +105,6 @@ def main(argv) -> None:
         plt.plot(lossesD)
         plt.plot(lossesY)
         plt.show()
-        # print(lossesD[-1], lossesY[-1])
 
 
 if __name__ == "__main__":

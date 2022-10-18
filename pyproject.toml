@@ -9,7 +9,7 @@ license = "MIT"
 python = "3.10"
 diffrax = "^0.2.1"
 mypy = "^0.971"
-chex = "^0.1.4"
+chex = "^0.1.5"
 flax = "^0.5.3"
 tree-math = "^0.1.0"
 distrax = "^0.1.2"
@@ -19,8 +19,8 @@ isort = "^5.10.1"
 pyupgrade = "^2.37.3"
 einops = "^0.4.1"
 pandas = "^1.4.3"
-jax = "^0.3.20"
-jaxlib = {extras = ["cpu"], version = "^0.3.20"}
+jax = "^0.3.23"
+jaxlib = "^0.3.22"
 
 
 [tool.poetry.dev-dependencies]
