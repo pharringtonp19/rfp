@@ -16,6 +16,8 @@ def loss_fn_binary(predict, target):
 
 @dataclass
 class Supervised_Loss:
+    """The supervised loss function is now responsible for splitting the data from tree map"""
+
     loss_fn: callable = lambda x: x
     feature_map: callable = lambda x: x
     reg_value: float = 0.0
@@ -53,7 +55,6 @@ class Cluster_Loss:
     def cluster_loss(self, params, array_data):
 
         # Partial Evaluation
-        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
         cluster_params, _ = self.inner_yuri.train(params, data)
         a2 = self.inner_yuri.loss_fn(cluster_params, data)
         a1 = self.inner_yuri.loss_fn(params, data)
