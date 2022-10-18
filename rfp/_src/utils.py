@@ -141,10 +141,8 @@ def batchify(func):
 
 def split(data):
     Y = data[:, 0].reshape(-1, 1)
-    D = data[:, 1].reshape(-1, 1)
-    T = data[:, 2].reshape(-1, 1)
-    X = data[:, 3:].reshape(data.shape[0], -1)
-    return Y, D, T, X
+    X = data[:, 1:].reshape(-1, 1)
+    return Y, X
 
 
 def split_weight(data):
