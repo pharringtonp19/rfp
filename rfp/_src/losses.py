@@ -20,10 +20,14 @@ class Supervised_Loss:
     feature_map: callable = lambda x: x
     reg_value: float = 0.0
     aux_status: bool = False
+    split: bool = False
 
     # @jax.jit
     def eval_loss(self, params, data):
-        Y, X = data
+        if self.split:
+            Y, X = data[:, 0].reshape(-1, 1), data[:, 1:]
+        else:
+            Y, X = data
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other + params.bias
         empirical_loss = jnp.mean(
