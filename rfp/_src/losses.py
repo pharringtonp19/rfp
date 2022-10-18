@@ -16,20 +16,15 @@ def loss_fn_binary(predict, target):
 
 @dataclass
 class Supervised_Loss:
-    """The supervised loss function is now responsible for splitting the data from tree map"""
-
     loss_fn: callable = lambda x: x
     feature_map: callable = lambda x: x
     reg_value: float = 0.0
     aux_status: bool = False
-    split: bool = False
 
     # @jax.jit
     def eval_loss(self, params, data):
-        if self.split:
-            Y, X = data[:, 0].reshape(-1, 1), data[:, 1:]
-        else:
-            Y, X = data
+
+        Y, X = data
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other + params.bias
         empirical_loss = jnp.mean(
@@ -52,7 +47,9 @@ class Cluster_Loss:
     reg_value: float = 1.0
     aux_status: bool = False
 
-    def cluster_loss(self, params, data):
+    def cluster_loss(self, params, array_data):
+
+        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
 
         # Partial Evaluation
         cluster_params, _ = self.inner_yuri.train(params, data)
