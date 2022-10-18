@@ -141,7 +141,7 @@ def batchify(func):
 
 def split(data):
     Y = data[:, 0].reshape(-1, 1)
-    X = data[:, 1:].reshape(-1, 1)
+    X = data[:, 1:]
     return Y, X
 
 
