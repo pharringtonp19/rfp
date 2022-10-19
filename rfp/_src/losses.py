@@ -71,6 +71,21 @@ class Cluster_Loss:
         # )
 
 
+@dataclass
+class Sqr_Error:
+    """Square Error"""
+
+    mlp: callable
+    data_split: callable = lambda x: x
+    aux_status: bool = False
+
+    def __call__(self, params, data):
+        """compute loss"""
+        targets, inputs = self.data_split(data)
+        prediction = self.mlp.fwd_pass(params, inputs)
+        return jnp.mean((prediction - targets) ** 2)
+
+
 # @dataclass
 # class feature_map_loss:
 #     """Computes the Feature Map Loss"""
