@@ -84,7 +84,7 @@ class VCluster_Loss:
         return (1 - self.reg_value) * a1 + self.reg_value * a2
 
     def __call__(self, params, data):
-        losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, array_data)
+        losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, data)
         return jnp.mean(losses)
 
 
