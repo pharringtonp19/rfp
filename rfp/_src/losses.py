@@ -20,7 +20,7 @@ class Supervised_Loss:
     feature_map: callable = lambda x: x
     reg_value: float = 0.0
     aux_status: bool = False
-    weighted = False
+    weighted: bool = False
 
     # @jax.jit
     def eval_loss(self, params, data):
