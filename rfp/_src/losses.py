@@ -68,6 +68,27 @@ class Cluster_Loss:
 
 
 @dataclass
+class VCluster_Loss:
+    inner_yuri: callable
+    reg_value: float = 1.0
+    aux_status: bool = False
+
+    def cluster_loss(self, params, array_data):
+
+        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
+
+        # Partial Evaluation
+        cluster_params, _ = self.inner_yuri.train(params, data)
+        a2 = self.inner_yuri.loss_fn(cluster_params, data)
+        a1 = self.inner_yuri.loss_fn(params, data)
+        return (1 - self.reg_value) * a1 + self.reg_value * a2
+
+    def __call__(self, params, data):
+        losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, array_data)
+        return jnp.mean(losses)
+
+
+@dataclass
 class Sqr_Error:
     """Square Error"""
 

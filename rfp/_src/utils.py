@@ -6,6 +6,7 @@ from typing import NamedTuple
 import flax.struct
 import jax
 import jax.numpy as jnp
+import numpy as np
 from chex import assert_shape
 from einops import reduce
 
@@ -103,22 +104,21 @@ def time_grad(loss_fn, params, data):
 #     )
 
 
-# def pjit_time_grad(f, data):
-#     import jax
-#     import numpy as np
-#     from jax.experimental import PartitionSpec, maps
-#     from jax.experimental.pjit import pjit
+def pjit_time_grad(f, data):
+    from jax.experimental import PartitionSpec, maps
+    from jax.experimental.pjit import pjit
 
-#     mesh_shape = (4,)  # This is hardcoded atm
-#     devices = np.asarray(jax.devices()).reshape(*mesh_shape)
-#     mesh = maps.Mesh(devices, ("x",))
-#     print(devices)
-#     f = pjit(f, in_axis_resources=PartitionSpec("x"), out_axis_resources=None)
+    mesh_shape = (4,)  # This is hardcoded atm
+    devices = np.asarray(jax.devices()).reshape(*mesh_shape)
+    mesh = maps.Mesh(devices, ("x",))
+    print(devices)
+    f = pjit(f, in_axis_resources=PartitionSpec("x"), out_axis_resources=None)
 
-#     # Sends data to accelerators based on partition_spec
-#     with maps.Mesh(mesh.devices, mesh.axis_names):
-#         jax.debug.breakpoint()
-#         loss = f(data)
+    # Sends data to accelerators based on partition_spec
+    with maps.Mesh(mesh.devices, mesh.axis_names):
+        loss = f(data)
+
+
 #     print(type(loss))
 # y = jnp.mean(loss)
 # print(y, y.shape)
