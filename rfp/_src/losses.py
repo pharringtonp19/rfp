@@ -27,9 +27,9 @@ class Supervised_Loss:
         Y, X, weight = data["Y"], data["X"], data["Weight"]
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other + params.bias
-        empirical_loss = jnp.mean(
+        empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn, in_axes=(0, 0, 0))(weight, Yhat.reshape(-1, 1), Y)
-        )
+        ) / jnp.sum(weight)
         if self.aux_status:
             return (
                 empirical_loss + self.reg_value * vector_field_penalty,
