@@ -5,13 +5,13 @@ import jax
 import jax.numpy as jnp
 
 
-def loss_fn_real(predict, target):
-    return (predict - target) ** 2
+def loss_fn_real(weight, predict, target):
+    return weight * (predict - target) ** 2
 
 
-def loss_fn_binary(predict, target):
+def loss_fn_binary(weight, predict, target):
     act = jnp.where(target == 1.0, predict, -1.0 * predict)
-    return -jax.nn.log_sigmoid(act)
+    return -jax.nn.log_sigmoid(act) * weight
 
 
 @dataclass
@@ -20,15 +20,20 @@ class Supervised_Loss:
     feature_map: callable = lambda x: x
     reg_value: float = 0.0
     aux_status: bool = False
+    weighted = False
 
     # @jax.jit
     def eval_loss(self, params, data):
 
-        Y, X = data
+        if self.weighted:
+            Y, X, weight = data
+        else:
+            Y, X = data
+            weight = jnp.ones_like(Y)
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other + params.bias
         empirical_loss = jnp.mean(
-            jax.vmap(self.loss_fn, in_axes=(0, 0))(Yhat.reshape(-1, 1), Y)
+            jax.vmap(self.loss_fn, in_axes=(0, 0, 0))(weight, Yhat.reshape(-1, 1), Y)
         )
         if self.aux_status:
             return (
@@ -47,35 +52,7 @@ class Cluster_Loss:
     reg_value: float = 1.0
     aux_status: bool = False
 
-    def cluster_loss(self, params, array_data):
-
-        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
-
-        # Partial Evaluation
-        cluster_params, _ = self.inner_yuri.train(params, data)
-        a2 = self.inner_yuri.loss_fn(cluster_params, data)
-        a1 = self.inner_yuri.loss_fn(params, data)
-        return (1 - self.reg_value) * a1 + self.reg_value * a2
-
-    def __call__(self, params, data):
-        cluster_losses = jax.tree_util.tree_map(
-            partial(self.cluster_loss, params), data
-        )
-        loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
-            lambda a, b: a + b, cluster_losses
-        )
-        return loss
-
-
-@dataclass
-class VCluster_Loss:
-    inner_yuri: callable
-    reg_value: float = 1.0
-    aux_status: bool = False
-
-    def cluster_loss(self, params, array_data):
-
-        data = (array_data[:, 0].reshape(-1, 1), array_data[:, 1:])
+    def cluster_loss(self, params, data):
 
         # Partial Evaluation
         cluster_params, _ = self.inner_yuri.train(params, data)
@@ -86,21 +63,12 @@ class VCluster_Loss:
     def __call__(self, params, data):
         losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, data)
         return jnp.mean(losses)
-
-
-@dataclass
-class Sqr_Error:
-    """Square Error"""
-
-    mlp: callable
-    data_split: callable = lambda x: x
-    aux_status: bool = False
-
-    def __call__(self, params, data):
-        """compute loss"""
-        targets, inputs = self.data_split(data)
-        prediction = self.mlp.fwd_pass(params, inputs)
-        return jnp.mean((prediction - targets) ** 2)
+        # cluster_losses = jax.tree_util.tree_map(
+        #     partial(self.cluster_loss, params), data
+        # )
+        # loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
+        #     lambda a, b: a + b, cluster_losses
+        # )
 
 
 # @dataclass

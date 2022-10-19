@@ -17,7 +17,6 @@ from rfp._src.losses import (
     Cluster_Loss,
     Sqr_Error,
     Supervised_Loss,
-    VCluster_Loss,
     loss_fn_binary,
     loss_fn_real,
 )
