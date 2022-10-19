@@ -26,9 +26,19 @@ class Supervised_Loss:
     def eval_loss(self, params, data):
 
         if self.weighted:
-            Y, X, weight = data
+            if self.split:
+                Y, X, weight = (
+                    data[:, 0].reshape(-1, 1),
+                    data[:, 1:-1],
+                    data[:, -1].reshape(-1, 1),
+                )
+            else:
+                Y, X, weight = data
         else:
-            Y, X = data
+            if self.split:
+                Y, X, weight = data[:, 0].reshape(-1, 1), data[:, 1:]
+            else:
+                Y, X = data
             weight = jnp.ones_like(Y)
         phiX, vector_field_penalty = self.feature_map(params.body, X)
         Yhat = phiX @ params.other + params.bias
