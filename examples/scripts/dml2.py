@@ -21,8 +21,7 @@ flags.DEFINE_float("lr", 0.01, "learning rate")
 flags.DEFINE_integer("epochs", 1000, "epochs")
 flags.DEFINE_bool("single_run", False, "single run")
 flags.DEFINE_bool("multi_run", False, "multi run")
-flags.DEFINE_integer("simulations", 3000, "simulations")
-flags.DEFINE_bool("original", False, "original dataset")
+flags.DEFINE_integer("simulations", 400, "simulations")
 flags.DEFINE_float("theta", 0.5, "constant treatment effect")
 
 FLAGS: Any = flags.FLAGS
@@ -41,50 +40,59 @@ def main(argv) -> None:
         # Data
         train_key, test_key, params_key = jax.random.split(init_key, 3)
 
-        Y, D, X = simulated_data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+        if FLAGS.vc:
+            Y, D, X = simulated_data.VC2015(
+                train_key, FLAGS.theta, FLAGS.n, FLAGS.features
+            )
+        else:
+            sampler = partial(simulated_data.sample1, simulated_data.f1)
+            Y, D, X = jax.vmap(sampler, in_axes=(0, None))(
+                jax.random.split(train_key, FLAGS.n), FLAGS.features
+            )
+            Y, D = Y.reshape(-1, 1), D.reshape(-1, 1)
 
         # Model
         mlp = MLP([32, 1])
-        params = mlp.init_fn(params_key, FLAGS.features)
+        params = mlp.init_fn(params_key, FLAGS.features + 1)
 
         # Training
         loss_fn = Sqr_Error(mlp)
-        z = loss_fn(params, (Y, X))
         yuri = Trainer(
             loss_fn, optax.sgd(learning_rate=FLAGS.lr, momentum=0.9), FLAGS.epochs
         )
-        opt_paramsD, lossesD = yuri.train(params, (D, X))
-        opt_paramsY, lossesY = yuri.train(params, (Y, X))
+        opt_params, losses = yuri.train(params, (Y, jnp.hstack((D, X))))
 
         # Eval
         Y, D, X = simulated_data.VC2015(test_key, FLAGS.theta, FLAGS.n, FLAGS.features)
-        residual_d = D - mlp.fwd_pass(opt_paramsD, X)
-        residual_y = Y - mlp.fwd_pass(opt_paramsY, X)
-        z = jnp.linalg.lstsq(residual_d, residual_y)[0]
+        D1 = jnp.ones_like(D)
+        D0 = jnp.zeros_like(D)
+
+        Y1 = mlp.fwd_pass(opt_params, jnp.hstack((D1, X)))
+        Y0 = mlp.fwd_pass(opt_params, jnp.hstack((D0, X)))
+
+        effect = jnp.mean(Y1 - Y0)
 
         if plots:
-            return z, lossesD, lossesY
-        return z
+            return effect, losses
+        return effect
 
     if FLAGS.multi_run:
         coeffs = jax.vmap(simulate)(
             jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)
         ).squeeze()
         std = jnp.std(coeffs)
-        print(f"Mean Error: {jnp.mean(coeffs)-target_coef}")
+        print(f"Mean Estimate: {jnp.mean(coeffs)}")
+        print(len(coeffs))
         array_plot = np.array((coeffs - target_coef) / std)
         np.save(
-            np_file_link + "dml_original.npy",
+            np_file_link + "dml_standard_nn.npy",
             np.asarray(array_plot),
         )
 
     if FLAGS.single_run:
-        estimated_coeff, lossesD, lossesY = simulate(
-            jax.random.PRNGKey(FLAGS.init_key_num), True
-        )
+        estimated_coeff, losses = simulate(jax.random.PRNGKey(FLAGS.init_key_num), True)
         print(f"Estimated Coefficient: {estimated_coeff.item():.2f}")
-        plt.plot(lossesD)
-        plt.plot(lossesY)
+        plt.plot(losses)
         plt.show()
 
 

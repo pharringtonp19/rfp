@@ -32,12 +32,12 @@ from rfp._src.types import Data
 from rfp._src.utils import (
     Model_Params,
     batch_sample_weight,
+    compute_cost_analysis,
     init_ode1_model,
     split,
     split_weight,
     store_time_results,
     time_grad,
-    time_grad_pvmap,
 )
 
 # DATA

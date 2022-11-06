@@ -14,8 +14,9 @@ github_folder = str(Path(os.getcwd()).parent.absolute())
 file_link: str = github_folder + "/jmp_paper/figures/framework/"
 np_file_link: str = os.getcwd() + "/examples/data/"
 
-flags.DEFINE_bool("original", False, "original dataset")
+flags.DEFINE_bool("original", False, "original")
 flags.DEFINE_bool("linear", False, "linear")
+flags.DEFINE_bool("standard", False, "standard")
 FLAGS = flags.FLAGS
 
 
@@ -24,8 +25,10 @@ def main(argv) -> None:
 
     if FLAGS.linear:
         results = np.load(np_file_link + f"dml_linear_comp.npy")
+    elif FLAGS.standard:
+        results = np.load(np_file_link + "dml_standard_nn.npy")
     else:
-        results = np.load(np_file_link + f"dml_{FLAGS.original}.npy")
+        results = np.load(np_file_link + "dml_original.npy")
     div = jnp.max(results)
     fig = plt.figure(dpi=300, tight_layout=True)
     plt.hist(results, edgecolor="black", density=True, bins=20)
@@ -37,8 +40,10 @@ def main(argv) -> None:
     plt.ylim(0, 0.5)
     if FLAGS.linear:
         filename = file_link + "dml_linear_comp.png"
+    elif FLAGS.standard:
+        filename = file_link + "dml_standard_nn.png"
     else:
-        filename = file_link + f"dml_{FLAGS.original}.png"
+        filename = file_link + f"dml_original.png"
     fig.savefig(filename, format="png")
     plt.show()
 
