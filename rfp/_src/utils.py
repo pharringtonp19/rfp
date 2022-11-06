@@ -15,9 +15,13 @@ from rfp._src.types import Params
 
 
 def compute_cost_analysis(f, *args):
-    lowered = jax.jit(f).lower(*args)
-    compiled = lowered.compile()
-    return compiled.cost_analysis()[0]["flops"]
+    def partial_eval_func(*args):
+
+        lowered = jax.jit(f).lower(*args)
+        compiled = lowered.compile()
+        return compiled.cost_analysis()[0]["flops"]
+
+    return partial_eval_func
 
 
 def einops_reduce(str1: str, str2: str) -> callable:
