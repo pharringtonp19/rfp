@@ -16,7 +16,6 @@ from rfp._src.types import Params
 
 def compute_cost_analysis(f):
     def partial_eval_func(*args):
-
         lowered = jax.jit(f).lower(*args)
         compiled = lowered.compile()
         return compiled.cost_analysis()[0]["flops"]
