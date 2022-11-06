@@ -14,7 +14,7 @@ from rfp._src import parallel
 from rfp._src.types import Params
 
 
-def compute_cost_analysis(f, *args):
+def compute_cost_analysis(f):
     def partial_eval_func(*args):
 
         lowered = jax.jit(f).lower(*args)
