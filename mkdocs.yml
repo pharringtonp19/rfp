@@ -4,24 +4,24 @@ site_description: Enabled by Jax
 site_author: Patrick Power
 
 
-nav:
-  - Regularizing the Forward Pass: index.md
-  # - Generalizing Across Clusters: "papers/Generalizing_Across_Clusters.pdf"
-  # - The Consequences of Right to Counsel: "papers/RTC.pdf"
-  # - Score Guided Attention: "papers/Score_Guided_Attention.pdf"
-  #   #- Overview: "generalizing_across_clusters/overview.md"
-  #   #- The Problem: "generalizing_across_clusters/the_problem.md"
-  # #- Deep Controls: "deep_controls.md"
-  # #- Research Question: "rtc.md"
-  - Implementation (JAX): 
-    - How to Train Your RFP: "Implementation/How to Train Your RFP.md"
-    - Neural Network Models: Implementation/networks.md
-    - Training: "Implementation/train.md"
-    - Losses: Implementation/losses.md
-    - Toy Data Sets: Implementation/data.md
-    - Utils: Implementation/utils.md
-    - Feature Map: 'Implementation/featuremap.md'
-    - Kernels: 'Implementation/kernels.md'
+# nav:
+#   - Regularizing the Forward Pass: index.md
+#   # - Generalizing Across Clusters: "papers/Generalizing_Across_Clusters.pdf"
+#   # - The Consequences of Right to Counsel: "papers/RTC.pdf"
+#   # - Score Guided Attention: "papers/Score_Guided_Attention.pdf"
+#   #   #- Overview: "generalizing_across_clusters/overview.md"
+#   #   #- The Problem: "generalizing_across_clusters/the_problem.md"
+#   # #- Deep Controls: "deep_controls.md"
+#   # #- Research Question: "rtc.md"
+#   - Implementation (JAX): 
+#     - How to Train Your RFP: "Implementation/How to Train Your RFP.md"
+#     - Neural Network Models: Implementation/networks.md
+#     - Training: "Implementation/train.md"
+#     - Losses: Implementation/losses.md
+#     - Toy Data Sets: Implementation/data.md
+#     - Utils: Implementation/utils.md
+#     - Feature Map: 'Implementation/featuremap.md'
+#     - Kernels: 'Implementation/kernels.md'
 
 theme:
   name: material
