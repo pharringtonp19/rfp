@@ -18,7 +18,10 @@ def compute_cost_analysis(f):
     def partial_eval_func(*args, **kwargs):
         lowered = jax.jit(f).lower(*args, **kwargs)
         compiled = lowered.compile()
-        return compiled.cost_analysis()[0]["flops"]
+        return (
+            compiled.cost_analysis()[0]["flops"],
+            compiled.cost_analysis()[0]["bytes accessed"],
+        )
 
     return partial_eval_func
 

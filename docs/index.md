@@ -13,7 +13,7 @@ hide:
 <iframe src="https://slides.com/pharringtonp19/rtc/embed?token=FxFf2FUF&style=transparent" width="460" height="336" title="rtc" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </center>
-
+<!-- 
 ### **The Three Stages of Applied Econometric Maturity**
 To some extent, we're all a bit like Richard McElreath (author of Rethinking Stastics) in that we've spent some time thinking about the statistics/ causal inference course we would have like to have in graduate school. 
 
@@ -83,4 +83,4 @@ We consider the following three sampling correction approaches. All of which can
  
  [^3]: ??? tip "Applied Econometrics" 
 
-        Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality. Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe". 
+        Applied econometrics is all about interpretation. Specifically, it's about interpreting the result of a statistical procedure in a given context. The sobering reality of applied causal inference is that you often find yourself betting on something you don't believe is true, don't care about, or some combination of the two. No approach to causal inference can avoid this reality. Taken together, the joke here is that applied econometrics is "easy" or at least requires little effort because this interpretation is always some flavor of "maybe".  -->
