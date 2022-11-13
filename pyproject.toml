@@ -20,6 +20,7 @@ pyupgrade = "^2.37.3"
 einops = "^0.4.1"
 jax = "^0.3.23"
 jaxlib = "^0.3.22"
+tinygp = "^0.2.3"
 
 
 [tool.poetry.dev-dependencies]
