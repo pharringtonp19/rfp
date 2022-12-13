@@ -6,7 +6,7 @@ authors = ["Patrick Power <pharringtonp19@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = "^3.10"
 diffrax = "^0.2.1"
 mypy = "^0.971"
 chex = "^0.1.5"

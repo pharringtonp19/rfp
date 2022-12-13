@@ -6,3 +6,8 @@ poetry add jax@latest
 
 echo "--Updating Jaxlib!--"
 poetry add jaxlib@latest
+
+
+### ------------- OUTSIDE OF POETRY 
+# Upgrade pyenv -- https://stackoverflow.com/questions/43993714/why-is-python-3-6-1-not-available-in-pyenv
+# brew upgrade pyenv
