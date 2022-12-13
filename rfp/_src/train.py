@@ -6,28 +6,23 @@ Yuri is the tainer who trains!
 """
 
 from dataclasses import dataclass
+from typing import Any, Callable
 
-import chex
 import jax
 import optax
-from numpy import float32
 
 from rfp._src.types import Data, Params
-from rfp._src.utils import training_sampler
-
-# jaxlib = [ {platform = 'linux', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"},
-#           {platform = 'darwin', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"} ]
 
 
 @dataclass
 class Trainer:
-    loss_fn: callable  # This is actually not a callable!
+    """"""
+
+    loss_fn: Callable  # This is actually not a callable!
     opt: optax.GradientTransformation
     epochs: int
 
-    def train(self, params: Params, data: Data):
-        """Params and Data"""
-
+    def train(self, params: Params, data: Data) -> tuple[Params, Any]:
         def update_fn(carry, t):
             params, opt_state = carry
             loss_values, grads = jax.value_and_grad(
