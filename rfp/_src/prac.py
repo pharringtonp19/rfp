@@ -1,8 +1,15 @@
-s = "hello"
-a = [100, 200, 300]
+add: int = 1
 
-def printy(arg):
-    print(f"arg = {arg}")
+print(add)
+# from copy import deepcopy
+# from typing import Any, TypeVar
 
-class Classy: 
-    pass 
+# T = TypeVar("T")
+
+# def copyof(value: T) -> T:
+#     return deepcopy(value)
+
+# name : str = "Anthony"
+# copy_of_name = copyof(name)
+# print(name)
+# print(copy_of_name)
