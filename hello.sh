@@ -1,5 +1,9 @@
 #! /bin/bash
-
+# poetry config virtualenvs.in-project true
+# pyenv local 3.10.4 
+# poetry env use 3.10.4 
+# poetry install 
+# source $(poetry env info --path)/bin/activate
 # export PATH="$HOME/.local/bin:$PATH"
 
 # https://www.youtube.com/watch?v=vQv4W-JfrmQ&list=PLS1QulWo1RIYmaxcEqw5JhK3b-6rgdWO_&index=2

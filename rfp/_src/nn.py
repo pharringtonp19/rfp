@@ -20,28 +20,26 @@ import jax
 import jax.numpy as jnp
 from flax.core import unfreeze
 
-from rfp._src.types import Array, Key, Params
-
 
 class MLP(nn.Module):
     features: Sequence[int]
     activation: callable = nn.relu
 
     @nn.compact
-    def __call__(self, x: Array) -> Array:
+    def __call__(self, x):
         for feat in self.features[:-1]:
             x = self.activation(nn.Dense(feat)(x))
         x = nn.Dense(self.features[-1])(x)
         return x
 
-    def fwd_pass(self, params: Params, x: Array) -> Array:
+    def fwd_pass(self, params, x):
         """The Forward Pass"""
         return self.apply({"params": params}, x)
 
-    def init_fn(self, key: Key, features: int) -> Params:
+    def init_fn(self, key, features):
         """Initialize Parameters"""
         params = unfreeze(self.init(key, jnp.ones((1, features))))["params"]
         return params
 
-    def embellished_fwd_pass(self, params: Params, x: Array):
+    def embellished_fwd_pass(self, params, x):
         return self.fwd_pass(params, x), 0.0

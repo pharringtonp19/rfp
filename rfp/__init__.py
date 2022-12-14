@@ -1,43 +1,46 @@
 """Public API for rfp."""
 
-# Examples
-import rfp._src.ff1 as ff1
-import rfp._src.ode1 as ode1
-import rfp._src.parallel as parallel
 import rfp._src.simulated_data as simulated_data
+from rfp._src.simulated_data import gp_data
 
-# FEATURE MAP
-from rfp._src.featuremap import NeuralODE, predict
+# Examples
+# import rfp._src.ff1 as ff1
+# import rfp._src.ode1 as ode1
+# import rfp._src.parallel as parallel
+#
 
-# LINEAR MODEL
-from rfp._src.linear_model import linear_map
+# # FEATURE MAP
+# from rfp._src.featuremap import NeuralODE, predict
 
-# LOSSES
-from rfp._src.losses import (
-    Cluster_Loss,
-    Sqr_Error,
-    Supervised_Loss,
-    loss_fn_binary,
-    loss_fn_real,
-)
+# # LINEAR MODEL
+# from rfp._src.linear_model import linear_map
 
-# NEURAL NETWORKS
-from rfp._src.nn import MLP
+# # LOSSES
+# from rfp._src.losses import (
+#     Cluster_Loss,
+#     Sqr_Error,
+#     Supervised_Loss,
+#     loss_fn_binary,
+#     loss_fn_real,
+# )
 
-# TRAIN
-from rfp._src.train import Trainer
-from rfp._src.types import Data
+# # NEURAL NETWORKS
+# from rfp._src.nn import MLP
 
-# UTILS
-from rfp._src.utils import (
-    Model_Params,
-    batch_sample_weight,
-    compute_cost_analysis,
-    init_ode1_model,
-    split,
-    split_weight,
-    store_time_results,
-    time_grad,
-)
+# # TRAIN
+# from rfp._src.train import Trainer
+# from rfp._src.types import Data
+
+# # UTILS
+# from rfp._src.utils import (
+#     Model_Params,
+#     batch_sample_weight,
+#     compute_cost_analysis,
+#     init_ode1_model,
+#     split,
+#     split_weight,
+#     store_time_results,
+#     time_grad,
+# )
 
 # DATA

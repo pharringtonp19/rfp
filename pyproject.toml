@@ -4,23 +4,21 @@ version = "0.1.0"
 description = "\"Regularizing the Forward Pass\""
 authors = ["Patrick Power <pharringtonp19@gmail.com>"]
 license = "MIT"
+homepage = "https://pharringtonp19.github.io/rfp/"
+repository = "https://github.com/pharringtonp19/rfp"
+documentation = "https://pharringtonp19.github.io/rfp/thoughts/"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.8,<4.0.0"
 diffrax = "^0.2.1"
-chex = "^0.1.5"
 flax = "^0.5.3"
-tree-math = "^0.1.0"
-distrax = "^0.1.2"
 mkdocstrings = {extras = ["python"], version = "^0.19.0"}
 mkdocs-material = "^8.4.1"
 isort = "^5.10.1"
-pyupgrade = "^2.37.3"
 einops = "^0.4.1"
 jax = "^0.4.1"
 jaxlib = "^0.4.1"
 tinygp = "^0.2.3"
-mypy = "^0.991"
 
 
 [tool.poetry.dev-dependencies]
@@ -28,7 +26,8 @@ flake8 = "^5.0.4"
 black = "^22.6.0"
 pytest = "^7.1.2"
 pre-commit = "^2.20.0"
-ipykernel = "^6.15.1"
+ipykernel = "^6.15.1" 
+mypy = "^0.991"
 
 
 

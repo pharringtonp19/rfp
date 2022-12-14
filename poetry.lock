@@ -100,6 +100,7 @@ mypy-extensions = ">=0.4.3"
 pathspec = ">=0.9.0"
 platformdirs = ">=2"
 tomli = {version = ">=1.1.0", markers = "python_full_version < \"3.11.0a7\""}
+typing-extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
 
 [package.extras]
 colorama = ["colorama (>=0.4.3)"]
@@ -257,18 +258,6 @@ files = [
 
 [package.dependencies]
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
-
-[[package]]
-name = "cloudpickle"
-version = "2.2.0"
-description = "Extended pickling support for Python objects"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "cloudpickle-2.2.0-py3-none-any.whl", hash = "sha256:7428798d5926d8fcbfd092d18d01a2a03daf8237d8fcdc8095d256b8490796f0"},
-    {file = "cloudpickle-2.2.0.tar.gz", hash = "sha256:3f4219469c55453cfe4737e564b67c2a149109dabf7f242478948b895f61106f"},
-]
 
 [[package]]
 name = "colorama"
@@ -448,7 +437,7 @@ files = [
 name = "decorator"
 version = "5.1.1"
 description = "Decorators for Humans"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 files = [
@@ -483,26 +472,6 @@ files = [
     {file = "distlib-0.3.6-py2.py3-none-any.whl", hash = "sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e"},
     {file = "distlib-0.3.6.tar.gz", hash = "sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46"},
 ]
-
-[[package]]
-name = "distrax"
-version = "0.1.2"
-description = "Distrax: Probability distributions in JAX."
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "distrax-0.1.2-py3-none-any.whl", hash = "sha256:0f56710372bbca799ae42524dc68b064996a16889c4915011e501b6e9a9d3590"},
-    {file = "distrax-0.1.2.tar.gz", hash = "sha256:6fffabc63768c0d32e854061442b8de39cff8946e3d61375a82490aaa02d648c"},
-]
-
-[package.dependencies]
-absl-py = ">=0.9.0"
-chex = ">=0.0.7"
-jax = ">=0.1.55"
-jaxlib = ">=0.1.67"
-numpy = ">=1.18.0"
-tensorflow-probability = ">=0.15.0"
 
 [[package]]
 name = "dm-tree"
@@ -690,18 +659,6 @@ type1 = ["xattr"]
 ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=14.0.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
-
-[[package]]
-name = "gast"
-version = "0.5.3"
-description = "Python AST that abstracts the underlying Python version"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "gast-0.5.3-py3-none-any.whl", hash = "sha256:211aac1e58c167b25d3504998f2db694454a24bb1fb1225bce99420166f21d6a"},
-    {file = "gast-0.5.3.tar.gz", hash = "sha256:cfbea25820e653af9c7d1807f659ce0a0a9c64f2439421a7bba4f0983f532dea"},
-]
 
 [[package]]
 name = "ghp-import"
@@ -1131,6 +1088,9 @@ files = [
     {file = "Markdown-3.4.1.tar.gz", hash = "sha256:3b809086bb6efad416156e00a0da66fe47618a5d6918dd688f53f40c8e4cfeff"},
 ]
 
+[package.dependencies]
+importlib-metadata = {version = ">=4.4", markers = "python_version < \"3.10\""}
+
 [package.extras]
 testing = ["coverage", "pyyaml"]
 
@@ -1363,14 +1323,14 @@ files = [
 
 [[package]]
 name = "mkdocstrings"
-version = "0.19.0"
+version = "0.19.1"
 description = "Automatic documentation from sources, for MkDocs."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocstrings-0.19.0-py3-none-any.whl", hash = "sha256:3217d510d385c961f69385a670b2677e68e07b5fea4a504d86bf54c006c87c7d"},
-    {file = "mkdocstrings-0.19.0.tar.gz", hash = "sha256:efa34a67bad11229d532d89f6836a8a215937548623b64f3698a1df62e01cc3e"},
+    {file = "mkdocstrings-0.19.1-py3-none-any.whl", hash = "sha256:32a38d88f67f65b264184ea71290f9332db750d189dea4200cbbe408d304c261"},
+    {file = "mkdocstrings-0.19.1.tar.gz", hash = "sha256:d1037cacb4b522c1e8c164ed5d00d724a82e49dcee0af80db8fb67b384faeef9"},
 ]
 
 [package.dependencies]
@@ -1469,7 +1429,7 @@ files = [
 name = "mypy"
 version = "0.991"
 description = "Optional static typing for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -1520,7 +1480,7 @@ reports = ["lxml"]
 name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 files = [
@@ -2028,21 +1988,6 @@ files = [
 six = ">=1.5"
 
 [[package]]
-name = "pyupgrade"
-version = "2.38.4"
-description = "A tool to automatically upgrade syntax for newer versions."
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "pyupgrade-2.38.4-py2.py3-none-any.whl", hash = "sha256:944ff993c396ddc2b9012eb3de4cda138eb4c149b22c6c560d4c8bfd0e180982"},
-    {file = "pyupgrade-2.38.4.tar.gz", hash = "sha256:1eb43a49f416752929741ba4d706bf3f33593d3cac9bdc217fc1ef55c047c1f4"},
-]
-
-[package.dependencies]
-tokenize-rt = "<5"
-
-[[package]]
 name = "pywin32"
 version = "305"
 description = "Python for Window Extensions"
@@ -2350,30 +2295,6 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
-name = "tensorflow-probability"
-version = "0.19.0"
-description = "Probabilistic modeling and statistical inference in TensorFlow"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "tensorflow_probability-0.19.0-py2.py3-none-any.whl", hash = "sha256:ee70967fbd52b09e9c5ec148a9437c4cf3f9e9d689cdca400a1bc921f21cdcac"},
-]
-
-[package.dependencies]
-absl-py = "*"
-cloudpickle = ">=1.3"
-decorator = "*"
-dm-tree = "*"
-gast = ">=0.3.2"
-numpy = ">=1.13.3"
-six = ">=1.10.0"
-
-[package.extras]
-jax = ["jax", "jaxlib"]
-tfds = ["tensorflow-datasets (>=2.2.0)"]
-
-[[package]]
 name = "tensorstore"
 version = "0.1.28"
 description = "Read and write large, multi-dimensional arrays"
@@ -2424,18 +2345,6 @@ docs = ["arviz", "flax", "ipython (==7.31.0)", "jaxopt", "matplotlib", "myst-nb"
 test = ["celerite", "george", "pytest (>=3.6)"]
 
 [[package]]
-name = "tokenize-rt"
-version = "4.2.1"
-description = "A wrapper around the stdlib `tokenize` which roundtrips."
-category = "main"
-optional = false
-python-versions = ">=3.6.1"
-files = [
-    {file = "tokenize_rt-4.2.1-py2.py3-none-any.whl", hash = "sha256:08a27fa032a81cf45e8858d0ac706004fcd523e8463415ddf1442be38e204ea8"},
-    {file = "tokenize_rt-4.2.1.tar.gz", hash = "sha256:0d4f69026fed520f8a1e0103aa36c406ef4661417f20ca643f913e33531b3b94"},
-]
-
-[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -2451,7 +2360,7 @@ files = [
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -2509,25 +2418,6 @@ docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 lint = ["black (>=22.6.0)", "mdformat (>0.7)", "ruff (>=0.0.156)"]
 test = ["pre-commit", "pytest"]
 typing = ["mypy (>=0.990)"]
-
-[[package]]
-name = "tree-math"
-version = "0.1.0"
-description = ""
-category = "main"
-optional = false
-python-versions = ">=3"
-files = [
-    {file = "tree-math-0.1.0.tar.gz", hash = "sha256:77eb8d6ba4d6cfdd2d986a6bc3fc2d1b16212f0172863a3ca509720babf75929"},
-    {file = "tree_math-0.1.0-py3-none-any.whl", hash = "sha256:9b3c4685ec0ade78fb3c9eb2d5c3d6b3552d9a0ba7415db01b111f8dd7143fc0"},
-]
-
-[package.dependencies]
-jax = "*"
-numpy = "*"
-
-[package.extras]
-tests = ["absl-py", "jaxlib", "numpy (>=1.17)", "pytest"]
 
 [[package]]
 name = "typeguard"
@@ -2666,5 +2556,5 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.10"
-content-hash = "24ea1d23b639e66c7f6fe1f5102a906f909d272906e60106947aa029d7b47c04"
+python-versions = ">=3.8,<4.0.0"
+content-hash = "f8289197bd05f28a1ac309e650c22ba82ff1fde131efdb6e0fcb0f8b4273b6f6"
