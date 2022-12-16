@@ -1,4 +1,11 @@
 #! /bin/bash
+
+# ----- ACTIVATE THE VIRTUAL ENVIRONMNET 
+# source $(poetry env info --path)/bin/activate
+
+# ----- Delete pyenv virtual environments
+# pyenv virtualenv-delete <venv-name>
+
 # poetry config virtualenvs.in-project true
 # pyenv local 3.10.4 
 # poetry env use 3.10.4 

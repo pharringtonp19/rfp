@@ -1,7 +1,10 @@
 """Public API for rfp."""
 
-import rfp._src.simulated_data as simulated_data
-from rfp._src.simulated_data import gp_data
+
+from rfp._src.types import Array, Params
+
+# import rfp._src.simulated_data as simulated_data
+# from rfp._src.simulated_data import gp_data
 
 # Examples
 # import rfp._src.ff1 as ff1

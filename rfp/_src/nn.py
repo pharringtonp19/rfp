@@ -13,21 +13,23 @@ Examples:
     >>> params = mlp.init_fn(jax.random.PRNGKey(1), d)
     >>> yhat = mlp.fwd_pass(params, xs)
 """
-from typing import Sequence
+from typing import Callable, Sequence
 
 import flax.linen as nn
 import jax
 import jax.numpy as jnp
 from flax.core import unfreeze
 
+from rfp import Array
+
 
 class MLP(nn.Module):
     features: Sequence[int]
-    activation: callable = nn.relu
+    activation: Callable = nn.relu
 
     @nn.compact
-    def __call__(self, x):
-        for feat in self.features[:-1]:
+    def __call__(self, x: Array):
+        for feat in self.feature[:-1]:
             x = self.activation(nn.Dense(feat)(x))
         x = nn.Dense(self.features[-1])(x)
         return x
@@ -41,5 +43,5 @@ class MLP(nn.Module):
         params = unfreeze(self.init(key, jnp.ones((1, features))))["params"]
         return params
 
-    def embellished_fwd_pass(self, params, x):
-        return self.fwd_pass(params, x), 0.0
+    # def embellished_fwd_pass(self, params, x):
+    #     return self.fwd_pass(params, x), 0.0
