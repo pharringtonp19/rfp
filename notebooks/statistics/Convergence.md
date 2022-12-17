@@ -15,3 +15,5 @@ X_n \to_D X \implies F_{X_n} \to F_X
 $$\begin{align}
 \mathbb{P}(\|X_n - X \|)
 \end{align}$$
+
+For both of these definitions, the underlying probability space can vary with $n$!
