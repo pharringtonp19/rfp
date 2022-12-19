@@ -6,11 +6,24 @@ from typing import NamedTuple
 import flax.struct
 import jax
 import jax.numpy as jnp
+import numpy as np
 from chex import assert_shape
 from einops import reduce
 
+from rfp._src import parallel
 from rfp._src.types import Params
-from rfp._src import parallel 
+
+
+def compute_cost_analysis(f):
+    def partial_eval_func(*args, **kwargs):
+        lowered = jax.jit(f).lower(*args, **kwargs)
+        compiled = lowered.compile()
+        return (
+            compiled.cost_analysis()[0]["flops"],
+            compiled.cost_analysis()[0]["bytes accessed"],
+        )
+
+    return partial_eval_func
 
 
 def einops_reduce(str1: str, str2: str) -> callable:
@@ -26,21 +39,6 @@ def einops_reduce(str1: str, str2: str) -> callable:
 
 """
 - A decorator is just syntactic sugar for a partially evaluated higher order function?"""
-
-
-def batch_sample_time(n):
-    def decorator(sampler):
-        def wrapper(key, features):
-            Y, D, T, X = jax.vmap(sampler, in_axes=(0, None))(
-                jax.random.split(key, n), features
-            )
-            Y, D, T = Y.reshape(-1, 1), D.reshape(-1, 1), T.reshape(-1, 1)
-            assert_shape([Y, D, T, X], [(n, 1), (n, 1), (n, 1), (n, features)])
-            return Y, D, T, X
-
-        return wrapper
-
-    return decorator
 
 
 def batch_sample_weight(n):
@@ -92,6 +90,7 @@ def time_grad_pvmap(loss_fn, params, data):
         f"Vectorized:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
 
+
 def time_grad(loss_fn, params, data):
 
     jitted_grad_loss_fn = jax.jit(
@@ -103,6 +102,7 @@ def time_grad(loss_fn, params, data):
     print(
         f"Standard:\t\t   Compile Time: {trials[0]:.4f} | Compiled Run Time: {trials[1]:.4f}  | Ratio: {trials[0] / trials[1]:.4f}"
     )
+
 
 # def time_grad(loss_fn, params, data):
 #     jitted_grad_loss_fn = jax.jit(
@@ -116,29 +116,28 @@ def time_grad(loss_fn, params, data):
 #     )
 
 
-# def pjit_time_grad(f, data):
-#     import jax
-#     import numpy as np
-#     from jax.experimental import PartitionSpec, maps
-#     from jax.experimental.pjit import pjit
+def pjit_time_grad(f, data):
+    from jax.experimental import PartitionSpec, maps
+    from jax.experimental.pjit import pjit
 
-#     mesh_shape = (4,)  # This is hardcoded atm
-#     devices = np.asarray(jax.devices()).reshape(*mesh_shape)
-#     mesh = maps.Mesh(devices, ("x",))
-#     print(devices)
-#     f = pjit(f, in_axis_resources=PartitionSpec("x"), out_axis_resources=None)
+    mesh_shape = (4,)  # This is hardcoded atm
+    devices = np.asarray(jax.devices()).reshape(*mesh_shape)
+    mesh = maps.Mesh(devices, ("x",))
+    print(devices)
+    f = pjit(f, in_axis_resources=PartitionSpec("x"), out_axis_resources=None)
 
-#     # Sends data to accelerators based on partition_spec
-#     with maps.Mesh(mesh.devices, mesh.axis_names):
-#         jax.debug.breakpoint()
-#         loss = f(data)
+    # Sends data to accelerators based on partition_spec
+    with maps.Mesh(mesh.devices, mesh.axis_names):
+        loss = f(data)
+
+
 #     print(type(loss))
-    # y = jnp.mean(loss)
-    # print(y, y.shape)
-    # print(loss.shape)
-    # for i in loss.device_buffers:
-    #     print(i.shape)
-    # print(len(loss.device_buffers))
+# y = jnp.mean(loss)
+# print(y, y.shape)
+# print(loss.shape)
+# for i in loss.device_buffers:
+#     print(i.shape)
+# print(len(loss.device_buffers))
 
 
 def batchify(func):
@@ -154,10 +153,8 @@ def batchify(func):
 
 def split(data):
     Y = data[:, 0].reshape(-1, 1)
-    D = data[:, 1].reshape(-1, 1)
-    T = data[:, 2].reshape(-1, 1)
-    X = data[:, 3:].reshape(data.shape[0], -1)
-    return Y, D, T, X
+    X = data[:, 1:]
+    return Y, X
 
 
 def split_weight(data):
@@ -173,6 +170,7 @@ def split_weight(data):
 class Model_Params(NamedTuple):
     body: Params
     other: Params
+    bias: Params
 
 
 def init_ode1_model(key, mlp):
@@ -181,9 +179,10 @@ def init_ode1_model(key, mlp):
     body = mlp.init_fn(subkey2, 2)
     return Model_Params(body, other)
 
+
 def store_time_results(path, n, text):
     """Taken from https://stackoverflow.com/questions/4719438/editing-specific-line-in-text-file-in-python"""
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         # read a list of lines into data
         data = file.readlines()
         print(data)
@@ -192,10 +191,8 @@ def store_time_results(path, n, text):
         data[n] = text
 
         # and write everything back
-        with open(path, 'w') as file:
-            file.writelines( data )
-
-
+        with open(path, "w") as file:
+            file.writelines(data)
 
 
 if __name__ == "__main__":

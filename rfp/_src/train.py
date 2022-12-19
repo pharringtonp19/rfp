@@ -1,3 +1,5 @@
+# Reference: https://stackoverflow.com/questions/100003/what-are-metaclasses-in-python?rq=1
+
 """
 In my scripts, I label an instance of the trainer
 class as "Yuri" in a reference to the great film 
@@ -6,28 +8,20 @@ Yuri is the tainer who trains!
 """
 
 from dataclasses import dataclass
+from typing import Any, Callable
 
-import chex
 import jax
 import optax
-from numpy import float32
-
-from rfp._src.types import Data, Params
-from rfp._src.utils import training_sampler
-
-# jaxlib = [ {platform = 'linux', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"},
-#           {platform = 'darwin', markers = "platform_machine == 'x86_64'", url = "https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl"} ]
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass
 class Trainer:
-    loss_fn: callable  # This is actually not a callable!
+    loss_fn: Callable
     opt: optax.GradientTransformation
     epochs: int
 
-    def train(self, params: Params, data: Data):
-        """Params and Data"""
-
+    # Train Function
+    def train(self, params, data):
         def update_fn(carry, t):
             params, opt_state = carry
             loss_values, grads = jax.value_and_grad(
@@ -41,3 +35,32 @@ class Trainer:
             update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
         return opt_params, loss_values_history
+
+
+if __name__ == "__main__":
+    print(Trainer)
+    assert hasattr(Trainer, "train")
+
+
+# @dataclass
+# class Trainer:
+#     """"""
+
+#     loss_fn: Callable  # This is actually not a callable!
+#     opt: optax.GradientTransformation
+#     epochs: int
+
+#     def train(self, params: Params, data: Data) -> tuple[Params, Any]:
+#         def update_fn(carry, t):
+#             params, opt_state = carry
+#             loss_values, grads = jax.value_and_grad(
+#                 self.loss_fn, has_aux=self.loss_fn.aux_status
+#             )(params, data)
+#             updates, opt_state = self.opt.update(grads, opt_state, params)
+#             params = optax.apply_updates(params, updates)
+#             return (params, opt_state), loss_values
+
+#         (opt_params, _), loss_values_history = jax.lax.scan(
+#             update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
+#         )
+#         return opt_params, loss_values_history

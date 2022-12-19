@@ -9,6 +9,10 @@ import jax.numpy as jnp
 Array: TypeAlias = chex.Array
 
 
+def linear_map(params, X):
+    return X @ params
+
+
 def linear_model_time(params, Y, D, T, X):
     regressors = jnp.hstack((D * T, D, T, jnp.ones_like(D), X))
     residuals = jnp.linalg.lstsq(regressors, Y)[1][0]

@@ -1,0 +1,45 @@
+def (.*.) {a:Type} (f : a -> a) (g : a -> a)  :  (a -> a) =
+    \x. g (f x)
+
+def (*.*) {a:Type} (n:Nat)  (f : a -> a) : a -> a = 
+    \x. yield_state x \ansRef. 
+        for i:(Fin n).
+            ansRef := f (get ansRef)
+'### Objective Function 
+
+def objective (x: Float) : Float = 
+    log (x*x + 1.0 + sin(3*x)) + 1.5
+'### Update/Step Function
+
+def retraction_map (x: Float) : Float = 
+    x -- Here we use the linearity of the search space
+
+def step (lr:Float) (mom:Float) (f: Float->Float) (state: (Float & Float)):  (Float & Float) =  
+    search_direction = fst state
+    position = snd state 
+    search_direction = mom*search_direction - grad f position
+    position = position + retraction_map (lr * search_direction) 
+    (search_direction,  position) 
+
+def solver (init_state: (Float & Float)) (lr:Float) (mom:Float) (f: Float->Float): Float = 
+    snd $ (1000 *.* (step lr mom f)) init_state 
+
+'### Training
+
+-- Hyperparameters
+lr = 0.1 
+mom = 0.9
+init_state = (0.0, 3.0)
+
+
+def f(x: Float) : Float =
+    x*x
+
+tuned_solver = solver init_state lr mom 
+
+def prox (tuned_solver: ((Float -> Float) -> Float)) (v:Float) (f: Float -> Float) (z: Float) : Float = 
+    f_approx = \x. f x + (1/(2*v))*abs(x-z)
+    tuned_solver f_approx
+
+prox tuned_solver 10. f 5.
+

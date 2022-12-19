@@ -13,29 +13,35 @@ Examples:
     >>> params = mlp.init_fn(jax.random.PRNGKey(1), d)
     >>> yhat = mlp.fwd_pass(params, xs)
 """
-import jax 
-import jax.numpy as jnp 
+from typing import Callable, Sequence
+
 import flax.linen as nn
-from typing import Sequence
+import jax
+import jax.numpy as jnp
 from flax.core import unfreeze
-from rfp._src.types import Params, Array, Key  
+
+from rfp import Array
+
 
 class MLP(nn.Module):
     features: Sequence[int]
-    activation: callable = nn.relu
+    activation: Callable = nn.relu
 
     @nn.compact
-    def __call__(self, x: Array) -> Array:
-        for feat in self.features[:-1]:
+    def __call__(self, x: Array):
+        for feat in self.feature[:-1]:
             x = self.activation(nn.Dense(feat)(x))
         x = nn.Dense(self.features[-1])(x)
         return x
-    
-    def fwd_pass(self, params: Params, x: Array) -> Array:
+
+    def fwd_pass(self, params, x):
         """The Forward Pass"""
         return self.apply({"params": params}, x)
-    
-    def init_fn(self, key: Key, features: int) -> Params:
+
+    def init_fn(self, key, features):
         """Initialize Parameters"""
-        params =  unfreeze(self.init(key, jnp.ones((1, features))))['params']
+        params = unfreeze(self.init(key, jnp.ones((1, features))))["params"]
         return params
+
+    # def embellished_fwd_pass(self, params, x):
+    #     return self.fwd_pass(params, x), 0.0

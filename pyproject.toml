@@ -4,35 +4,38 @@ version = "0.1.0"
 description = "\"Regularizing the Forward Pass\""
 authors = ["Patrick Power <pharringtonp19@gmail.com>"]
 license = "MIT"
+homepage = "https://pharringtonp19.github.io/rfp/"
+repository = "https://github.com/pharringtonp19/rfp"
+documentation = "https://pharringtonp19.github.io/rfp/thoughts/"
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = ">=3.8,<4.0.0"
 diffrax = "^0.2.1"
-mypy = "^0.971"
-chex = "^0.1.4"
 flax = "^0.5.3"
+<<<<<<< HEAD
 tree-math = "^0.1.0"
 distrax = "^0.1.2"
 jaxlib = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"
 #jaxlib =  [{markers = "sys_platform == 'darwin'", url="https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl" },
 #            {markers = "sys_platform == 'linux'", url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"} ] 
 jax = "^0.3.17"
+=======
+>>>>>>> a65b3e54146f0d2c9b87e3531350b005191d9cca
 mkdocstrings = {extras = ["python"], version = "^0.19.0"}
 mkdocs-material = "^8.4.1"
 isort = "^5.10.1"
-pyupgrade = "^2.37.3"
 einops = "^0.4.1"
-pandas = "^1.4.3"
+jax = "^0.4.1"
+jaxlib = "^0.4.1"
+tinygp = "^0.2.3"
 
-
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+mypy = "^0.991"
+black = "^22.12.0"
 flake8 = "^5.0.4"
-black = "^22.6.0"
 pytest = "^7.1.2"
 pre-commit = "^2.20.0"
 ipykernel = "^6.15.1"
-
-
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
