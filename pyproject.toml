@@ -12,15 +12,8 @@ documentation = "https://pharringtonp19.github.io/rfp/thoughts/"
 python = ">=3.8,<4.0.0"
 diffrax = "^0.2.1"
 flax = "^0.5.3"
-<<<<<<< HEAD
 tree-math = "^0.1.0"
 distrax = "^0.1.2"
-jaxlib = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"
-#jaxlib =  [{markers = "sys_platform == 'darwin'", url="https://storage.googleapis.com/jax-releases/mac/jaxlib-0.3.15-cp310-none-macosx_10_14_x86_64.whl" },
-#            {markers = "sys_platform == 'linux'", url = "https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.15%2Bcuda11.cudnn82-cp310-none-manylinux2014_x86_64.whl"} ] 
-jax = "^0.3.17"
-=======
->>>>>>> a65b3e54146f0d2c9b87e3531350b005191d9cca
 mkdocstrings = {extras = ["python"], version = "^0.19.0"}
 mkdocs-material = "^8.4.1"
 isort = "^5.10.1"
