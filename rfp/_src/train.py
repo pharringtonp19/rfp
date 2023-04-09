@@ -8,12 +8,12 @@ Yuri is the tainer who trains!
 """
 
 from dataclasses import dataclass
+from functools import partial
 from typing import Any, Callable
-from jax.experimental import checkify
-from functools import partial 
 
 import jax
 import optax
+from jax.experimental import checkify
 
 
 @dataclass
@@ -37,7 +37,7 @@ class Trainer:
             update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
         return opt_params, loss_values_history
-    
+
 
 if __name__ == "__main__":
     print(Trainer)

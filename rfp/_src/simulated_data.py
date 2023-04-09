@@ -4,13 +4,13 @@ import jax.numpy as jnp
 
 def gp_data(Xkernel, Ykernel, n, key):
     from tinygp import GaussianProcess
+
     subkey1, subkey2 = jax.random.split(key)
     gp_x = GaussianProcess(Xkernel, jnp.arange(n))
     x = gp_x.sample(subkey1)
     gp = GaussianProcess(Ykernel, x)
     y = gp.sample(subkey2)
     return y, x
-
 
 
 # def f1(x):

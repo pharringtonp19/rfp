@@ -1,16 +1,28 @@
-import jax 
+import jax
 import jax.numpy as jnp
-import optax 
-from rfp import MLP, Model_Params, Cluster_Loss, Supervised_Loss, loss_fn_real, Trainer, predict, gp_data
 import matplotlib.pyplot as plt
+import optax
 from matplotlib import rcParams
-rcParams['image.interpolation'] = 'nearest'
-rcParams['image.cmap'] = 'viridis'
-rcParams['axes.grid'] = False
-from absl import app, flags
-import os 
+
+from rfp import (
+    MLP,
+    Cluster_Loss,
+    Model_Params,
+    Supervised_Loss,
+    Trainer,
+    gp_data,
+    loss_fn_real,
+    predict,
+)
+
+rcParams["image.interpolation"] = "nearest"
+rcParams["image.cmap"] = "viridis"
+rcParams["axes.grid"] = False
+import os
+from functools import partial
 from pathlib import Path
-from functools import partial 
+
+from absl import app, flags
 from tinygp import kernels
 
 github_folder = str(Path(os.getcwd()).parent.absolute())
@@ -29,37 +41,28 @@ flags.DEFINE_float("reg_val", 0.0, "Regularization Value")
 FLAGS = flags.FLAGS
 
 
-
-
-
-
-
 def main(argv) -> None:
-  del argv
+    del argv
 
-
-  Xkernel = kernels.ExpSquared(scale=1.5)
-  Ykernel = kernels.ExpSquared(scale=1.5)
-  data_key = jax.random.PRNGKey(FLAGS.init_key_num)
-  Y, X = jax.vmap(partial(gp_data, Xkernel, Ykernel, FLAGS.n))(jax.random.split(data_key, FLAGS.c))
-  W = jnp.ones_like(X)
-
-
-
-
- 
+    Xkernel = kernels.ExpSquared(scale=1.5)
+    Ykernel = kernels.ExpSquared(scale=1.5)
+    data_key = jax.random.PRNGKey(FLAGS.init_key_num)
+    Y, X = jax.vmap(partial(gp_data, Xkernel, Ykernel, FLAGS.n))(
+        jax.random.split(data_key, FLAGS.c)
+    )
+    W = jnp.ones_like(X)
 
 
 #     width = FLAGS.net_width
 #     mlp = MLP([width, width])
 
-#     supervised_loss = Supervised_Loss(loss_fn = loss_fn_real, 
+#     supervised_loss = Supervised_Loss(loss_fn = loss_fn_real,
 #                                         feature_map = mlp.embellished_fwd_pass,
-#                                         reg_value = 0.0, 
-#                                         aux_status = False)                     
+#                                         reg_value = 0.0,
+#                                         aux_status = False)
 
-#     inner_yuri = Trainer(loss_fn = supervised_loss, 
-#                         opt = optax.sgd(learning_rate=0.001), 
+#     inner_yuri = Trainer(loss_fn = supervised_loss,
+#                         opt = optax.sgd(learning_rate=0.001),
 #                         epochs = 3)
 
 #     cluster_loss = Cluster_Loss(inner_yuri, reg_value=FLAGS.reg_val, aux_status=False)
@@ -69,31 +72,31 @@ def main(argv) -> None:
 
 #     def simulate(c, key):
 #       key0, key1, key2, key3 = jax.random.split(key, 4)
-#       model_params = Model_Params(mlp.init_fn(key0, 1),                       
-#                                 jax.random.normal(key1, shape=(width,)),    
-#                                 jnp.zeros(shape=()))   
+#       model_params = Model_Params(mlp.init_fn(key0, 1),
+#                                 jax.random.normal(key1, shape=(width,)),
+#                                 jnp.zeros(shape=()))
 
 #       # Sample Clusters
 #       train_batch = jax.vmap(partial(sample_param_fn, param_fn), in_axes=(0, None))(jax.random.split(key2, FLAGS.c), FLAGS.n)
 #       test_batch = jax.vmap(partial(sample_param_fn, param_fn), in_axes=(0, None))(jax.random.split(key2, FLAGS.test_c), FLAGS.n)
 
 #       Y = jnp.vstack([jnp.expand_dims(train_batch[1][i],0) for i in range(c)])
-#       X = jnp.vstack([jnp.expand_dims(train_batch[0][i],0) for i in range(c)]) # 
+#       X = jnp.vstack([jnp.expand_dims(train_batch[0][i],0) for i in range(c)]) #
 #       W = jnp.ones_like(X)
-#       cluster_data = {'Y': Y, 'X':X, 'Weight': W}   
+#       cluster_data = {'Y': Y, 'X':X, 'Weight': W}
 #       opt_params, _ = yuri.train(model_params, cluster_data)
 #       fwd = partial(predict, False, mlp.fwd_pass, opt_params)
 #       yhat = jax.vmap(fwd)(test_batch[0])
 #       loss = jnp.mean((yhat-test_batch[1].squeeze())**2)
 #       return loss
-    
+
 #     loss = jax.vmap(partial(simulate, 2))(jax.random.split(jax.random.PRNGKey(1), 32))
 #     print(loss)
 #     print(jnp.nanmean(loss))
 
 #     # losses = jax.vmap(partial(simulate, 2))(jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.sims))
 #     # print(jnp.nanmean(losses))
-#     # results = [] 
+#     # results = []
 #     # for i in [2, 5, 10]:
 #     #     losses = jax.vmap(partial(simulate, i))(jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.sims))
 #     #     print(i, jnp.nanmean(losses))
