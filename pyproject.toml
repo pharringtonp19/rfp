@@ -21,6 +21,8 @@ einops = "^0.4.1"
 jax = "^0.4.1"
 jaxlib = "^0.4.1"
 tinygp = "^0.2.3"
+statsmodels = "^0.13.5"
+jaxopt = "^0.5.5"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.991"

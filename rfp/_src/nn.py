@@ -20,7 +20,7 @@ import jax
 import jax.numpy as jnp
 from flax.core import unfreeze
 
-from rfp import Array
+from rfp._src.types import Array
 
 
 class MLP(nn.Module):

@@ -7,6 +7,7 @@ from rfp._src.nn import MLP
 from rfp._src.train import Trainer
 from rfp._src.types import Array, Params
 from rfp._src.utils import Model_Params
+from rfp._src.simulated_data import gp_data
 
 # import rfp._src.simulated_data as simulated_data
 # from rfp._src.simulated_data import gp_data
