@@ -4,15 +4,13 @@ from pathlib import Path
 from typing import Any, Type
 
 import jax
-
-jax.config.update("jax_enable_x64", True)
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, Sqr_Error, Trainer, simulated_data
+from rfp import MLP, VC2015, Trainer
 
 np_file_link: str = os.getcwd() + "/examples/data/"
 
@@ -27,20 +25,25 @@ FLAGS: Any = flags.FLAGS
 
 def main(argv) -> None:
     del argv
+
+    # Print target coefficient
     target_coef = FLAGS.theta
     print(f"Target Coefficient: {target_coef:.2f}")
 
     @partial(jax.jit, static_argnums=(1))
     def simulate(init_key, plots: bool = False):
 
-        # Data
+        # Generate simulated data
         train_key, test_key = jax.random.split(init_key, 2)
+        Y, D, X = VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
 
-        Y, D, X = simulated_data.VC2015(train_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+        # Compute coefficient
         regs = jnp.hstack((D, jnp.ones_like(D), X))
         coeff = jnp.linalg.lstsq(regs, Y)[0][0]
+
         return coeff
 
+    # Simulate data and save to file
     coeffs = jax.vmap(simulate)(
         jax.random.split(jax.random.PRNGKey(FLAGS.init_key_num), FLAGS.simulations)
     ).squeeze()
