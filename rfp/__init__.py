@@ -2,7 +2,7 @@
 
 
 from rfp._src.featuremap import predict
-from rfp._src.losses import Cluster_Loss, Supervised_Loss, loss_fn_real
+from rfp._src.losses import Cluster_Loss, Sqr_Error, Supervised_Loss, loss_fn_real
 from rfp._src.nn import MLP
 from rfp._src.simulated_data import VC2015
 from rfp._src.train import Trainer

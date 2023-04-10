@@ -10,8 +10,9 @@ import numpy as np
 import optax
 from absl import app, flags
 
-from rfp import MLP, Sqr_Error, Trainer, simulated_data
+from rfp import MLP, VC2015, Trainer
 
+github_folder = str(Path(os.getcwd()).absolute())
 np_file_link: str = os.getcwd() + "/examples/data/"
 
 flags.DEFINE_integer("init_key_num", 0, "initial key number")
@@ -57,7 +58,7 @@ def main(argv) -> None:
         opt_paramsY, lossesY = yuri.train(params, (Y, X))
 
         # Eval
-        Y, D, X = simulated_data.VC2015(test_key, FLAGS.theta, FLAGS.n, FLAGS.features)
+        Y, D, X = VC2015(test_key, FLAGS.theta, FLAGS.n, FLAGS.features)
         residual_d = D - mlp.fwd_pass(opt_paramsD, X)
         residual_y = Y - mlp.fwd_pass(opt_paramsY, X)
         z = jnp.linalg.lstsq(residual_d, residual_y)[0]
