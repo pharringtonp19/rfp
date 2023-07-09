@@ -4,10 +4,8 @@ from rfp.utils import final_layer
 import jax
 import jax.numpy as jnp
 from typing import Callable, Tuple, Dict
-
-
-def loss_fn_real(weight, predict, target):
-    return weight * (predict - target) ** 2
+from rfp.utils import Model_Params
+from rfp.train import Trainer
 
 def binary_cross_entropy(predict, target, mask):
     return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * (1-mask)
@@ -20,7 +18,7 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def __call__(self, params, data):
+    def __call__(self, params: Model_Params, data: Dict) -> jnp.array:
         Y, X, mask = data["Y"], data["X"], data["Mask"]
         # print(Y.shape, X.shape, mask.shape)
         phiX, fwd_pass_penalty = self.feature_map(params.body, X)
@@ -36,27 +34,19 @@ class Supervised_Loss:
 
 @dataclass
 class Cluster_Loss:
-    inner_yuri: callable
+    inner_yuri: Trainer
     reg_value: float = 1.0
     aux_status: bool = False
 
-    def cluster_loss(self, params, data):
-
-        # Partial Evaluation
+    def cluster_loss(self, params:Trainer, data: Dict) -> jnp.array:
         cluster_params, _ = self.inner_yuri.train(params, data)
         a2 = self.inner_yuri.loss_fn(cluster_params, data)
         a1 = self.inner_yuri.loss_fn(params, data)
         return (1 - self.reg_value) * a1 + self.reg_value * a2
 
-    def __call__(self, params, data):
+    def __call__(self, params:Trainer, data: Dict) -> jnp.array:
         losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, data)
         return jnp.mean(losses)
-        # cluster_losses = jax.tree_util.tree_map(
-        #     partial(self.cluster_loss, params), data
-        # )
-        # loss = (1 / (len(data))) * jax.tree_util.tree_reduce(
-        #     lambda a, b: a + b, cluster_losses
-        # )
 
 
 @dataclass
