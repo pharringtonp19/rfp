@@ -10,7 +10,8 @@ class Model_Params(NamedTuple):
     bias: jnp.array # Linear Model Bias
 
     @staticmethod
-    def init_fn(key, mlp, features, head):
+    def init_fn(key, mlp, features):
+        head = mlp.nodes[-1]
         """Initialize Model Parameters"""
         body = mlp.init_fn(key, features)
         head = jax.random.normal(key, (head,1)) ### THIS NEEDS TO BE CHECKED

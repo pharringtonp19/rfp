@@ -6,7 +6,7 @@ from flax.core import unfreeze
 
 
 class MLP(nn.Module):
-    features: Sequence[int]
+    nodes: Sequence[int]
     activation: Callable = nn.relu
 
     @nn.compact
