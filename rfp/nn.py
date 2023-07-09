@@ -11,7 +11,7 @@ class MLP(nn.Module):
 
     @nn.compact
     def __call__(self, x):
-        for feat in self.features:
+        for feat in self.nodes:
             x = self.activation(nn.Dense(feat)(x))
         return x
 
