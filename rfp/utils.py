@@ -13,9 +13,11 @@ class Model_Params(NamedTuple):
     def init_fn(key, mlp, features, head):
         """Initialize Model Parameters"""
         body = mlp.init_fn(key, features)
-        head = jax.random.normal(key, (head,))
-        bias = jax.random.normal(key, (1,))
+        head = jax.random.normal(key, (head,1)) ### THIS NEEDS TO BE CHECKED
+        bias = jax.random.normal(key, (1,1))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
+    
+
 
 
 
