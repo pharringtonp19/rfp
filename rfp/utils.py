@@ -17,6 +17,10 @@ class Model_Params(NamedTuple):
         bias = jax.random.normal(key, (1,1))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
     
+def apply_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
+    """Apply a single layer of the model"""
+    return x @ params.head + params.bias
+    
 
 
 
