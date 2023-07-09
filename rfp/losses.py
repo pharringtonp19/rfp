@@ -9,7 +9,7 @@ def loss_fn_real(weight, predict, target):
     return weight * (predict - target) ** 2
 
 def binary_cross_entropy(predict, target, mask):
-    return jax.lax.where(mask == True, 0.0,  -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict))
+    return jnp.where(mask == True, 0.0,  -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict))
 
 @dataclass
 class Supervised_Loss:
