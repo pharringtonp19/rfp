@@ -11,9 +11,8 @@ class MLP(nn.Module):
 
     @nn.compact
     def __call__(self, x):
-        for feat in self.features[:-1]:
+        for feat in self.features:
             x = self.activation(nn.Dense(feat)(x))
-        x = nn.Dense(self.features[-1])(x)
         return x
 
     def fwd_pass(self, params, x):
