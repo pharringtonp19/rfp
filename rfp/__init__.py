@@ -1,13 +1,16 @@
 """Public API for rfp."""
 
+from .losses import binary_cross_entropy
+from .nn import MLP
 
-from rfp._src.featuremap import predict
-from rfp._src.losses import Cluster_Loss, Sqr_Error, Supervised_Loss, loss_fn_real
-from rfp._src.nn import MLP
-from rfp._src.simulated_data import VC2015
-from rfp._src.train import Trainer
-from rfp._src.types import Array, Params
-from rfp._src.utils import Model_Params
+
+# from rfp._src.featuremap import predict
+# from rfp.losses import Cluster_Loss, Sqr_Error, Supervised_Loss, loss_fn_real
+# from rfp._src.nn import MLP
+# from rfp._src.simulated_data import VC2015
+# from rfp._src.train import Trainer
+# from rfp._src.types import Array, Params
+# from rfp._src.utils import Model_Params
 
 # import rfp._src.simulated_data as simulated_data
 # from rfp._src.simulated_data import gp_data
