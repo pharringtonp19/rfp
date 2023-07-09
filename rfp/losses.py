@@ -3,6 +3,7 @@ from functools import partial
 from rfp.utils import final_layer
 import jax
 import jax.numpy as jnp
+from typing import Callable, Tuple, Dict
 
 
 def loss_fn_real(weight, predict, target):
@@ -13,9 +14,9 @@ def binary_cross_entropy(predict, target, mask):
 
 @dataclass
 class Supervised_Loss:
-    loss_fn: callable  
-    feature_map: callable  
-    reg_value: float = 0.0
+    loss_fn: callable[[jnp.array, jnp.array, jnp.array], jnp.array]
+    feature_map: Callable[[Dict], Tuple[jnp.array, float]]                                         ### TODO: Is this the correct type?
+    reg_value: float = 0.0                                                                         # Regularizing the forward pass
     aux_status: bool = False
 
     # @jax.jit
