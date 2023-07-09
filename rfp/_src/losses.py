@@ -8,11 +8,8 @@ import jax.numpy as jnp
 def loss_fn_real(weight, predict, target):
     return weight * (predict - target) ** 2
 
-
-def loss_fn_binary(weight, predict, target):
-    act = jnp.where(target == 1.0, predict, -1.0 * predict)
-    return -jax.nn.log_sigmoid(act) * weight
-
+def binary_cross_entropy(predict, target):
+    return -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict)
 
 @dataclass
 class Supervised_Loss:
