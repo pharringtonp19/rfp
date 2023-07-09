@@ -14,7 +14,7 @@ def binary_cross_entropy(predict, target, mask):
 
 @dataclass
 class Supervised_Loss:
-    loss_fn: callable[[jnp.array, jnp.array, jnp.array], jnp.array]
+    loss_fn: Callable[[jnp.array, jnp.array, jnp.array], jnp.array]
     feature_map: Callable[[Dict], Tuple[jnp.array, float]]                                         ### TODO: Is this the correct type?
     reg_value: float = 0.0                                                                         # Regularizing the forward pass
     aux_status: bool = False
