@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import partial
-
+from rfp.utils import final_layer
 import jax
 import jax.numpy as jnp
 
@@ -8,8 +8,8 @@ import jax.numpy as jnp
 def loss_fn_real(weight, predict, target):
     return weight * (predict - target) ** 2
 
-def binary_cross_entropy(predict, target):
-    return -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict)
+def binary_cross_entropy(predict, target, mask):
+    return jax.lax.where(mask == True, 0.0,  -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict))
 
 @dataclass
 class Supervised_Loss:
@@ -19,23 +19,16 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def eval_loss(self, params, data):
-
-        Y, X, weight = data["Y"], data["X"], data["Weight"]
-        phiX, vector_field_penalty = self.feature_map(params.body, X)
-        Yhat = phiX @ params.other + params.bias
-        empirical_loss = jnp.sum(
-            jax.vmap(self.loss_fn, in_axes=(0, 0, 0))(weight, Yhat.reshape(-1, 1), Y)
-        ) / jnp.sum(weight)
-        if self.aux_status:
-            return (
-                empirical_loss + self.reg_value * vector_field_penalty,
-                vector_field_penalty,
-            )
-        return empirical_loss + self.reg_value * vector_field_penalty
-
     def __call__(self, params, data):
-        return self.eval_loss(params, data)
+        Y, X, mask = data["Y"], data["X"], data["Weight"]
+        phiX, fwd_pass_penalty = self.feature_map(params.body, X)
+        Yhat = final_layer(params, phiX)
+        empirical_loss = jnp.sum(
+            jax.vmap(self.loss_fn,)(Yhat, Y, mask)) / jnp.sum(mask)
+        if self.aux_status:
+            return (empirical_loss + self.reg_value * fwd_pass_penalty, fwd_pass_penalty) ### TODO: check this
+        return empirical_loss + self.reg_value * fwd_pass_penalty
+
 
 
 @dataclass

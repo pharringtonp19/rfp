@@ -5,9 +5,9 @@ import jax.numpy as jnp
 from rfp._src.types import Params ### THIS NEEDS TO BE FIXED
 
 class Model_Params(NamedTuple):
-    body: Params # Feature Map Parameters
-    head: Params # Linear Model Parameters
-    bias: Params # Linear Model Bias
+    body: dict # Feature Map Parameters
+    head: jnp.array # Linear Model Parameters
+    bias: jnp.array # Linear Model Bias
 
     @staticmethod
     def init_fn(key, mlp, features, head):
@@ -17,8 +17,8 @@ class Model_Params(NamedTuple):
         bias = jax.random.normal(key, (1,1))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
     
-def apply_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
-    """Apply a single layer of the model"""
+def final_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
+    """Apply a final layer of the model"""
     return x @ params.head + params.bias
     
 
