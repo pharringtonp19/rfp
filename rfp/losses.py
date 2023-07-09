@@ -9,22 +9,24 @@ def loss_fn_real(weight, predict, target):
     return weight * (predict - target) ** 2
 
 def binary_cross_entropy(predict, target, mask):
-    return jnp.where(mask == True, 0.0,  -target * jnp.log(predict) - (1 - target) * jnp.log(1 - predict))
+    return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * (1-mask)
 
 @dataclass
 class Supervised_Loss:
-    loss_fn: callable = lambda x: x
-    feature_map: callable = lambda x: x
+    loss_fn: callable  
+    feature_map: callable  
     reg_value: float = 0.0
     aux_status: bool = False
 
     # @jax.jit
     def __call__(self, params, data):
         Y, X, mask = data["Y"], data["X"], data["Mask"]
+        # print(Y.shape, X.shape, mask.shape)
         phiX, fwd_pass_penalty = self.feature_map(params.body, X)
+        # print(phiX.shape, fwd_pass_penalty)
         Yhat = final_layer(params, phiX)
         empirical_loss = jnp.sum(
-            jax.vmap(self.loss_fn,)(Yhat, Y, mask)) / jnp.sum(mask)
+            jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(1-mask)
         if self.aux_status:
             return (empirical_loss + self.reg_value * fwd_pass_penalty, fwd_pass_penalty) ### TODO: check this
         return empirical_loss + self.reg_value * fwd_pass_penalty
