@@ -4,16 +4,18 @@
 In my scripts, I label an instance of the trainer
 class as "Yuri" in a reference to the great film 
 The Pink Panther. If you recall from the movie,
-Yuri is the tainer who trains! 
+Yuri is the trainer who trains! 
 """
 
 from dataclasses import dataclass
 from functools import partial
-from typing import Any, Callable
+from typing import Any, Callable, Dict
 
 import jax
 import optax
 from jax.experimental import checkify
+from rfp.utils import Model_Params
+
 
 
 @dataclass
@@ -23,7 +25,7 @@ class Trainer:
     epochs: int
 
     # Train Function
-    def train(self, params, data):
+    def train(self, params: Model_Params, data: Dict):
         def update_fn(carry, t):
             params, opt_state = carry
             loss_values, grads = jax.value_and_grad(
@@ -37,8 +39,3 @@ class Trainer:
             update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs
         )
         return opt_params, loss_values_history
-
-
-if __name__ == "__main__":
-    print(Trainer)
-    assert hasattr(Trainer, "train")
