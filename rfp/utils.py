@@ -1,11 +1,10 @@
 from typing import NamedTuple
 
-from rfp._src.types import Params
-
+from rfp._src.types import Params ### THIS NEEDS TO BE FIXED
 
 class Model_Params(NamedTuple):
     body: Params
-    other: Params
+    head: Params
     bias: Params
 
 
