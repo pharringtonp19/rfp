@@ -20,7 +20,7 @@ class Supervised_Loss:
 
     # @jax.jit
     def __call__(self, params, data):
-        Y, X, mask = data["Y"], data["X"], data["Weight"]
+        Y, X, mask = data["Y"], data["X"], data["Mask"]
         phiX, fwd_pass_penalty = self.feature_map(params.body, X)
         Yhat = final_layer(params, phiX)
         empirical_loss = jnp.sum(
