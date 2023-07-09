@@ -1,11 +1,22 @@
 from typing import NamedTuple
+import jax
+import jax.numpy as jnp
 
 from rfp._src.types import Params ### THIS NEEDS TO BE FIXED
 
 class Model_Params(NamedTuple):
-    body: Params
-    head: Params
-    bias: Params
+    body: Params # Feature Map Parameters
+    head: Params # Linear Model Parameters
+    bias: Params # Linear Model Bias
+
+    @staticmethod
+    def init_fn(key, mlp, sequence, features):
+        """Initialize Model Parameters"""
+        body = mlp.init(key, sequence, features)
+        head = jax.random.normal(key, (features,))
+        bias = jax.random.normal(key, (1,))
+        return Model_Params(body, head, bias)
+
 
 
 # def compute_cost_analysis(f):
