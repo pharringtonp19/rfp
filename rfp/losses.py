@@ -11,7 +11,7 @@ from jaxlib.xla_extension import ArrayImpl
 
 
 def binary_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                      ### TODO: Is this the correct type?
-    return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * (1-mask)
+    return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * mask
 
 @dataclass
 class Supervised_Loss:
@@ -25,7 +25,7 @@ class Supervised_Loss:
         phiX, fwd_pass_penalty = self.feature_map(params.body, X)
         Yhat = final_layer(params, phiX)
         empirical_loss = jnp.sum(
-            jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(1-mask)
+            jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(mask)
         if self.aux_status:
             return (empirical_loss + self.reg_value * fwd_pass_penalty, fwd_pass_penalty) ### TODO: check this
         return empirical_loss + self.reg_value * fwd_pass_penalty
