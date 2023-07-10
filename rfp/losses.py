@@ -21,11 +21,8 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def __call__(self, params: Model_Params, data: Dict) -> jnp.array:
-        Y, X, mask = data["Y"], data["X"], data["Mask"]
-        # print(Y.shape, X.shape, mask.shape)
+    def __call__(self, params: Model_Params, X, Y, mask) -> jnp.array:
         phiX, fwd_pass_penalty = self.feature_map(params.body, X)
-        # print(phiX.shape, fwd_pass_penalty)
         Yhat = final_layer(params, phiX)
         empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(1-mask)
@@ -40,12 +37,12 @@ class Cluster_Loss:
     reg_value: float = 1.0
     aux_status: bool = False
 
-    def cluster_loss(self, params:Trainer, data: Dict) -> jnp.array:
-        cluster_params, _ = self.inner_yuri.train(params, data)
-        a2 = self.inner_yuri.loss_fn(cluster_params, data)
-        a1 = self.inner_yuri.loss_fn(params, data)
+    def cluster_loss(self, params:Trainer, X, Y, mask) -> jnp.array:
+        cluster_params, _ = self.inner_yuri.train(params,  X, Y, mask)
+        a2 = self.inner_yuri.loss_fn(cluster_params,  X, Y, mask)
+        a1 = self.inner_yuri.loss_fn(params,  X, Y, mask)
         return (1 - self.reg_value) * a1 + self.reg_value * a2
 
-    def __call__(self, params: Trainer, data: Dict) -> jnp.array:
-        losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, data)
+    def __call__(self, params: Trainer,  X, Y, mask) -> jnp.array:
+        losses = jax.vmap(self.cluster_loss, in_axes=(None, 0))(params, X, Y, mask)
         return jnp.mean(losses)
