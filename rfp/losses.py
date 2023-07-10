@@ -45,4 +45,5 @@ class Cluster_Loss:
 
     def __call__(self, params: Trainer,  X, Y, mask) -> jnp.array:
         losses = jax.vmap(self.cluster_loss, in_axes=(None, 0, 0, 0))(params, X, Y, mask)
-        return jnp.mean(losses)
+        weights = jnp.sum(mask, axis=1)
+        return jnp.dot(losses, weights)/jnp.sum(weights)
