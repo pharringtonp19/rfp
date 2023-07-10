@@ -25,12 +25,12 @@ class Trainer:
     epochs: int
 
     # Train Function
-    def train(self, params: Model_Params, data: Dict):
+    def train(self, params: Model_Params, X, Y, mask):
         def update_fn(carry, t):
             params, opt_state = carry
             loss_values, grads = jax.value_and_grad(
                 self.loss_fn, has_aux=self.loss_fn.aux_status
-            )(params, data)
+            )(params, X, Y, mask)
             updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
             return (params, opt_state), loss_values
