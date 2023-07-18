@@ -11,12 +11,13 @@ class Model_Params(NamedTuple):
     bias: jnp.array # Linear Model Bias
 
     @staticmethod
-    def init_fn(key, mlp, features, head=1):
-        head = mlp.nodes[-1]
+    def init_fn(key, mlp, features, head_dim=1):
+        k1, k2 = jax.random.split(key)
+        fwd_pass_layer = mlp.nodes[-1]
         """Initialize Model Parameters"""
         body = mlp.init_fn(key, features)
-        head = jax.random.normal(key, (head,head)) ### THIS NEEDS TO BE CHECKED
-        bias = jax.random.normal(key, (1,head))    ### THIS NEEDS TO BE CHECKED
+        head = jax.random.normal(k1, (fwd_pass_layer, head_dim)) ### THIS NEEDS TO BE CHECKED
+        bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
     
 def final_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
