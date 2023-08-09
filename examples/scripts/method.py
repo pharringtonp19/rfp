@@ -29,7 +29,7 @@ from rfp import (
 
 import warnings
 
-from rfp._src.utils import pjit_time_grad
+from rfp.utils import pjit_time_grad
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 

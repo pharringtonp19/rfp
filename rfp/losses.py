@@ -14,7 +14,7 @@ def binary_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl)
     return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * mask
 
 def softmax_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                     ### TODO: Is this the correct type?
-    return -jnp.sum(jax.nn.log_softmax(predict, axis=-1)*target, axis=-1).shape* mask
+    return -jnp.sum(jax.nn.log_softmax(predict, axis=-1)*target, axis=-1) * mask
 
 @dataclass
 class Supervised_Loss:

@@ -14,7 +14,7 @@ from diffrax import (  # type: ignore
 )
 from flax.core import unfreeze
 
-from rfp._src.nn import MLP  # Is this necessary?
+from rfp.nn import MLP  # Is this necessary?
 
 # from rfp._src.types import Array, Kleisi, ODE_Solver, Params
 

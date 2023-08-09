@@ -11,7 +11,7 @@ import timeit
 from dataclasses import dataclass
 
 from rfp._src import parallel
-from rfp._src.utils import time_grad_pvmap
+from rfp.utils import time_grad_pvmap
 
 from absl import app, flags
 

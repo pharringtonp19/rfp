@@ -4,8 +4,8 @@ import jax
 import jax.numpy as jnp
 from diffrax import Heun, ODETerm, PIDController, SaveAt, diffeqsolve
 
-from rfp._src.nn import MLP
-from rfp._src.utils import Model_Params
+from rfp.nn import MLP
+from rfp.utils import Model_Params
 
 
 def init_params(key, mlp):

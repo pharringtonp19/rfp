@@ -4,8 +4,8 @@ from functools import partial
 import jax
 import jax.numpy as jnp
 
-from rfp._src.nn import MLP
-from rfp._src.utils import split_weight
+from rfp.nn import MLP
+from rfp.utils import split_weight
 
 
 @dataclass
