@@ -1,16 +1,18 @@
-from typing import Callable, Sequence
-import flax.linen as nn
+from typing import Sequence, Callable
 import jax
+from flax import linen as nn
 import jax.numpy as jnp
 from flax.core import unfreeze
-
 
 class MLP(nn.Module):
     nodes: Sequence[int]
     activation: Callable = nn.relu
+    identity: bool = False  # Add this line
 
     @nn.compact
     def __call__(self, x):
+        if self.identity:  # Add this condition
+            return x
         for feat in self.nodes:
             x = self.activation(nn.Dense(feat)(x))
         return x
@@ -23,7 +25,7 @@ class MLP(nn.Module):
         """Initialize Parameters"""
         params = unfreeze(self.init(key, jnp.ones((features,))))["params"]
         if verbose:
-            print(jax.tree_util.tree_map(lambda x: x.shape, params)) # Checking output shapes
+            print(jax.tree_util.tree_map(lambda x: x.shape, params))  # Checking output shapes
         return params
 
     def embellished_fwd_pass(self, params, x):
