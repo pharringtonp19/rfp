@@ -7,12 +7,9 @@ from flax.core import unfreeze
 class MLP(nn.Module):
     nodes: Sequence[int]
     activation: Callable = nn.relu
-    identity: bool = False  # Add this line
 
     @nn.compact
     def __call__(self, x):
-        if self.identity:  # Add this condition
-            return x
         for feat in self.nodes:
             x = self.activation(nn.Dense(feat)(x))
         return x

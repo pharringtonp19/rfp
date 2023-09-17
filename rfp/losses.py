@@ -9,6 +9,8 @@ from rfp.train import Trainer
 from jaxlib.xla_extension import ArrayImpl
 
 
+def mse(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                      ### TODO: Is this the correct type?
+    return (predict-target)**2 * mask
 
 def binary_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                      ### TODO: Is this the correct type?
     return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * mask
