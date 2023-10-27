@@ -6,22 +6,21 @@ import jax.numpy as jnp
 from typing import Callable, Tuple, Dict
 from rfp.utils import Model_Params
 from rfp.train import Trainer
-from jaxlib.xla_extension import ArrayImpl
 
 
-def mse(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                      ### TODO: Is this the correct type?
+def mse(predict, target, mask):                      ### TODO: Is this the correct type?
     return (predict-target)**2 * mask
 
-def binary_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                      ### TODO: Is this the correct type?
+def binary_cross_entropy(predict, target, mask):                      ### TODO: Is this the correct type?
     return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * mask
 
-def softmax_cross_entropy(predict: ArrayImpl, target: ArrayImpl, mask: ArrayImpl) -> ArrayImpl:                     ### TODO: Is this the correct type?
+def softmax_cross_entropy(predict, target, mask):                     ### TODO: Is this the correct type?
     return -jnp.sum(jax.nn.log_softmax(predict, axis=-1)*target, axis=-1) * mask
 
 @dataclass
 class Supervised_Loss:
-    loss_fn: Callable[[ArrayImpl, ArrayImpl, ArrayImpl], ArrayImpl]
-    feature_map: Callable[[Dict], Tuple[ArrayImpl, float]]                                         ### TODO: Is this the correct type?
+    loss_fn: Callable 
+    feature_map: Callable                                     ### TODO: Is this the correct type?
     reg_value: float = 0.0                                                                         
     aux_status: bool = False
 
