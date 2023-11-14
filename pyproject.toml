@@ -11,7 +11,7 @@ documentation = "https://pharringtonp19.github.io/rfp/thoughts/"
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0.0"
 diffrax = "^0.2.1"
-flax = "^0.5.3"
+flax = "*"
 tree-math = "^0.1.0"
 distrax = "^0.1.2"
 mkdocstrings = {extras = ["python"], version = "^0.19.0"}
