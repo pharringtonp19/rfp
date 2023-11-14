@@ -31,7 +31,7 @@ class Supervised_Loss:
         empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(mask)
         if self.aux_status:
-            return (empirical_loss + self.reg_value * fwd_pass_penalty, fwd_pass_penalty) ### TODO: check this
+            return (empirical_loss + self.reg_value * fwd_pass_penalty, (empirical_loss, fwd_pass_penalty)) ### TODO: check this
         return empirical_loss + self.reg_value * fwd_pass_penalty
 
 
