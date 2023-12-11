@@ -20,10 +20,11 @@ class Model_Params(NamedTuple):
         bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
     
+    @property # This is to work with `jax.debug.visualize_array_sharding'
     def shape(self):
-        """Return the shapes of the model parameters."""
-        body_shapes = {k: v.shape for k, v in self.body.items()} if self.body else {}
-        return {'body': body_shapes, 'head': self.head.shape, 'bias': self.bias.shape}
+        """A property to return a representative shape."""
+        # Example: return the shape of 'head' as it might be the primary parameter
+        return self.head.shape
 
     
 def final_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
