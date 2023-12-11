@@ -20,6 +20,12 @@ class Model_Params(NamedTuple):
         bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
         return Model_Params(body, head, bias)
     
+    def shapes(self):
+        """Return the shapes of the model parameters."""
+        body_shapes = {k: v.shape for k, v in self.body.items()} if self.body else {}
+        return {'body': body_shapes, 'head': self.head.shape, 'bias': self.bias.shape}
+
+    
 def final_layer(params: Model_Params, x: jnp.ndarray) -> jnp.ndarray:
     """Apply a final layer of the model"""
     return x @ params.head + params.bias
