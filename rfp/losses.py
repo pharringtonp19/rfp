@@ -12,7 +12,7 @@ def mse(predict, target, mask):                      ### TODO: Is this the corre
     return (predict-target)**2 * mask
 
 def binary_cross_entropy(predict, target, mask):                      ### TODO: Is this the correct type?
-    return -target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict) * mask
+    return (-target * jax.nn.log_sigmoid(predict) - (1 - target) * jax.nn.log_sigmoid(1 - predict)) * mask
 
 def softmax_cross_entropy(predict, target, mask):                     ### TODO: Is this the correct type?
     return -jnp.sum(jax.nn.log_softmax(predict, axis=-1)*target, axis=-1) * mask
