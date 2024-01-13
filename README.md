@@ -5,6 +5,7 @@
 - [ ] Early Stopping
 - [ ] Distributed
 - [ ] Tests
+- [ ] Individual Weights
 
 
 
