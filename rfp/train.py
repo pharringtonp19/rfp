@@ -45,12 +45,12 @@ class Trainer_With_Val:
     def train(self, params: Model_Params, X, Y, mask, X_val, Y_val, mask_val):
         def update_fn(carry, t):
             params, val_opt_params, opt_val_loss, opt_state = carry
-            loss_values, grads = jax.value_and_grad(self.loss_fn, has_aux=self.loss_fn.aux_status)(params, X, Y, mask)
-            val_losses = jax.vmap(self.loss_fn, in_axes=(None, 0, 0, 0))(params, X_val, Y_val, mask_val)
+            train_loss, grads = jax.value_and_grad(self.loss_fn, has_aux=self.loss_fn.aux_status)(params, X, Y, mask)
+            val_loss, grads = self.loss_fn(params, X, Y, mask)
             updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
-            val_opt_params = jnp.where(val_losses < opt_val_loss, params, val_opt_params)
-            opt_val_loss = jnp.where(val_losses < opt_val_loss, val_losses, opt_val_loss)
-            return (params, val_opt_params, opt_val_loss, opt_state), (loss_values, val_losses)
+            val_opt_params = jnp.where(val_loss < opt_val_loss, params, val_opt_params)
+            opt_val_loss = jnp.where(val_loss < opt_val_loss, val_loss, opt_val_loss)
+            return (params, val_opt_params, opt_val_loss, opt_state), (train_loss, val_loss)
         (final_train_params, val_opt_params, _, _), loss_values_history = jax.lax.scan(update_fn, (params, params, jnp.inf, self.opt.init(params)), xs=None, length=self.epochs)
         return final_train_params, val_opt_params, loss_values_history
