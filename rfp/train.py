@@ -52,5 +52,5 @@ class Trainer_With_Val:
             val_opt_params = jnp.where(val_losses < opt_val_loss, params, val_opt_params)
             opt_val_loss = jnp.where(val_losses < opt_val_loss, val_losses, opt_val_loss)
             return (params, val_opt_params, opt_val_loss, opt_state), (loss_values, val_losses)
-        (final_train_params, val_opt_params, _, _), loss_values_history = jax.lax.scan(update_fn, (params, self.opt.init(params)), xs=None, length=self.epochs)
+        (final_train_params, val_opt_params, _, _), loss_values_history = jax.lax.scan(update_fn, (params, params, jnp.inf, self.opt.init(params)), xs=None, length=self.epochs)
         return final_train_params, val_opt_params, loss_values_history
