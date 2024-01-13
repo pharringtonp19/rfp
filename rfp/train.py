@@ -46,7 +46,7 @@ class Trainer_With_Val:
         def update_fn(carry, t):
             params, val_opt_params, opt_val_loss, opt_state = carry
             train_loss, grads = jax.value_and_grad(self.loss_fn, has_aux=self.loss_fn.aux_status)(params, X, Y, mask)
-            val_loss, grads = self.loss_fn(params, X, Y, mask)
+            val_loss = self.loss_fn(params, X_val, Y_val, mask_val)
             updates, opt_state = self.opt.update(grads, opt_state, params)
             params = optax.apply_updates(params, updates)
             val_opt_params = jnp.where(val_loss < opt_val_loss, params, val_opt_params)
