@@ -80,8 +80,8 @@ def unpad_matrix(batch_X: np.array, batch_D: np.array, mask: np.array):
         raise ValueError("Mask and input batch dimensions do not match")
 
     # Use broadcasting to apply mask and select non-zero rows in one step
-    unpad_X = batch_X[mask.astype(bool)]
-    unpad_D = batch_D[mask.astype(bool)]
+    unpad_X = batch_X[mask.astype(bool).reshape(-1)]
+    unpad_D = batch_D[mask.astype(bool).reshape(-1)]
 
     return unpad_X, unpad_D
 
