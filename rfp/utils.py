@@ -63,25 +63,35 @@ def batch_matrix_with_padding(matrix: np.array, zip_codes: np.array) -> dict:
     
 
 def unpad_matrix(batch_X: np.array, batch_D: np.array, mask: np.array):
-    # Get the original data (by setting padding to 0)
-    original_X = batch_X * mask
-    original_D = batch_D * mask
-    
-    # Find the rows that are not all zero (i.e., part of the original matrix)
-    non_zero_rows = np.any(original_X != 0, axis=1)
-    
-    # Select only those rows
-    unpad_X = original_X[non_zero_rows]
-    unpad_D = original_D[non_zero_rows]
-    
+    """
+    Removes padding from batch matrices based on a given mask.
+
+    Args:
+    batch_X (np.array): The first batch matrix with padding.
+    batch_D (np.array): The second batch matrix with padding.
+    mask (np.array): A mask indicating the original data (non-padded parts).
+
+    Returns:
+    tuple: A tuple of two arrays (unpad_X, unpad_D) with padding removed.
+    """
+
+    # Validate mask dimensions
+    if mask.ndim != batch_X.ndim:
+        raise ValueError("Mask and input batch dimensions do not match")
+
+    # Use broadcasting to apply mask and select non-zero rows in one step
+    unpad_X = batch_X[mask.astype(bool)]
+    unpad_D = batch_D[mask.astype(bool)]
+
     return unpad_X, unpad_D
 
-def unpad_all_matrices(batch_X: np.array, batch_D: np.array, masks: np.array) -> dict:
+def unpad_all_matrices(X: np.array, D: np.array, masks: np.array) -> dict:
     original_X = {}
     original_D = {}
 
-    for i in range(batch_X.shape[0]):
-        original_X[i], original_D[i] = unpad_matrix(batch_X[i], batch_D[i], masks[i])
+    for i in range(X.shape[0]):
+        original_X[i], original_D[i] = unpad_matrix(X[i], D[i], masks[i])
+        original_X[i], original_D[i] = original_X[i].reshape(-1, X.shape[-1]), original_D[i].reshape(-1, D.shape[-1])
     
     return np.vstack((list(original_X.values()))), np.vstack((list(original_D.values())))
 
