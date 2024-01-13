@@ -62,7 +62,28 @@ def batch_matrix_with_padding(matrix: np.array, zip_codes: np.array) -> dict:
     return np.stack(list(Batches.values())), np.stack(list(Masks.values()))
     
 
+def unpad_matrix(batch_X: np.array, batch_D: np.array, mask: np.array):
+    # Get the original data (by setting padding to 0)
+    original_X = batch_X * mask
+    original_D = batch_D * mask
+    
+    # Find the rows that are not all zero (i.e., part of the original matrix)
+    non_zero_rows = np.any(original_X != 0, axis=1)
+    
+    # Select only those rows
+    unpad_X = original_X[non_zero_rows]
+    unpad_D = original_D[non_zero_rows]
+    
+    return unpad_X, unpad_D
 
+def unpad_all_matrices(batch_X: np.array, batch_D: np.array, masks: np.array) -> dict:
+    original_X = {}
+    original_D = {}
+
+    for i in range(batch_X.shape[0]):
+        original_X[i], original_D[i] = unpad_matrix(batch_X[i], batch_D[i], masks[i])
+    
+    return np.vstack((list(original_X.values()))), np.vstack((list(original_D.values())))
 
 
 # def compute_cost_analysis(f):
