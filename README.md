@@ -6,6 +6,7 @@
 - [ ] Distributed
 - [ ] Tests
 - [ ] Individual Weights
+- [ ] Map (Defiers)?
 
 
 
