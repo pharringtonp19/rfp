@@ -4,6 +4,8 @@
 
 ### **Useful Readings**
 - [THE MANY WAYS TO ANALYSE GRADIENT DESCENT](https://www.aarondefazio.com/tangentially/?p=32)
+- [Transformers from Scratch
+](https://e2eml.school/transformers.html)
 
 
 
