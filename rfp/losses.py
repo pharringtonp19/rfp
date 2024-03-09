@@ -11,9 +11,9 @@ from rfp.train import Trainer
 def mse(predict, target, mask):                      ### TODO: Is this the correct type?
     return (predict-target)**2 * mask
 
-def binary_cross_entropy(predict, target, mask):  
-    probability_of_outcome = jnp.where(target==1.0, jax.nn.sigmoid(predict), 1.0 - jax.nn.sigmoid(predict))
-    return -1*jnp.log(probability_of_outcome) * mask 
+def binary_cross_entropy(logits, target, mask):  
+    probability_of_one = jax.nn.sigmoid(logits)
+    return -target*jnp.log(probability_of_one) - (1-target)*jnp.log(1-probability_of_one) * mask
 
 def softmax_cross_entropy(predict, target, mask):                     ### TODO: Is this the correct type?
     return -jnp.sum(jax.nn.log_softmax(predict, axis=-1)*target, axis=-1) * mask
