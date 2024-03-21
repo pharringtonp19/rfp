@@ -21,14 +21,13 @@ def softmax_cross_entropy(predict, target, mask):                     ### TODO: 
 @dataclass
 class Supervised_Loss:
     loss_fn: Callable 
-    feature_map: Callable                                     ### TODO: Is this the correct type?
+    rfp : Callable                                     ### TODO: Is this the correct type?
     reg_value: float = 0.0                                                                         
     aux_status: bool = False
 
     # @jax.jit
     def __call__(self, params: Model_Params, X, Y, mask) -> jnp.array:
-        phiX, fwd_pass_penalty = self.feature_map(params.body, X)
-        Yhat = final_layer(params, phiX)
+        Yhat, fwd_pass_penalty = self.rfp(params, X) 
         empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(mask)
         if self.aux_status:
