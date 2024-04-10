@@ -4,7 +4,7 @@ from rfp.utils import final_layer
 import jax
 import jax.numpy as jnp
 from typing import Callable, Tuple, Dict
-from rfp.utils import Model_Params
+from rfp.utils import ModelParams
 from rfp.train import Trainer
 
 
@@ -27,7 +27,7 @@ class Supervised_Loss:
     aux_status: bool = False
 
     # @jax.jit
-    def __call__(self, params: Model_Params, X, Y, mask) -> jnp.array:
+    def __call__(self, params: ModelParams, X, Y, mask) -> jnp.array:
         Yhat, fwd_pass_penalty = self.rfp(params, X) 
         empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(mask)
