@@ -15,7 +15,6 @@ import jax
 import jax.numpy as jnp 
 import optax
 from jax.experimental import checkify
-from rfp.utils import Model_Params
 
 
 @dataclass
@@ -25,7 +24,7 @@ class Trainer:
     epochs: int
 
     # Train Function
-    def train(self, params: Model_Params, X, Y, mask):
+    def train(self, params, X, Y, mask):
         def update_fn(carry, t):
             params, opt_state = carry
             loss_values, grads = jax.value_and_grad(self.loss_fn, has_aux=self.loss_fn.aux_status)(params, X, Y, mask)
