@@ -20,6 +20,9 @@ class ModelParams(NamedTuple):
         bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
         return ModelParams(body, head, bias)
     
+    def __repr__(self) -> str:
+        return super().__repr__()
+    
     def tree_flatten(self):
         children = (self.body, self.head, self.bias)
         aux_data = None
