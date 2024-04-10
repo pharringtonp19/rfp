@@ -21,7 +21,7 @@ class ModelParams(NamedTuple):
         return ModelParams(body, head, bias)
     
     def __repr__(self) -> str:
-        return super().__repr__()
+        return f"ModelParams(body={self.body}, head={self.head}, bias={self.bias})"
     
     def tree_flatten(self):
         children = (self.body, self.head, self.bias)
