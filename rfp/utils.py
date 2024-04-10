@@ -2,10 +2,10 @@ from typing import NamedTuple
 import jax
 import jax.numpy as jnp
 import numpy as np 
+from jax.tree_util import register_pytree_node_class
 
-from rfp._src.types import Params ### THIS NEEDS TO BE FIXED
-
-class Model_Params(NamedTuple):
+@register_pytree_node_class
+class ModelParams(NamedTuple):
     body: dict # Feature Map Parameters
     head: jnp.array # Linear Model Parameters
     bias: jnp.array # Linear Model Bias
@@ -18,7 +18,16 @@ class Model_Params(NamedTuple):
         body = mlp.init_fn(key, features)
         head = jax.random.normal(k1, (fwd_pass_layer, head_dim)) ### THIS NEEDS TO BE CHECKED
         bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
-        return Model_Params(body, head, bias)
+        return ModelParams(body, head, bias)
+    
+    def tree_flatten(self):
+        children = (self.body, self.head, self.bias)
+        aux_data = None
+        return children, aux_data
+    
+    @classmethod
+    def tree_unflatten(cls, aux_data, children):
+        return cls(*children)
     
     @property # This is to work with `jax.debug.visualize_array_sharding'
     def shape(self):
