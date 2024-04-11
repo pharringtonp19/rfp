@@ -7,7 +7,7 @@ from flax.core import unfreeze
 class MLP(nn.Module):
     nodes: Sequence[int]
     activation: Callable = nn.relu
-    final_activation: Callable = nn.sigmoid
+
 
     @nn.compact
     def __call__(self, x):
@@ -26,14 +26,21 @@ class MLP(nn.Module):
         """The Forward Pass"""
         return self.apply({"params": params}, x)
 
-
     def embellished_fwd_pass(self, params, x):
         return self.fwd_pass(params, x), 0.0
     
-    def predict(self, full_params, x):
-        phiX = self.fwd_pass(full_params.body, x)
-        yhat = self.final_activation(self.final_layer(phiX))
-        return yhat
+
+class Model:
+    fwd_pass_model: nn.Module
+    final_activation: Callable = nn.sigmoid
+    
+    def fwd_pass(self, params, x):
+        phiX = self.fwd_pass_model.fwd_pass(params.body, x)
+        return self.final_activation(self.final_layer(phiX))
+    
+    def embellished_fwd_pass(self, params, x):
+        phiX, penalty = self.fwd_pass_model.embellished_fwd_pass(params.body, x)
+        return self.final_activation(self.final_layer(phiX)), penalty
 
     @staticmethod
     def final_layer(full_params, x):
