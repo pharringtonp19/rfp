@@ -37,7 +37,7 @@ class Model:
     
     def fwd_pass(self, params, x):
         phiX = self.fwd_pass_model.fwd_pass(params.body, x)
-        return self.final_activation(self.final_layer(phiX))
+        return self.final_activation(phiX @ params.head + params.bias)
     
     def embellished_fwd_pass(self, params, x):
         phiX, penalty = self.fwd_pass_model.embellished_fwd_pass(params.body, x)
