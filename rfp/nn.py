@@ -3,6 +3,7 @@ import jax
 from flax import linen as nn
 import jax.numpy as jnp
 from flax.core import unfreeze
+from dataclasses import dataclass
 
 class MLP(nn.Module):
     nodes: Sequence[int]
@@ -29,7 +30,7 @@ class MLP(nn.Module):
     def embellished_fwd_pass(self, params, x):
         return self.fwd_pass(params, x), 0.0
     
-
+@dataclass
 class Model:
     fwd_pass_model: nn.Module
     final_activation: Callable = nn.sigmoid
