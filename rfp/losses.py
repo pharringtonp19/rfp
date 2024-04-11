@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from functools import partial
-from rfp.utils import final_layer
 import jax
 import jax.numpy as jnp
 from typing import Callable, Tuple, Dict
