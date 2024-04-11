@@ -47,5 +47,5 @@ class Trainer:
             opt_params = jax.lax.cond(val_loss < val_loss_opt, lambda : params, lambda: opt_params)
             val_loss_opt = jnp.where(val_loss < val_loss_opt, val_loss, val_loss_opt)
             return (params, opt_params, val_loss_opt, opt_state), (train_loss, val_loss)
-        (params, opt_params, _, _), (train_loss_history, val_loss_history) = jax.lax.scan(update_fn, (params, copy(params), jnp.array(jnp.inf), self.opt.init(params)), xs=None, length=self.epochs)
+        (params, opt_params, _, _), (train_loss_history, val_loss_history) = jax.lax.scan(update_fn, (params, copy.copy(params), jnp.array(jnp.inf), self.opt.init(params)), xs=None, length=self.epochs)
         return params, opt_params, train_loss_history, val_loss_history
