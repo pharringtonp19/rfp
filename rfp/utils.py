@@ -39,9 +39,7 @@ class ModelParams(NamedTuple):
         return self.head.shape
 
     
-def final_layer(params, x):
-    """Apply a final layer of the model"""
-    return x @ params.head + params.bias
+
 
 
 def batch_matrix_with_padding(matrix: np.array, zip_codes: np.array) -> dict:
