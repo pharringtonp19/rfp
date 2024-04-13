@@ -22,3 +22,5 @@ poetry.lock
 pyproject.toml 
 /styles
 
+getting-started/rfp_env/
+
