@@ -1,11 +1,11 @@
-Connect to remote computer
+Connect to remote 
 ```
 ssh -i ~/.ssh/`key'.pem ubuntu@12345678910
 ```
 
-Download script
+Clone Repository and Open Getting-Started Folder
 ```
-wget -O setup_env.sh https://github.com/pharringtonp19/rfp/blob/main/getting-started/setup_env.sh
+git clone https://github.com/pharringtonp19/rfp.git && cd rfp/getting-started
 ```
 
 Make script executable
