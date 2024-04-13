@@ -5,7 +5,7 @@ ssh -i ~/.ssh/`key'.pem ubuntu@12345678910
 
 Download script
 ```
-wget -O setup_env.sh https://raw.githubusercontent.com/pharringtonp19/llmft/main/initialization/setup_env.sh
+wget -O setup_env.sh https://github.com/pharringtonp19/rfp/blob/main/getting-started/setup_env.sh
 ```
 
 Make script executable
