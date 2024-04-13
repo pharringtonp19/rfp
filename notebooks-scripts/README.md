@@ -3,6 +3,9 @@ The [standard training](https://github.com/pharringtonp19/rfp/blob/main/notebook
 
 $$ \theta := \int \frac{\mathbb{E}[Y\vert X,Z=1] - \mathbb{E}[Y\vert X,Z=0]}{\mathbb{E}[D\vert X,Z=1] - \mathbb{E}[D\vert X,Z=0] } d\mathbb{P}$$
 
+The [rfp training](https://github.com/pharringtonp19/rfp/blob/main/notebooks-scripts/rfp_training.ipynb) notebook estimates a conditional expectation function $\mathbb{E}[Y \vert W]$ by fitting a feed-forward neural network using regularized bi-level gradient descent.
+
+
 ## **Implementation Details**
 
 - We allow observational weighting via `sample_weights`
