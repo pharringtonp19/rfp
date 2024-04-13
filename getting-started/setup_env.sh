@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Switch to the rfp folder
+cd rfp
+
 # Name of the virtual environment
 ENV_NAME="rfp_env"
 
