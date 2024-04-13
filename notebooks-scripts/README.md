@@ -7,3 +7,17 @@ $$ \theta := \int \frac{\mathbb{E}[Y\vert X,Z=1] - \mathbb{E}[Y\vert X,Z=0]}{\ma
 
 - We allow observational weighting via `sample_weights`
 - Hyperparameters are specified in the **Parameterize Notebook** cell block
+
+
+## Potential Issues
+
+#### Binary Targets
+With binary targets, nans can occur during the training run if the predicted value is too close to 0 or 1. We therefore suggest altering the feature normalization procedure and using the following function to plot a histogram of the initial values 
+
+```python
+def hist_predictions(key):
+    params = ModelParams.init_fn(key, mlp, features)
+    yhat = model.fwd_pass(params, XZ_normalized)
+    plt.hist(yhat.reshape(-1,), bins=50)
+    plt.show()
+```
