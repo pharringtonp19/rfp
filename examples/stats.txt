@@ -1,3 +1,0 @@
-1
-1D Feed Forward |   Number of Simulations: 400    |   Total Elapsed time: 2.189 |   Time Per Simulation: 0.0055
-6
