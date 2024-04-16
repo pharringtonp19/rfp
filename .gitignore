@@ -20,6 +20,7 @@ site/
 
 poetry.lock
 pyproject.toml 
+styles/.DS_Store
 
 getting-started/rfp_env/
 
