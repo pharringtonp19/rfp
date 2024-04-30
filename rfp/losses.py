@@ -24,9 +24,16 @@ class Supervised_Loss:
     reg_value: float = 0.0                                                                         
     aux_status: bool = False
 
+    def _ensure_penalty(self, output):
+        """Ensure the output is a tuple (Yhat, penalty)."""
+        if isinstance(output, tuple):
+            return output  # (Yhat, penalty) already
+        return (output, 0.0)  # Only Yhat was returned, assume penalty is 0
+
     # @jax.jit
     def __call__(self, params: ModelParams, X, Y, mask) -> jnp.array:
-        Yhat, fwd_pass_penalty = self.rfp(params, X) 
+        output = self.rfp(params, X) 
+        Yhat, fwd_pass_penalty = self._ensure_penalty(output)
         empirical_loss = jnp.sum(
             jax.vmap(self.loss_fn)(Yhat, Y, mask)) / jnp.sum(mask)
         if self.aux_status:
