@@ -14,10 +14,17 @@ class ModelParams(NamedTuple):
     def init_fn(key, mlp, features, head_dim=1):
         k1, k2 = jax.random.split(key)
         fwd_pass_layer = mlp.nodes[-1]
-        """Initialize Model Parameters"""
+        
+        # Initialize Model Parameters
         body = mlp.init_fn(key, features)
-        head = jax.random.normal(k1, (fwd_pass_layer, head_dim)) ### THIS NEEDS TO BE CHECKED
-        bias = jax.random.normal(k2, (1, head_dim))    ### THIS NEEDS TO BE CHECKED
+        
+        # He initialization for the head and bias
+        stddev_head = jnp.sqrt(2.0 / fwd_pass_layer)
+        head = stddev_head * jax.random.normal(k1, (fwd_pass_layer, head_dim))
+        
+        stddev_bias = jnp.sqrt(2.0 / 1)
+        bias = stddev_bias * jax.random.normal(k2, (1, head_dim))
+        
         return ModelParams(body, head, bias)
     
     def __repr__(self) -> str:
